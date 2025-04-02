@@ -1,6 +1,6 @@
 БД
 	Users: [] / id, login, password, registred_at
-	Options: id, user_id, //что-то еще
+	Options: id, user_id, image_url //что-то еще
 	projects: [] /id, user_id, name , trecked_times[] / id, start_time, end_time, description
 	sessions: hash,id, user/ id, login, password, registred_at,
 

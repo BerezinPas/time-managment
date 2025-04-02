@@ -34,7 +34,16 @@
   "projects": [
     {
       "id": 1,
-      "name": "first"
+      "user_id": 1,
+      "name": "first",
+      "trecked_times": [
+        {
+          "id": 1,
+          "start_time": "0",
+          "end_time": "",
+          "description": "blabal"
+        }
+      ]
     }
   ],
   "options": [],
@@ -88,6 +97,26 @@
         "registred_at": "2025-04-02 08:23"
       },
       "id": 5
+    },
+    {
+      "hash": "0.82390878456903160476088032737607136368751525878906",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 6
+    },
+    {
+      "hash": "0.56941023401291590566586364730028435587882995605469",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 7
     }
   ]
 }
