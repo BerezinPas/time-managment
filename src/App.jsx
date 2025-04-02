@@ -1,13 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.scss';
 import { Footer, Header } from './components';
-import { Authorization, Main, Projects, Register } from './pages';
+import { Authorization, Main, Project, Projects, Register } from './pages';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect } from 'react';
-import { setUser } from './actions';
+import { loadProjectsAsync, setUser } from './actions';
 
 function App() {
 	const dispatch = useDispatch();
+
+	// useLayoutEffect(() => {
+	// 	dispatch(loadProjectsAsync(userId));
+	// }, [userId, dispatch]);
 
 	useLayoutEffect(() => {
 		const currentUserDataJSON = sessionStorage.getItem('userData');
@@ -22,6 +26,7 @@ function App() {
 				id: Number(currentUserData.id),
 			}),
 		);
+		dispatch(loadProjectsAsync(currentUserData.id));
 	}, [dispatch]);
 
 	return (
@@ -34,6 +39,9 @@ function App() {
 					<Route path="/authorization" element={<Authorization />} />
 					<Route path="/analitics" element={<div>analitics</div>} />
 					<Route path="/projects" element={<Projects />} />
+					<Route path="/project" element={<Project />} />
+					<Route path="/project/:id" element={<Project />} />
+					{/* <Route path="/projects" element={<Projects />} /> */}
 				</Routes>
 			</div>
 

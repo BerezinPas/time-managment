@@ -1,3 +1,4 @@
 export * from './user-reducer';
 export * from './app-reducer';
-export * from './projectsReducer';
+export * from './project-reducer';
+export * from './projects-reducer';
