@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "admin",
+      "password": "qweqwe",
+      "registred_at": "22222"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "first"
+    }
+  ],
+  "options": [],
+  "sessions": [
+    {
+      "hash": "0.17910245846909056410822813631966710090637207031250",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 1
+    }
+  ]
+}
