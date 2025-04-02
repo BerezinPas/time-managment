@@ -9,8 +9,16 @@ import {
 } from '../../schemes';
 import styles from './register.module.scss';
 import { useState } from 'react';
+import { server } from '../../bff/server';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../actions';
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
+	const dispatch = useDispatch();
+	const [serverError, setServerError] = useState(null);
+	const navigate = useNavigate();
+
 	const registerFormSchema = yup.object().shape({
 		login: loginSchema,
 		password: passwordSchema,
@@ -35,14 +43,17 @@ export const Register = () => {
 		errors?.password?.message ||
 		errors?.passwordCheck?.message;
 
-	const errorMessage = formError;
+	const errorMessage = serverError || formError;
 
 	console.log(errors);
-	const onSubmit = ({ login, password }) => {
-		console.log(login);
-		console.log(password);
-		console.log(errors);
-		console.log('sssss');
+	const onSubmit = async ({ login, password }) => {
+		const { error, res } = await server.register(login, password);
+		if (error) {
+			setServerError(error);
+			return;
+		}
+		dispatch(setUser(res));
+		navigate('/');
 	};
 
 	return (

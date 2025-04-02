@@ -1,10 +1,7 @@
 import { URL } from '../constants';
 
-export const createSession = (hash, user) => {
-	console.log('hash', hash);
-	console.log('user', user.id);
-
-	return fetch(`${URL}/sessions`, {
+export const createSession = (hash, user) =>
+	fetch(`${URL}/sessions`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
 		body: JSON.stringify({
@@ -17,4 +14,3 @@ export const createSession = (hash, user) => {
 			},
 		}),
 	});
-};

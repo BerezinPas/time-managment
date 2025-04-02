@@ -5,6 +5,30 @@
       "login": "admin",
       "password": "qweqwe",
       "registred_at": "22222"
+    },
+    {
+      "login": "qwe",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 08:23",
+      "id": 2
+    },
+    {
+      "login": "qweq",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 09:36",
+      "id": 3
+    },
+    {
+      "login": "qwew",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 09:38",
+      "id": 4
+    },
+    {
+      "login": "qwes",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 09:38",
+      "id": 5
     }
   ],
   "projects": [
@@ -16,14 +40,54 @@
   "options": [],
   "sessions": [
     {
-      "hash": "0.17910245846909056410822813631966710090637207031250",
+      "hash": "0.17633832655614711804048511112341657280921936035156",
       "user": {
-        "id": 1,
-        "login": "admin",
+        "id": 2,
+        "login": "qwe",
         "password": "qweqwe",
-        "registred_at": "22222"
+        "registred_at": "2025-04-02 08:23"
       },
       "id": 1
+    },
+    {
+      "hash": "0.22767329450806017554498339450219646096229553222656",
+      "user": {
+        "id": 3,
+        "login": "qweq",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 09:36"
+      },
+      "id": 2
+    },
+    {
+      "hash": "0.20305146490758674282517404208192601799964904785156",
+      "user": {
+        "id": 4,
+        "login": "qwew",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 09:38"
+      },
+      "id": 3
+    },
+    {
+      "hash": "0.98837523499546597882670084800338372588157653808594",
+      "user": {
+        "id": 5,
+        "login": "qwes",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 09:38"
+      },
+      "id": 4
+    },
+    {
+      "hash": "0.50797732836269671174989071005256846547126770019531",
+      "user": {
+        "id": 2,
+        "login": "qwe",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 08:23"
+      },
+      "id": 5
     }
   ]
 }

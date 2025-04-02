@@ -8,10 +8,12 @@ import { useDispatch } from 'react-redux';
 import { server } from '../../bff/server';
 import { setUser } from '../../actions';
 import styles from './authorization.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export const Authorization = () => {
 	const dispatch = useDispatch();
 	const [serverError, setServerError] = useState(null);
+	const navigate = useNavigate();
 
 	const registerFormSchema = yup.object().shape({
 		login: loginSchema,
@@ -45,6 +47,7 @@ export const Authorization = () => {
 			return;
 		}
 		dispatch(setUser(res));
+		navigate('/');
 	};
 
 	return (
