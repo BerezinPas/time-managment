@@ -1,0 +1,31 @@
+// @import url('./variables.scss');
+// @import './App.module.scss';
+body {
+	background-color: $bgColor;
+	font-size: 18px;
+}
+.appColumn {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: $bgColor;
+	/* width: 1000px; */
+	min-height: 100%;
+	margin: 0 auto;
+	min-height: 100%;
+}
+.pageContent {
+	padding: 120px 0 50px;
+	/* height: 100%; */
+	flex-grow: 1;
+	display: flex;
+}
+
+@keyframes logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

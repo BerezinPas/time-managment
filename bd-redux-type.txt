@@ -1,0 +1,11 @@
+БД
+	Users: [] / id, login, password, registred_at
+	Options: id, user_id, //что-то еще
+	projects: [] /id, user_id, name , trecked_times[] / id, start_time, end_time, description
+	sessions: hash,id, user/ id, login, password, registred_at,
+
+Redux
+	User: id, login, registred_at
+	Options:
+	projects: [] /id,  name , summuryTreckedTime,
+	project: id, name, trecked_times[] / id, start_time, end_time, description

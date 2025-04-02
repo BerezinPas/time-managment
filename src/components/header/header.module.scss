@@ -1,0 +1,33 @@
+.header {
+	padding: 20px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: #fff;
+}
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.links {
+	display: flex;
+	gap: 10px;
+	color: $mainColor;
+}
+.link {
+	padding: 10px;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.avatar {
+	border-radius: 50%;
+}
