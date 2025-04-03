@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects, selectUserId } from '../../selectors';
 import { loadProjectsAsync } from '../../actions';
 import { ProjectRow } from './components';
+import { Link } from 'react-router-dom';
 
 export const Projects = () => {
 	const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export const Projects = () => {
 
 	return (
 		<div>
+			<Link to="/project">add project</Link>
 			{projects.map(({ id, name, summuryTreckedTime }) => (
 				<ProjectRow
 					key={id}

@@ -9,8 +9,6 @@ const initialState = {
 export const projectReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case ACTION_TYPE.SET_PROJECT:
-			console.log('projectReducer', payload);
-
 			return {
 				...state,
 				...payload,

@@ -1,128 +1,176 @@
 {
-	"users": [
-		{
-			"id": 1,
-			"login": "admin",
-			"password": "qweqwe",
-			"registred_at": "22222"
-		},
-		{
-			"login": "qwe",
-			"password": "qweqwe",
-			"registred_at": "2025-04-02 08:23",
-			"id": 2
-		},
-		{
-			"login": "qweq",
-			"password": "qweqwe",
-			"registred_at": "2025-04-02 09:36",
-			"id": 3
-		},
-		{
-			"login": "qwew",
-			"password": "qweqwe",
-			"registred_at": "2025-04-02 09:38",
-			"id": 4
-		},
-		{
-			"login": "qwes",
-			"password": "qweqwe",
-			"registred_at": "2025-04-02 09:38",
-			"id": 5
-		}
-	],
-	"projects": [
-		{
-			"id": 1,
-			"user_id": 1,
-			"name": "first",
-			"trecked_times": [
-				{
-					"id": 1,
-					"start_time": "0",
-					"end_time": "",
-					"description": "blabal"
-				}
-			]
-		},
-		{
-			"id": 2,
-			"user_id": 1,
-			"name": "second",
-			"trecked_times": []
-		}
-	],
-	"options": [],
-	"sessions": [
-		{
-			"hash": "0.17633832655614711804048511112341657280921936035156",
-			"user": {
-				"id": 2,
-				"login": "qwe",
-				"password": "qweqwe",
-				"registred_at": "2025-04-02 08:23"
-			},
-			"id": 1
-		},
-		{
-			"hash": "0.22767329450806017554498339450219646096229553222656",
-			"user": {
-				"id": 3,
-				"login": "qweq",
-				"password": "qweqwe",
-				"registred_at": "2025-04-02 09:36"
-			},
-			"id": 2
-		},
-		{
-			"hash": "0.20305146490758674282517404208192601799964904785156",
-			"user": {
-				"id": 4,
-				"login": "qwew",
-				"password": "qweqwe",
-				"registred_at": "2025-04-02 09:38"
-			},
-			"id": 3
-		},
-		{
-			"hash": "0.98837523499546597882670084800338372588157653808594",
-			"user": {
-				"id": 5,
-				"login": "qwes",
-				"password": "qweqwe",
-				"registred_at": "2025-04-02 09:38"
-			},
-			"id": 4
-		},
-		{
-			"hash": "0.50797732836269671174989071005256846547126770019531",
-			"user": {
-				"id": 2,
-				"login": "qwe",
-				"password": "qweqwe",
-				"registred_at": "2025-04-02 08:23"
-			},
-			"id": 5
-		},
-		{
-			"hash": "0.82390878456903160476088032737607136368751525878906",
-			"user": {
-				"id": 1,
-				"login": "admin",
-				"password": "qweqwe",
-				"registred_at": "22222"
-			},
-			"id": 6
-		},
-		{
-			"hash": "0.56941023401291590566586364730028435587882995605469",
-			"user": {
-				"id": 1,
-				"login": "admin",
-				"password": "qweqwe",
-				"registred_at": "22222"
-			},
-			"id": 7
-		}
-	]
+  "users": [
+    {
+      "id": 1,
+      "login": "admin",
+      "password": "qweqwe",
+      "registred_at": "22222"
+    },
+    {
+      "login": "qwe",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 08:23",
+      "id": 2
+    },
+    {
+      "login": "qweq",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 09:36",
+      "id": 3
+    },
+    {
+      "login": "qwew",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 09:38",
+      "id": 4
+    },
+    {
+      "login": "qwes",
+      "password": "qweqwe",
+      "registred_at": "2025-04-02 09:38",
+      "id": 5
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "name": "first",
+      "trecked_times": [
+        {
+          "id": 1,
+          "start_time": "0",
+          "end_time": "",
+          "description": "blabal"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "name": "second",
+      "trecked_times": []
+    },
+    {
+      "name": "Дрессировка собаки",
+      "user_id": 1,
+      "trecked_times": [],
+      "id": 3
+    },
+    {
+      "name": "Строительство дома",
+      "user_id": 1,
+      "trecked_times": [],
+      "id": 4
+    },
+    {
+      "name": "Тренировка в зале",
+      "user_id": 1,
+      "trecked_times": [],
+      "id": 5
+    },
+    {
+      "name": "Медитация",
+      "user_id": 1,
+      "trecked_times": [],
+      "id": 6
+    },
+    {
+      "user_id": 1,
+      "name": "Чтение книг",
+      "trecked_times": [],
+      "id": 7
+    },
+    {
+      "user_id": 1,
+      "name": "что-то важное",
+      "trecked_times": [],
+      "id": 8
+    },
+    {
+      "user_id": 1,
+      "name": "delete",
+      "trecked_times": [],
+      "id": 9
+    },
+    {
+      "user_id": 1,
+      "name": "qwe",
+      "trecked_times": [],
+      "id": 10
+    }
+  ],
+  "options": [],
+  "sessions": [
+    {
+      "hash": "0.17633832655614711804048511112341657280921936035156",
+      "user": {
+        "id": 2,
+        "login": "qwe",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 08:23"
+      },
+      "id": 1
+    },
+    {
+      "hash": "0.22767329450806017554498339450219646096229553222656",
+      "user": {
+        "id": 3,
+        "login": "qweq",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 09:36"
+      },
+      "id": 2
+    },
+    {
+      "hash": "0.20305146490758674282517404208192601799964904785156",
+      "user": {
+        "id": 4,
+        "login": "qwew",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 09:38"
+      },
+      "id": 3
+    },
+    {
+      "hash": "0.98837523499546597882670084800338372588157653808594",
+      "user": {
+        "id": 5,
+        "login": "qwes",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 09:38"
+      },
+      "id": 4
+    },
+    {
+      "hash": "0.50797732836269671174989071005256846547126770019531",
+      "user": {
+        "id": 2,
+        "login": "qwe",
+        "password": "qweqwe",
+        "registred_at": "2025-04-02 08:23"
+      },
+      "id": 5
+    },
+    {
+      "hash": "0.82390878456903160476088032737607136368751525878906",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 6
+    },
+    {
+      "hash": "0.56941023401291590566586364730028435587882995605469",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 7
+    }
+  ]
 }
