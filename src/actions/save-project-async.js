@@ -1,4 +1,4 @@
-import { server } from '../bff/server';
+import { server } from '../bff';
 import { addProject } from './add-project';
 import { setProject } from './set-project';
 

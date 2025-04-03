@@ -1,8 +1,28 @@
 import styles from './button.module.scss';
 
-export const Button = ({ children, ...props }) => {
+/**
+ * @param {{
+ * children: any,
+ * variant: 'delete' | 'secondary' | 'primary'
+ *  }} props
+ *
+ */
+
+export const Button = ({ variant, children, ...props }) => {
+	let classes = `${styles.btn} `;
+	switch (variant) {
+		case 'delete':
+			classes += styles.delete;
+			break;
+		case 'secondary':
+			classes += styles.secondary;
+			break;
+
+		default:
+			break;
+	}
 	return (
-		<button className={styles.btn} {...props}>
+		<button className={classes} {...props}>
 			{children}
 		</button>
 	);

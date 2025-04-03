@@ -1,10 +1,11 @@
 import { useEffect, useLayoutEffect } from 'react';
-import { useMatch, useParams } from 'react-router-dom';
-import { server } from '../../bff/server';
+import { Link, useMatch, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProject } from '../../selectors';
-import { loadProjectAsync } from '../../actions';
+import { deleteProjectAsync, loadProjectAsync } from '../../actions';
 import { ProjectForm } from './components/project-form/project-form';
+import styles from './project.module.scss';
+import { Button } from '../../components';
 
 export const Project = () => {
 	const params = useParams();
@@ -19,5 +20,28 @@ export const Project = () => {
 		dispatch(loadProjectAsync(params.id));
 	}, [params.id, dispatch]);
 
-	return <div>{isCreating ? <ProjectForm /> : <div>{project.name}</div>}</div>;
+	const onDelete = (id) => {
+		dispatch(deleteProjectAsync(id));
+	};
+
+	const projectContent = (
+		<div>
+			<h2>
+				{project.name}
+				<div className={styles.controlBtns}>
+					<Button variant="delete" onClick={() => onDelete(project.id)}>
+						delete
+					</Button>
+					<Button variant="secondary">
+						<Link to={`/project/${project.id}/edit`}>edit</Link>
+					</Button>
+					<button>edit</button>
+				</div>
+			</h2>
+		</div>
+	);
+
+	const content = isCreating ? <ProjectForm /> : projectContent;
+
+	return <div>{content}</div>;
 };

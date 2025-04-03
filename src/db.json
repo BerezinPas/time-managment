@@ -33,25 +33,6 @@
   ],
   "projects": [
     {
-      "id": 1,
-      "user_id": 1,
-      "name": "first",
-      "trecked_times": [
-        {
-          "id": 1,
-          "start_time": "0",
-          "end_time": "",
-          "description": "blabal"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "user_id": 1,
-      "name": "second",
-      "trecked_times": []
-    },
-    {
       "name": "Дрессировка собаки",
       "user_id": 1,
       "trecked_times": [],
@@ -80,24 +61,6 @@
       "name": "Чтение книг",
       "trecked_times": [],
       "id": 7
-    },
-    {
-      "user_id": 1,
-      "name": "что-то важное",
-      "trecked_times": [],
-      "id": 8
-    },
-    {
-      "user_id": 1,
-      "name": "delete",
-      "trecked_times": [],
-      "id": 9
-    },
-    {
-      "user_id": 1,
-      "name": "qwe",
-      "trecked_times": [],
-      "id": 10
     }
   ],
   "options": [],

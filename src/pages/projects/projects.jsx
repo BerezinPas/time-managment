@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { server } from '../../bff/server';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects, selectUserId } from '../../selectors';
 import { loadProjectsAsync } from '../../actions';

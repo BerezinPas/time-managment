@@ -1,4 +1,4 @@
-import { server } from '../bff/server';
+import { server } from '../bff';
 import { setProject } from './set-project';
 
 export const loadProjectAsync = (projectId) => (dispatch) => {

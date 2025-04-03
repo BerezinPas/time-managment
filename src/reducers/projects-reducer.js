@@ -10,6 +10,9 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 		case ACTION_TYPE.ADD_PROJECT:
 			return [...state, payload];
 
+		case ACTION_TYPE.DELETE_PROJECT:
+			return state.filter(({ id }) => id !== payload);
+
 		default:
 			return state;
 	}

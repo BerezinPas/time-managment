@@ -1,4 +1,6 @@
 export * from './add-project';
+export * from './delete-project-async';
+export * from './delete-project';
 export * from './load-project-async';
 export * from './load-projects-async';
 export * from './save-project-async';

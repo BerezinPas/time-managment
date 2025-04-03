@@ -9,10 +9,10 @@ import {
 } from '../../schemes';
 import styles from './register.module.scss';
 import { useState } from 'react';
-import { server } from '../../bff/server';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../actions';
 import { useNavigate } from 'react-router-dom';
+import { server } from '../../bff';
 
 export const Register = () => {
 	const dispatch = useDispatch();
