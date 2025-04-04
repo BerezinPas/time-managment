@@ -14,6 +14,7 @@
 
 	&:disabled {
 		opacity: 0.5;
+		cursor: default;
 	}
 
 	&.secondary {
@@ -26,7 +27,7 @@
 		}
 	}
 
-	&.delete {
+	&.danger {
 		background-color: $dangerColor;
 
 		&:hover {

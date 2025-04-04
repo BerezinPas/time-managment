@@ -3,7 +3,7 @@ import styles from './button.module.scss';
 /**
  * @param {{
  * children: any,
- * variant: 'delete' | 'secondary' | 'primary'
+ * variant: 'danger' | 'secondary' | 'primary'
  *  }} props
  *
  */
@@ -11,8 +11,8 @@ import styles from './button.module.scss';
 export const Button = ({ variant, children, ...props }) => {
 	let classes = `${styles.btn} `;
 	switch (variant) {
-		case 'delete':
-			classes += styles.delete;
+		case 'danger':
+			classes += styles.danger;
 			break;
 		case 'secondary':
 			classes += styles.secondary;
