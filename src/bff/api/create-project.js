@@ -8,7 +8,6 @@ export const createProject = (name, userId) =>
 		body: JSON.stringify({
 			user_id: userId,
 			name,
-			trecked_times: [],
 		}),
 	})
 		.then((project) => project.json())

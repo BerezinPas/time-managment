@@ -32,10 +32,9 @@ export const Project = () => {
 					<Button variant="delete" onClick={() => onDelete(project.id)}>
 						delete
 					</Button>
-					<Button variant="secondary">
-						<Link to={`/project/${project.id}/edit`}>edit</Link>
-					</Button>
-					<button>edit</button>
+					<Link to={`/project/${project.id}/edit`}>
+						<Button variant="secondary">edit</Button>
+					</Link>
 				</div>
 			</h2>
 		</div>

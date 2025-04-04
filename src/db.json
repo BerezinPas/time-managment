@@ -35,35 +35,74 @@
     {
       "name": "Дрессировка собаки",
       "user_id": 1,
-      "trecked_times": [],
       "id": 3
     },
     {
       "name": "Строительство дома",
       "user_id": 1,
-      "trecked_times": [],
       "id": 4
     },
     {
       "name": "Тренировка в зале",
       "user_id": 1,
-      "trecked_times": [],
       "id": 5
     },
     {
       "name": "Медитация",
       "user_id": 1,
-      "trecked_times": [],
       "id": 6
     },
     {
       "user_id": 1,
       "name": "Чтение книг",
-      "trecked_times": [],
       "id": 7
     }
   ],
   "options": [],
+  "trecked_times": [
+    {
+      "project_id": "4",
+      "start_time": 1743751837748,
+      "end_time": 1743751841394,
+      "description": "Составил план",
+      "id": 3
+    },
+    {
+      "project_id": "4",
+      "start_time": 1743751881650,
+      "end_time": 1743751899394,
+      "description": "Подготовил грунт",
+      "id": 4
+    },
+    {
+      "project_id": "4",
+      "start_time": 1743751900914,
+      "end_time": 1743751915898,
+      "description": "Заказал инструменты",
+      "id": 5
+    },
+    {
+      "project_id": "3",
+      "start_time": 1743751923634,
+      "end_time": 1743751936602,
+      "description": "Команда Сидеть",
+      "id": 6
+    },
+    {
+      "project_id": "3",
+      "start_time": 1743751937658,
+      "end_time": 1743751942978,
+      "description": "Команда Ждать",
+      "id": 7
+    },
+    {
+      "project_id": "3",
+      "start_time": 1743751943658,
+      "end_time": 1743751952202,
+      "description": "Команда Лежать",
+      "id": 8
+    }
+  ],
   "sessions": [
     {
       "hash": "0.17633832655614711804048511112341657280921936035156",
@@ -74,66 +113,6 @@
         "registred_at": "2025-04-02 08:23"
       },
       "id": 1
-    },
-    {
-      "hash": "0.22767329450806017554498339450219646096229553222656",
-      "user": {
-        "id": 3,
-        "login": "qweq",
-        "password": "qweqwe",
-        "registred_at": "2025-04-02 09:36"
-      },
-      "id": 2
-    },
-    {
-      "hash": "0.20305146490758674282517404208192601799964904785156",
-      "user": {
-        "id": 4,
-        "login": "qwew",
-        "password": "qweqwe",
-        "registred_at": "2025-04-02 09:38"
-      },
-      "id": 3
-    },
-    {
-      "hash": "0.98837523499546597882670084800338372588157653808594",
-      "user": {
-        "id": 5,
-        "login": "qwes",
-        "password": "qweqwe",
-        "registred_at": "2025-04-02 09:38"
-      },
-      "id": 4
-    },
-    {
-      "hash": "0.50797732836269671174989071005256846547126770019531",
-      "user": {
-        "id": 2,
-        "login": "qwe",
-        "password": "qweqwe",
-        "registred_at": "2025-04-02 08:23"
-      },
-      "id": 5
-    },
-    {
-      "hash": "0.82390878456903160476088032737607136368751525878906",
-      "user": {
-        "id": 1,
-        "login": "admin",
-        "password": "qweqwe",
-        "registred_at": "22222"
-      },
-      "id": 6
-    },
-    {
-      "hash": "0.56941023401291590566586364730028435587882995605469",
-      "user": {
-        "id": 1,
-        "login": "admin",
-        "password": "qweqwe",
-        "registred_at": "22222"
-      },
-      "id": 7
     }
   ]
 }
