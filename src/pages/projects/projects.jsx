@@ -11,7 +11,7 @@ export const Projects = () => {
 	const projects = useSelector(selectProjects);
 
 	return (
-		<div>
+		<div className="container">
 			<Link to="/project">add project</Link>
 			{projects.map(({ id, name, summuryTreckedTime }) => (
 				<ProjectRow

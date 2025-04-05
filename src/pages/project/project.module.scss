@@ -1,0 +1,11 @@
+@import url('./components/trecked-time-row/trecked-time-row.module.scss');
+
+.treckedTimesList {
+	display: flex;
+	flex-direction: column;
+}
+
+.controlBtns {
+	display: flex;
+	gap: 10px;
+}

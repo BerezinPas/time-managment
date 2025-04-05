@@ -1,118 +1,174 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "login": "admin",
-      "password": "qweqwe",
-      "registred_at": "22222"
-    },
-    {
-      "login": "qwe",
-      "password": "qweqwe",
-      "registred_at": "2025-04-02 08:23",
-      "id": 2
-    },
-    {
-      "login": "qweq",
-      "password": "qweqwe",
-      "registred_at": "2025-04-02 09:36",
-      "id": 3
-    },
-    {
-      "login": "qwew",
-      "password": "qweqwe",
-      "registred_at": "2025-04-02 09:38",
-      "id": 4
-    },
-    {
-      "login": "qwes",
-      "password": "qweqwe",
-      "registred_at": "2025-04-02 09:38",
-      "id": 5
-    }
-  ],
-  "projects": [
-    {
-      "name": "Дрессировка собаки",
-      "user_id": 1,
-      "id": 3
-    },
-    {
-      "name": "Строительство дома",
-      "user_id": 1,
-      "id": 4
-    },
-    {
-      "name": "Тренировка в зале",
-      "user_id": 1,
-      "id": 5
-    },
-    {
-      "name": "Медитация",
-      "user_id": 1,
-      "id": 6
-    },
-    {
-      "user_id": 1,
-      "name": "Чтение книг",
-      "id": 7
-    }
-  ],
-  "options": [],
-  "trecked_times": [
-    {
-      "project_id": "4",
-      "start_time": 1743751837748,
-      "end_time": 1743751841394,
-      "description": "Составил план",
-      "id": 3
-    },
-    {
-      "project_id": "4",
-      "start_time": 1743751881650,
-      "end_time": 1743751899394,
-      "description": "Подготовил грунт",
-      "id": 4
-    },
-    {
-      "project_id": "4",
-      "start_time": 1743751900914,
-      "end_time": 1743751915898,
-      "description": "Заказал инструменты",
-      "id": 5
-    },
-    {
-      "project_id": "3",
-      "start_time": 1743751923634,
-      "end_time": 1743751936602,
-      "description": "Команда Сидеть",
-      "id": 6
-    },
-    {
-      "project_id": "3",
-      "start_time": 1743751937658,
-      "end_time": 1743751942978,
-      "description": "Команда Ждать",
-      "id": 7
-    },
-    {
-      "project_id": "3",
-      "start_time": 1743751943658,
-      "end_time": 1743751952202,
-      "description": "Команда Лежать",
-      "id": 8
-    }
-  ],
-  "sessions": [
-    {
-      "hash": "0.17633832655614711804048511112341657280921936035156",
-      "user": {
-        "id": 2,
-        "login": "qwe",
-        "password": "qweqwe",
-        "registred_at": "2025-04-02 08:23"
-      },
-      "id": 1
-    }
-  ]
+	"users": [
+		{
+			"id": 1,
+			"login": "admin",
+			"password": "qweqwe",
+			"registred_at": "22222"
+		},
+		{
+			"login": "qwe",
+			"password": "qweqwe",
+			"registred_at": "2025-04-02 08:23",
+			"id": 2
+		},
+		{
+			"login": "qweq",
+			"password": "qweqwe",
+			"registred_at": "2025-04-02 09:36",
+			"id": 3
+		},
+		{
+			"login": "qwew",
+			"password": "qweqwe",
+			"registred_at": "2025-04-02 09:38",
+			"id": 4
+		},
+		{
+			"login": "qwes",
+			"password": "qweqwe",
+			"registred_at": "2025-04-02 09:38",
+			"id": 5
+		}
+	],
+	"projects": [
+		{
+			"name": "Дрессировка собаки",
+			"user_id": 1,
+			"id": 3
+		},
+		{
+			"name": "Строительство дома",
+			"user_id": 1,
+			"id": 4
+		},
+		{
+			"name": "Тренировка в зале",
+			"user_id": 1,
+			"id": 5
+		},
+		{
+			"name": "Медитация",
+			"user_id": 1,
+			"id": 6
+		},
+		{
+			"user_id": 1,
+			"name": "Чтение книг",
+			"id": 7
+		}
+	],
+	"options": [],
+	"trecked_times": [
+		{
+			"project_id": "4",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+			"description": "Составил план",
+			"id": 3
+		},
+		{
+			"project_id": "4",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:35:45 GMT",
+			"description": "Подготовил грунт",
+			"id": 4
+		},
+		{
+			"project_id": "4",
+			"start_time": "Fri, 04 Apr 2025 09:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+			"description": "Заказал инструменты",
+			"id": 5
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 12:32:45 GMT",
+			"description": "Команда Сидеть",
+			"id": 6
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:12:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+			"description": "Команда Ждать",
+			"id": 7
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:22:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+			"description": "Команда Лежать",
+			"id": 8
+		},
+		{
+			"project_id": "4",
+			"start_time": "Fri, 04 Apr 2025 05:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+			"description": "Замешал цемент",
+			"id": 9
+		},
+		{
+			"project_id": "4",
+			"start_time": "Fri, 04 Apr 2025 06:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+			"description": "Сделал каркас ",
+			"id": 10
+		},
+		{
+			"project_id": "4",
+			"start_time": "Fri, 04 Apr 2025 10:34:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:42:45 GMT",
+			"description": "Заготовил бревна для стен",
+			"id": 11
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:31:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 10:52:55 GMT",
+			"description": "Команда Дай лапу",
+			"id": 12
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 17:31:45 GMT",
+			"description": "Команда Кружись",
+			"id": 13
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 15:32:45 GMT",
+			"description": "Команда Ко мне",
+			"id": 14
+		},
+		{
+			"project_id": "3",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 14:32:45 GMT",
+			"description": "Команда Рядом ",
+			"id": 15
+		},
+		{
+			"project_id": "5",
+			"start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
+			"end_time": "Fri, 04 Apr 2025 13:32:45 GMT",
+			"description": "asddd",
+			"id": 16
+		}
+	],
+	"sessions": [
+		{
+			"hash": "0.17633832655614711804048511112341657280921936035156",
+			"user": {
+				"id": 2,
+				"login": "qwe",
+				"password": "qweqwe",
+				"registred_at": "2025-04-02 08:23"
+			},
+			"id": 1
+		}
+	]
 }

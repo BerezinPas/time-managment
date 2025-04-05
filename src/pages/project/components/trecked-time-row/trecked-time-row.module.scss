@@ -1,0 +1,39 @@
+.row {
+	display: flex;
+	padding: 16px 24px;
+	border-bottom: 1px solid #e5e9f0;
+	color: $textColor;
+	align-items: center;
+	&.rowHeader {
+		color: $mainColor;
+	}
+
+	&:nth-child(2n) {
+		background-color: #fff;
+	}
+
+	&:nth-child(2n + 1) {
+		background-color: #f8f9fa;
+	}
+
+	// &:hover {
+	// 	background-color: #f0f4f8;
+	// }
+}
+
+.descCol {
+	flex: 1 1 200px;
+	margin-right: 10px;
+}
+
+.durationCol {
+	flex: 0 0 150px;
+	margin-right: 10px;
+}
+
+.timeCol {
+	flex: 0 0 120px;
+}
+.date {
+	margin-top: 5px;
+}

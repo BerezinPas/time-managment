@@ -1,5 +1,6 @@
 // @import url('./variables.scss');
 // @import './App.module.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 body {
 	background-color: $bgColor;
 	font-size: 18px;
@@ -9,16 +10,30 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: $bgColor;
+	font-family: 'Inter', sans-serif;
 	/* width: 1000px; */
-	min-height: 100%;
-	margin: 0 auto;
+	// min-height: 100%;
+	// margin: 0 auto;
 	min-height: 100%;
 }
 .pageContent {
 	padding: 120px 0 50px;
-	/* height: 100%; */
-	flex-grow: 1;
+	height: 100%;
+	// flex-grow: 1;
+	// display: flex;
+}
+
+:global .container {
+	padding: 0 15px;
+	max-width: 1230px;
+	margin: 0 auto;
+}
+
+:global .h2 {
+	font-size: 28px;
 	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
 }
 
 @keyframes logo-spin {

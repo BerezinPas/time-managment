@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../../components/button/button';
 import { Input } from '../../components';
 import { createTreckedTimeAsync } from '../../actions/create-trecked-time-async';
+import { formateTimeStampToHHMMSS } from '../../utils';
 
 export const Main = () => {
 	const dispatch = useDispatch();
@@ -40,8 +41,8 @@ export const Main = () => {
 		dispatch(
 			createTreckedTimeAsync({
 				projectId: selectedProject,
-				startTime: timer,
-				endTime,
+				startTime: new Date(timer).toUTCString(),
+				endTime: new Date(endTime).toUTCString(),
 				description,
 			}),
 		);
@@ -69,13 +70,6 @@ export const Main = () => {
 
 	// console.log('currentTimer', currentTimer);
 
-	const formateDate = (secs) => {
-		const pad = (val) => ('0' + val).slice(-2);
-		return [Math.floor(secs / 3600), Math.floor((secs % 3600) / 60), secs % 60]
-			.map(pad)
-			.join(':');
-	};
-
 	const onDescriptionChange = ({ target }) => {
 		setDescription(target.value);
 	};
@@ -83,10 +77,10 @@ export const Main = () => {
 	// TODO fix select default value undefind
 	// TODO Поменять СТРУКТУРУ БД
 	return (
-		<div>
+		<div className="container">
 			<h2>home</h2>
 			<div>
-				<div>{formateDate(Math.floor(currentTimer / 1000))}</div>
+				<div>{formateTimeStampToHHMMSS(currentTimer)}</div>
 				<select
 					name="projects"
 					onChange={(e) => setSelectedProject(e.target.value)}

@@ -5,3 +5,5 @@ export const selectUserId = ({ user }) => user.id;
 export const selectProjects = ({ projects }) => projects;
 
 export const selectProject = ({ project }) => project;
+
+export const selectTreckedTimes = ({ project }) => project.treckedTimes;

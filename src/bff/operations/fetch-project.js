@@ -5,6 +5,9 @@ export const fetchProject = async (projectId) => {
 
 	const treckedTimes = await getTreckedTimes(projectId);
 
+	console.log(treckedTimes);
+	console.log(Date.now());
+
 	return {
 		error: null,
 		res: { ...project, treckedTimes },

@@ -6,4 +6,14 @@ export const getTreckedTimes = (projectId) =>
 		.then((treckedTimes) => treckedTimes.json())
 		.then(
 			(treckedTimes) => treckedTimes && treckedTimes.map(transformTreckedTime),
-		);
+		)
+		.then((treckedTimes) => {
+			return (
+				treckedTimes &&
+				treckedTimes.map((el) => ({
+					...el,
+					startTime: Date.parse(el.startTime),
+					endTime: Date.parse(el.endTime),
+				}))
+			);
+		});

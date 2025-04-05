@@ -41,6 +41,7 @@ function App() {
 					<Route path="/projects" element={<Projects />} />
 					<Route path="/project" element={<Project />} />
 					<Route path="/project/:id" element={<Project />} />
+					<Route path="/project/:id/edit" element={<Project />} />
 					{/* <Route path="/projects" element={<Projects />} /> */}
 				</Routes>
 			</div>
