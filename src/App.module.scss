@@ -33,9 +33,39 @@ body {
 	font-size: 28px;
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 1em;
+	margin-bottom: 1.5em;
 }
 
+:global .row {
+	display: flex;
+	padding: 16px 24px;
+	border-bottom: 1px solid #e5e9f0;
+	color: $textColor;
+	align-items: center;
+	&.rowHeader {
+		color: $mainColor;
+	}
+
+	&:nth-child(2n) {
+		background-color: #fff;
+	}
+
+	&:nth-child(2n + 1) {
+		background-color: #f8f9fa;
+	}
+
+	&.hover:hover {
+		background-color: #f0f4f8;
+	}
+}
+
+:global .error {
+	color: $dangerColor;
+	padding: 10px 15px;
+	border: 1px solid $dangerColor;
+	background-color: #fee9e9;
+	border-radius: 6px;
+}
 @keyframes logo-spin {
 	from {
 		transform: rotate(0deg);

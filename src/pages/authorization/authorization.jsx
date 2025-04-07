@@ -39,7 +39,7 @@ export const Authorization = () => {
 
 	const errorMessage = serverError || formError;
 
-	console.log(errors);
+	// console.log(errors);
 	const onSubmit = async ({ login, password }) => {
 		const { error, res } = await server.authorizate(login, password);
 		if (error) {

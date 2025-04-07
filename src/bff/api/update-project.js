@@ -1,11 +1,14 @@
 import { URL } from '../constants';
+import { transformProject } from '../transformers';
 
-export const updateProject = (name, treckedTimes) =>
-	fetch(`${URL}/projects`, {
+export const updateProject = (id, name, treckedTimes) =>
+	fetch(`${URL}/projects/${id}`, {
 		method: 'PATCH',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
 		body: JSON.stringify({
 			name,
 			trecked_times: treckedTimes,
 		}),
-	});
+	})
+		.then((project) => project.json())
+		.then((project) => project && transformProject(project));

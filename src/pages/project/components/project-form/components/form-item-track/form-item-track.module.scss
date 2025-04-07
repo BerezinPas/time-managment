@@ -1,0 +1,40 @@
+.descCol {
+	flex: 1 1 200px;
+	margin-right: 20px;
+}
+
+.startCol {
+	flex: 0 0 150px;
+	margin-right: 20px;
+}
+
+.endCol {
+	flex: 0 0 120px;
+}
+
+.timeCol {
+	flex: 0 0 214px;
+	display: flex;
+	align-items: center;
+	// flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-right: 20px;
+}
+input[type='time'] {
+	flex: 0 0 100px;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	margin-left: -0px;
+}
+
+input[type='date'] {
+	margin-top: 5px;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	margin-left: 0px;
+}

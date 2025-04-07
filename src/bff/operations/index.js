@@ -5,3 +5,4 @@ export * from './fetch-projects';
 export * from './register';
 export * from './remove-project';
 export * from './save-project';
+export * from './save-trecked-times';

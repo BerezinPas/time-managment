@@ -45,7 +45,7 @@ export const Register = () => {
 
 	const errorMessage = serverError || formError;
 
-	console.log(errors);
+	// console.log(errors);
 	const onSubmit = async ({ login, password }) => {
 		const { error, res } = await server.register(login, password);
 		if (error) {

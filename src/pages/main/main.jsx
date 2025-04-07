@@ -52,8 +52,8 @@ export const Main = () => {
 		setCurrentTimer(null);
 	};
 
-	console.log(projects[0]);
-	console.log('selectedProject', selectedProject);
+	// console.log(projects[0]);
+	// console.log('selectedProject', selectedProject);
 
 	useEffect(() => {
 		let interval;
@@ -74,8 +74,6 @@ export const Main = () => {
 		setDescription(target.value);
 	};
 
-	// TODO fix select default value undefind
-	// TODO Поменять СТРУКТУРУ БД
 	return (
 		<div className="container">
 			<h2>home</h2>

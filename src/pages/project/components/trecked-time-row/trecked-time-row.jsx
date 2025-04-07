@@ -7,8 +7,8 @@ export const TreckedTimeRow = ({
 	endTime,
 	description,
 }) => {
-	console.log(new Date(endTime - 300000000).toUTCString());
-	console.log(new Date('04 Apr 2025 07:32:16 GMT'));
+	// console.log(new Date(endTime - 300000000).toUTCString());
+	// console.log(new Date('04 Apr 2025 07:32:16 GMT'));
 
 	return (
 		<div className={styles.row}>
@@ -29,6 +29,3 @@ export const TreckedTimeRow = ({
 		</div>
 	);
 };
-
-// TODO записывать в бд не таймШтамп а дату
-// когда получаю данные преобразовать их обратно в таймШтамп
