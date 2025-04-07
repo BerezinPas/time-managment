@@ -56,7 +56,7 @@ export const Project = () => {
 				</div>
 			</h2>
 			<div className={styles.treckedTimesList}>
-				<div className={`${styles.row} ${styles.rowHeader}`}>
+				<div className="row rowHeader">
 					<div className={styles.descCol}>Описание</div>
 					<div className={styles.durationCol}>Длительность</div>
 					<div className={styles.timeCol}>Время</div>

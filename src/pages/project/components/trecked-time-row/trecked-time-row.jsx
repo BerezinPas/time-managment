@@ -11,7 +11,7 @@ export const TreckedTimeRow = ({
 	// console.log(new Date('04 Apr 2025 07:32:16 GMT'));
 
 	return (
-		<div className={styles.row}>
+		<div className="row">
 			<div className={styles.descCol}>{description}</div>
 			<div className={styles.durationCol}>
 				{formateTimeStampToHHMMSS(endTime - startTime)}

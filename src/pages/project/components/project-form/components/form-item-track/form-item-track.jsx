@@ -7,7 +7,6 @@ export const FormItemTrack = ({
 	unregister,
 	setDeleteTrecksId,
 	setNewTreckedTimes,
-	className,
 }) => {
 	const onDelete = () => {
 		if (!String(id).includes('generated')) {
@@ -35,7 +34,7 @@ export const FormItemTrack = ({
 			</div>
 			{/* <div className={styles.date}></div> */}
 			<Button type="button" variant="danger" onClick={onDelete}>
-				Delete
+				удалить
 			</Button>
 		</div>
 	);

@@ -4,6 +4,7 @@ import { selectProjects, selectUserId } from '../../selectors';
 import { loadProjectsAsync } from '../../actions';
 import { ProjectRow } from './components';
 import { Link } from 'react-router-dom';
+import { Button } from '../../components';
 
 export const Projects = () => {
 	const dispatch = useDispatch();
@@ -12,7 +13,15 @@ export const Projects = () => {
 
 	return (
 		<div className="container">
-			<Link to="/project">add project</Link>
+			<div>
+				<h2 className="h2">
+					Проекты
+					<Link to="/project">
+						<Button>создать проект</Button>
+					</Link>
+				</h2>
+			</div>
+
 			{projects.map(({ id, name, summuryTreckedTime }) => (
 				<ProjectRow
 					key={id}

@@ -86,7 +86,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 	const content = (
 		<>
 			<div className=" ">
-				<Input {...register(`name`)} />
+				<Input placeholder="Название проекта" {...register(`name`)} />
 			</div>
 
 			<div className={styles.controlPanel}>
@@ -130,7 +130,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 						onClick={handleSubmit(onSubmit)}
 						type="submit"
 					>
-						сохранить
+						{isCreating ? 'создать проект' : 'сохранить'}
 					</Button>
 				</div>
 			</div>
@@ -150,7 +150,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 
 	return (
 		<div className="container">
-			{isCreating ? <h2 className="h2">createProject</h2> : ''}
+			{isCreating ? <h2 className="h2">Новый проект</h2> : ''}
 			{content}
 		</div>
 	);
