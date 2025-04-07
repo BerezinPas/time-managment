@@ -6,7 +6,7 @@ import { Input } from '../../components';
 import { createTreckedTimeAsync } from '../../actions/create-trecked-time-async';
 import { formateTimeStampToHHMMSS } from '../../utils';
 
-export const Main = () => {
+export const MainPage = () => {
 	const dispatch = useDispatch();
 	const projects = useSelector(selectProjects);
 	const [selectedProject, setSelectedProject] = useState(projects[1]?.id);
@@ -41,8 +41,8 @@ export const Main = () => {
 		dispatch(
 			createTreckedTimeAsync({
 				projectId: selectedProject,
-				startTime: new Date(timer).toUTCString(),
-				endTime: new Date(endTime).toUTCString(),
+				startTime: new Date(timer).toISOString(),
+				endTime: new Date(endTime).toISOString(),
 				description,
 			}),
 		);
