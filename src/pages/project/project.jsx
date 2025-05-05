@@ -11,7 +11,6 @@ import { ProjectForm } from './components/project-form/project-form';
 import { Button } from '../../components';
 import { TrackRow } from './components';
 import styles from './project.module.scss';
-import { initialStateProject } from '../../reducers/project-reducer';
 
 export const Project = () => {
 	const params = useParams();
@@ -40,7 +39,8 @@ export const Project = () => {
 	}, [params.id, dispatch]);
 
 	const onDelete = (id) => {
-		dispatch(deleteProjectAsync(id)).then(() => {
+		const tracksId = tracks.map((track) => track.id);
+		dispatch(deleteProjectAsync(id, tracksId)).then(() => {
 			navigate('/projects');
 		});
 	};

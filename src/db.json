@@ -54,18 +54,8 @@
     },
     {
       "user_id": 1,
-      "name": "ааа ы",
+      "name": "12121212",
       "id": 7
-    },
-    {
-      "user_id": 1,
-      "name": "яяяяя яяя",
-      "id": 8
-    },
-    {
-      "user_id": 1,
-      "name": "1232222",
-      "id": 9
     }
   ],
   "options": [],
@@ -181,27 +171,6 @@
       "end_time": "2025-04-07T20:07:00.000Z",
       "description": "qqq",
       "id": 37
-    },
-    {
-      "project_id": 7,
-      "start_time": "2025-04-15T18:25:00.000Z",
-      "end_time": "2025-04-15T21:25:00.000Z",
-      "description": "фффф",
-      "id": 38
-    },
-    {
-      "project_id": 8,
-      "start_time": "2025-04-15T21:02:00.000Z",
-      "end_time": "2025-04-15T21:25:00.000Z",
-      "description": "йййй",
-      "id": 39
-    },
-    {
-      "project_id": 9,
-      "start_time": "2025-05-02T18:32:00.000Z",
-      "end_time": "2025-05-03T17:02:00.000Z",
-      "description": "sss",
-      "id": 40
     },
     {
       "project_id": 3,
