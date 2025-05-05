@@ -11,7 +11,7 @@ import styles from './project-form.module.scss';
 import { useState } from 'react';
 import { FormItemTrack } from './components';
 import {
-	groupByTrecks,
+	groupByTracks,
 	groupDirtyFieldsByTracks,
 	initFormValues,
 	formateTrack,
@@ -23,13 +23,13 @@ export const ProjectForm = ({ project, isCreating }) => {
 	const navigate = useNavigate();
 	const userId = useSelector(selectUserId);
 
-	const [newTrackedTimes, setNewTrackedTimes] = useState(project.treckedTimes);
+	const [newTracks, setNewTracks] = useState(project.tracks);
 	const [deletedTracksId, setDeleteTracksId] = useState([]);
 
 	const projectFormSchema = yup.object().shape({
 		name: nameProjectShema,
 
-		...newTrackedTimes.reduce((acc, cur) => {
+		...newTracks.reduce((acc, cur) => {
 			acc[`startDay-${cur.id}`] = dataTrackSchema;
 			return acc;
 		}, {}),
@@ -47,15 +47,15 @@ export const ProjectForm = ({ project, isCreating }) => {
 	});
 
 	const onSubmit = (formData) => {
-		const updatedTrecks = groupDirtyFieldsByTracks(
+		const updatedTracks = groupDirtyFieldsByTracks(
 			dirtyFields,
 			formData,
 			project.id,
 		);
 
-		const tracksData = groupByTrecks(formData, project.id);
+		const tracksData = groupByTracks(formData, project.id);
 
-		const createdTrecks = tracksData.filter(({ id }) =>
+		const createdTracks = tracksData.filter(({ id }) =>
 			id.includes('generated'),
 		);
 
@@ -64,10 +64,10 @@ export const ProjectForm = ({ project, isCreating }) => {
 				id: project.id,
 				userId,
 				name: formData.name,
-				treckedTimes: {
-					create: createdTrecks.map(formateTrack) || [],
+				tracks: {
+					create: createdTracks.map(formateTrack) || [],
 					update:
-						updatedTrecks.map((el) =>
+						updatedTracks.map((el) =>
 							formateTrack(
 								el,
 								tracksData.find(({ id }) => Number(el.id) === Number(id)),
@@ -98,7 +98,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 						// TODO FOCUS onCREATE DECS input
 						onClick={() => {
 							const newId = generateId();
-							setNewTrackedTimes((prev) => [
+							setNewTracks((prev) => [
 								{
 									id: newId,
 									projectId: project.id,
@@ -135,14 +135,14 @@ export const ProjectForm = ({ project, isCreating }) => {
 				</div>
 			</div>
 
-			{newTrackedTimes.map(({ id, description, startTime, endTime }) => (
+			{newTracks.map(({ id, description, startTime, endTime }) => (
 				<FormItemTrack
 					key={id}
 					id={id}
 					register={register}
 					unregister={unregister}
-					setDeleteTrecksId={setDeleteTracksId}
-					setNewTreckedTimes={setNewTrackedTimes}
+					setDeleteTracksId={setDeleteTracksId}
+					setNewTracks={setNewTracks}
 				/>
 			))}
 		</>

@@ -1,0 +1,142 @@
+import { useSelector } from 'react-redux';
+import { selectProjects } from '../../../../selectors';
+import Select from 'react-select';
+import { Button, Input } from '../../../../components';
+import styles from './analytics-control-panel.module.scss';
+import { useState } from 'react';
+import { ONE_HOUR_IN_MSECS } from '../../../../constants';
+
+export const AnalyticsControlPanel = ({
+	checked,
+	setChecked,
+	onSelectChange,
+	setDateGap,
+	dateGap,
+	selectedProjectsId,
+	setSelectedProjectsId,
+	timeZone,
+}) => {
+	const [dateGapInput, setDateGapInput] = useState({ ...dateGap });
+	const [error, setError] = useState(null);
+	const projects = useSelector(selectProjects);
+
+	// console.log(',QWEQWE', new Date(dateGap.start).toString());
+	// console.log('@@@', new Date(dateGap.start).toISOString());
+	// console.log('@@@.end', new Date(dateGap.end));
+	// console.log('!!!!', new Date(dateGapInput.start));
+	// console.log('!!!!.end', new Date(dateGapInput.end));
+	// console.log(new Date().getTimezoneOffset() / 60);
+	const options = projects.map((project) => ({
+		value: project.id,
+		label: project.name,
+	}));
+	// console.log(options);
+
+	const resetFilters = () => {
+		setChecked(true);
+		setSelectedProjectsId([]);
+	};
+
+	// TODO VALIDATION ON DATE!!!
+	const validateDateStart = (value) => dateGapInput.end >= Date.parse(value);
+
+	const validateDateEnd = (value) => dateGapInput.start <= Date.parse(value);
+
+	const onDateChange = (e) => {
+		setDateGapInput((prev) => ({
+			...prev,
+			[e.target.name]:
+				Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS,
+		}));
+
+		if (e.target.name === 'start' && !validateDateStart(e.target.value)) {
+			setError('Некорректное время');
+			return;
+		}
+		if (e.target.name === 'end' && !validateDateEnd(e.target.value)) {
+			setError('Некорректное время');
+			return;
+		}
+		setError(null);
+		setDateGap((prev) => ({
+			...prev,
+			...dateGapInput,
+			[e.target.name]:
+				Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS,
+		}));
+	};
+
+	// const setValue =(ValueType, ActionTypes) => void
+	// console.log('OPTIONS', options);
+
+	const toYYYYMMDD = (date = new Date()) => {
+		// console.log('datedate', date);
+		// console.log('datedate', date.getDate());
+		// console.log('datedate', date.getMonth());
+
+		const mounth = `0${date.getMonth() + 1}`.slice(-2);
+		const day = `0${date.getDate()}`.slice(-2);
+		console.log(`${date.getFullYear()}-${day}-${mounth}`);
+
+		return `${date.getFullYear()}-${mounth}-${day}`;
+	};
+
+	return (
+		<div className={styles.controlPanel}>
+			<label className={styles.groupCheckbox}>
+				<input
+					type="checkbox"
+					checked={checked}
+					onChange={({ target }) => setChecked(target.checked)}
+				/>
+				<span>Сгруппировать</span>
+			</label>
+
+			<div className={styles.dateRange}>
+				<Input
+					type="date"
+					name="start"
+					onChange={onDateChange}
+					// value={new Date(dateGapInput.start).toISOString().slice(0, 10)}
+					value={toYYYYMMDD(new Date(dateGapInput.start))}
+					// value={new Date(dateGapInput.start)
+					// 	.toLocaleString('ru', {
+					// 		timeZone: 'Asia/Novosibirsk',
+					// 	})
+					// 	.slice(0, 10)}
+				/>
+				<Input
+					type="date"
+					name="end"
+					onChange={onDateChange}
+					value={toYYYYMMDD(new Date(dateGapInput.end))}
+				/>
+			</div>
+			{error && <div className="error">{error}</div>}
+			<Button
+				className={styles.resetBtn}
+				variant="danger"
+				onClick={() => resetFilters()}
+			>
+				Сброс
+			</Button>
+
+			<Select
+				value={options.filter((option) =>
+					selectedProjectsId.includes(option.value),
+				)}
+				className={styles.select}
+				options={options}
+				isMulti
+				closeMenuOnSelect={false}
+				onChange={onSelectChange}
+				isClearable
+			/>
+		</div>
+	);
+};
+[
+	{ value: 'chocolate', label: 'Chocolate' },
+	{ value: 'strawberry', label: 'Strawberry' },
+	{ value: 'vanilla', label: 'Vanilla' },
+];

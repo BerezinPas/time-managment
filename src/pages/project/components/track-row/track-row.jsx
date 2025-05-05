@@ -1,20 +1,17 @@
 import { formateTimeStampToHHMMSS } from '../../../../utils';
-import styles from './trecked-time-row.module.scss';
-export const TreckedTimeRow = ({
+import styles from './track-row.module.scss';
+export const TrackRow = ({
 	id,
 	projectId,
 	startTime,
 	endTime,
 	description,
 }) => {
-	// console.log(new Date(endTime - 300000000).toUTCString());
-	// console.log(new Date('04 Apr 2025 07:32:16 GMT'));
-
 	return (
 		<div className="row">
 			<div className={styles.descCol}>{description}</div>
 			<div className={styles.durationCol}>
-				{formateTimeStampToHHMMSS(endTime - startTime)}
+				{formateTimeStampToHHMMSS(new Date(endTime) - new Date(startTime))}
 			</div>
 			<div className={styles.timeCol}>
 				<div>

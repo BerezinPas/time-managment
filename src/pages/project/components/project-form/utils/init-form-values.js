@@ -1,5 +1,5 @@
 export const initFormValues = (project) =>
-	project.treckedTimes.reduce(
+	project.tracks.reduce(
 		(obj, cur) => {
 			obj[`description-${cur.id}`] = cur.description;
 

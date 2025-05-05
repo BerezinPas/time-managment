@@ -6,4 +6,4 @@ export const selectProjects = ({ projects }) => projects;
 
 export const selectProject = ({ project }) => project;
 
-export const selectTreckedTimes = ({ project }) => project.treckedTimes;
+export const selectTracks = ({ project }) => project.tracks;

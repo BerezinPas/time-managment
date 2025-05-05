@@ -23,7 +23,6 @@ export const formateTrack = (track, fields) => {
 	);
 	console.log('newStartTime', newStartTime);
 
-	// TODO парсить и проверять а потом зоздавать новую дату
 	if (newStartTime > newEndTime) {
 		// console.log('fields', fields);
 		// console.log(

@@ -22,12 +22,12 @@ export const Projects = () => {
 				</h2>
 			</div>
 
-			{projects.map(({ id, name, summuryTreckedTime }) => (
+			{projects.map(({ id, name, summuryDuration }) => (
 				<ProjectRow
 					key={id}
 					id={id}
 					name={name}
-					summuryTreckedTime={summuryTreckedTime}
+					summuryDuration={summuryDuration}
 				/>
 			))}
 		</div>

@@ -1,4 +1,4 @@
-export const groupByTrecks = (formData, projectId) =>
+export const groupByTracks = (formData, projectId) =>
 	Object.keys(formData).reduce((acc, cur) => {
 		const [key, id] = cur.split('-');
 		if (key === 'name') {

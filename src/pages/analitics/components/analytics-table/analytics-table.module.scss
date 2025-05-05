@@ -1,0 +1,103 @@
+.projectWrapper {
+	flex-wrap: wrap;
+	padding: 0;
+
+	// &:nth-of-type(2n) .tracksWrapper > :global.row {
+	// 	background-color: #fff;
+	// }
+	// &:nth-of-type(2n + 1) .tracksWrapper > :global.row {
+	// 	background-color: #f8f9fa;
+	// }
+}
+.projectRow {
+	width: 100%;
+	padding: 16px 24px;
+	border-bottom: 2px solid #e5e9f0;
+	background-color: #fff;
+	display: flex;
+	cursor: pointer;
+	transition: 0.25s;
+
+	&:hover {
+		background-color: #f0f4f8;
+	}
+
+	// padding: 0;
+	// & .tracksWrapper {
+	// 	background-color: #540707;
+	// 	color: #76b7b2;
+	// }
+
+	// &:nth-of-type(2n) {
+	// 	background-color: #fff;
+	// }
+}
+
+.tracksWrapper {
+	width: 100%;
+	& > :global.row {
+		background-color: #f0f0f0;
+		background-color: #dadada;
+		padding-left: 36px;
+		// background-color: transparent;
+	}
+}
+
+.analyticsRow {
+	background-color: #f8f9fa;
+}
+
+.colName {
+	flex: 1 0 auto;
+	display: flex;
+	justify-content: start;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.colDate {
+	flex: 0 0 150px;
+	display: flex;
+	cursor: pointer;
+}
+
+.colDuration {
+	flex: 0 0 150px;
+	display: flex;
+	cursor: pointer;
+}
+
+.colProcent {
+	flex: 0 0 100px;
+	display: flex;
+}
+
+.arrows {
+	position: relative;
+	height: 20px;
+	margin-left: 8px;
+	&.inc .arrowUp {
+		border-bottom-color: $mainColor;
+	}
+	&.dec .arrowDown {
+		border-top-color: $mainColor;
+	}
+}
+.arrow {
+	width: 8px;
+	// height: 4px;
+	height: 10px;
+	position: absolute;
+	// background-color: #a02222;
+	border: 5px solid transparent;
+	// transform: rotate(180deg);
+	&Up {
+		top: 0;
+		border-bottom-color: #5d33c739;
+	}
+
+	&Down {
+		bottom: -5px;
+		border-top-color: #5d33c739;
+	}
+}

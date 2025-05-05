@@ -1,19 +1,19 @@
 import { createProject, updateProject } from '../api';
-import { saveTreckedTimes } from './save-trecked-times';
+import { saveTracks } from './save-tracks';
 
-export const saveProject = async ({ id, name, userId, treckedTimes }) => {
-	let trecksData;
+export const saveProject = async ({ id, name, userId, tracks }) => {
+	let tracksData;
 	let project;
 
 	if (id !== null) {
 		project = await updateProject(id, name);
-		trecksData = await saveTreckedTimes(treckedTimes);
+		tracksData = await saveTracks(tracks);
 	} else {
 		project = await createProject(name, userId);
-		trecksData = await saveTreckedTimes({
-			...treckedTimes,
-			create: treckedTimes.create.map((treck) => ({
-				...treck,
+		tracksData = await saveTracks({
+			...tracks,
+			create: tracks.create.map((track) => ({
+				...track,
 				projectId: project.id,
 			})),
 		});
@@ -21,6 +21,6 @@ export const saveProject = async ({ id, name, userId, treckedTimes }) => {
 
 	return {
 		error: null,
-		res: { project, trecksData },
+		res: { project, tracksData },
 	};
 };

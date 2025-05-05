@@ -1,14 +1,14 @@
 import { URL } from '../constants';
-import { transformTreckedTime } from '../transformers';
+import { transformTrack } from '../transformers';
 
-export const createTreckedTime = ({
+export const createTrack = ({
 	projectId,
 	startTime,
 	endTime,
 
 	description,
 }) =>
-	fetch(`${URL}/trecked_times`, {
+	fetch(`${URL}/tracks`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
 		body: JSON.stringify({
@@ -18,5 +18,5 @@ export const createTreckedTime = ({
 			description,
 		}),
 	})
-		.then((treckedTime) => treckedTime.json())
-		.then((treckedTime) => treckedTime && transformTreckedTime(treckedTime));
+		.then((track) => track.json())
+		.then((track) => track && transformTrack(track));

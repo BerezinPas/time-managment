@@ -1,0 +1,56 @@
+.segment {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	transform-origin: center;
+	transition: all 0.5s;
+	transform: rotate(0deg);
+
+	&:nth-child(2n) {
+		background-color: #76b7b2;
+	}
+
+	&:nth-child(2n + 1) {
+		background-color: #e15759;
+	}
+}
+
+.number {
+	z-index: 10;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	pointer-events: none;
+
+	> span {
+		margin-top: -45px;
+	}
+}
+
+.toolTip {
+	position: absolute;
+	z-index: 3;
+	background-color: #ffffff;
+	border: 1px solid #e5e9f0;
+	box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	font-size: 16px;
+	transform: translate(-50%, -50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	z-index: 15;
+	width: 200px;
+	padding: 10px;
+	height: 100px;
+	// & > div {
+	// 	// display: flex;
+	// 	flex-direction: column;
+	// 	gap: 5px;
+	// }
+}

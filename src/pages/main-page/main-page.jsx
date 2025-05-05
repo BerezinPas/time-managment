@@ -3,8 +3,8 @@ import { selectProjects } from '../../selectors';
 import { useEffect, useState } from 'react';
 import { Button } from '../../components/button/button';
 import { Input } from '../../components';
-import { createTreckedTimeAsync } from '../../actions/create-trecked-time-async';
 import { formateTimeStampToHHMMSS } from '../../utils';
+import { createTrackAsync } from '../../actions';
 
 export const MainPage = () => {
 	const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export const MainPage = () => {
 		const endTime = pointPause ? pointPause : Date.now();
 
 		dispatch(
-			createTreckedTimeAsync({
+			createTrackAsync({
 				projectId: selectedProject,
 				startTime: new Date(timer).toISOString(),
 				endTime: new Date(endTime).toISOString(),
@@ -81,7 +81,7 @@ export const MainPage = () => {
 				<div>{formateTimeStampToHHMMSS(currentTimer)}</div>
 				<select
 					name="projects"
-					onChange={(e) => setSelectedProject(e.target.value)}
+					onChange={(e) => setSelectedProject(Number(e.target.value))}
 					value={selectedProject}
 				>
 					{projects.map(({ id, name }) => (
@@ -106,16 +106,3 @@ export const MainPage = () => {
 		</div>
 	);
 };
-
-// TODO запись в бд поправить НА ГЛАВНОЙ
-/**
- *ВЕСРСТКА СТРАНИЦЫ С ПРОЕКТАМИ
- *
- *ПОМЕНЯТЬ ЗАПИСЬ ТРЕКОВ В РЕДАКСЕ
- *ПЕРЕМЕНОВАТЬ ВСЕ В БД И ВЕЗДЕ trecked_time на track
- *
-
- *
- *
- *
- */

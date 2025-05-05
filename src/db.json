@@ -54,209 +54,168 @@
     },
     {
       "user_id": 1,
-      "name": "Чтение книг",
+      "name": "ааа ы",
       "id": 7
     },
     {
       "user_id": 1,
-      "name": "nbew",
+      "name": "яяяяя яяя",
       "id": 8
     },
     {
       "user_id": 1,
-      "name": "qwewew",
+      "name": "1232222",
       "id": 9
-    },
-    {
-      "user_id": 1,
-      "name": "111qqq",
-      "id": 10
-    },
-    {
-      "user_id": 1,
-      "name": "NEWWWW",
-      "id": 11
-    },
-    {
-      "user_id": 1,
-      "name": "ASH SHIT HERE WE GO AGAIN",
-      "id": 12
-    },
-    {
-      "user_id": 1,
-      "name": "an another ONE",
-      "id": 13
     }
   ],
   "options": [],
-  "trecked_times": [
+  "tracks": [
     {
-      "project_id": "5",
-      "start_time": "2025-04-01T10:59:00.000Z",
+      "project_id": 5,
+      "start_time": "2025-04-02T10:01:00.000Z",
       "end_time": "2025-04-02T10:32:00.000Z",
       "description": "Составил план",
       "id": 3
     },
     {
-      "project_id": "5",
-      "start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 10:35:45 GMT",
+      "project_id": 5,
+      "start_time": "2025-04-04T10:02:00.000Z",
+      "end_time": "2025-04-04T10:54:00.000Z",
       "description": "Подготовил грунт",
       "id": 4
     },
     {
-      "project_id": "5",
-      "start_time": "2111-12-02T09:01:00.000Z",
-      "end_time": "2111-12-03T04:22:00.000Z",
+      "project_id": 5,
+      "start_time": "2025-04-04T09:03:00.000Z",
+      "end_time": "2025-04-05T04:06:00.000Z",
       "description": "Заказал инструменты1111",
       "id": 5
     },
     {
-      "project_id": "3",
-      "start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 12:32:45 GMT",
-      "description": "Команда Сидеть",
+      "project_id": 3,
+      "start_time": "2025-04-04T04:32:00.000Z",
+      "end_time": "2025-04-04T12:05:00.000Z",
+      "description": "Команда Сидеть!",
       "id": 6
     },
     {
-      "project_id": "3",
-      "start_time": "Fri, 04 Apr 2025 10:12:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+      "project_id": 3,
+      "start_time": "2025-04-03T20:12:00.000Z",
+      "end_time": "2025-04-04T10:24:00.000Z",
       "description": "Команда Ждать",
       "id": 7
     },
     {
-      "project_id": "3",
-      "start_time": "Fri, 04 Apr 2025 10:22:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 10:32:45 GMT",
+      "project_id": 3,
+      "start_time": "2025-04-04T10:22:00.000Z",
+      "end_time": "2025-04-05T10:01:00.000Z",
       "description": "Команда Лежать",
       "id": 8
     },
     {
-      "project_id": "3",
-      "start_time": "Fri, 04 Apr 2025 10:31:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 10:52:55 GMT",
+      "project_id": 3,
+      "start_time": "2025-04-04T10:42:00.000Z",
+      "end_time": "2025-04-04T10:52:00.000Z",
       "description": "Команда Дай лапу",
       "id": 12
     },
     {
-      "project_id": "3",
-      "start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 17:31:45 GMT",
+      "project_id": 3,
+      "start_time": "2025-04-04T10:32:00.000Z",
+      "end_time": "2025-04-04T17:03:00.000Z",
       "description": "Команда Кружись",
       "id": 13
     },
     {
-      "project_id": "3",
-      "start_time": "Fri, 04 Apr 2025 10:32:43 GMT",
-      "end_time": "Fri, 04 Apr 2025 15:32:45 GMT",
+      "project_id": 3,
+      "start_time": "2025-04-04T10:24:00.000Z",
+      "end_time": "2025-04-04T15:01:00.000Z",
       "description": "Команда Ко мне",
       "id": 14
     },
     {
-      "project_id": "4",
-      "start_time": "2025-04-05T10:32:00.000Z",
-      "end_time": "2025-04-05T16:04:00.000Z",
+      "project_id": 4,
+      "start_time": "2025-04-05T10:01:00.000Z",
+      "end_time": "2025-04-05T16:44:00.000Z",
       "description": "Составил План",
       "id": 15
     },
     {
-      "project_id": "4",
-      "start_time": "2025-04-05T20:02:00.000Z",
-      "end_time": "2025-04-06T19:21:00.000Z",
+      "project_id": 4,
+      "start_time": "2025-04-05T20:07:00.000Z",
+      "end_time": "2025-04-06T19:04:00.000Z",
       "description": "Съездил в магазин",
       "id": 16
     },
     {
-      "project_id": "4",
+      "project_id": 4,
       "start_time": "2025-04-07T04:02:00.000Z",
-      "end_time": "2025-04-07T18:23:00.000Z",
+      "end_time": "2025-04-07T18:08:00.000Z",
       "description": "Замешал цемент",
       "id": 17
     },
     {
-      "project_id": "4",
-      "start_time": "2025-04-06T11:05:00.000Z",
-      "end_time": "2025-04-06T18:02:00.000Z",
+      "project_id": 4,
+      "start_time": "2025-04-06T11:04:00.000Z",
+      "end_time": "2025-04-06T18:35:00.000Z",
       "description": "qweqwewe",
       "id": 20
     },
     {
-      "project_id": "4",
+      "project_id": 4,
       "start_time": "2025-04-05T19:01:00.000Z",
-      "end_time": "2025-04-06T11:03:00.000Z",
+      "end_time": "2025-04-06T11:45:00.000Z",
       "description": "еще что-то",
       "id": 24
     },
     {
+      "project_id": 3,
+      "start_time": "2025-04-08T06:39:00.000Z",
+      "end_time": "2025-04-09T04:39:00.000Z",
+      "description": "Команда новая",
+      "id": 36
+    },
+    {
+      "project_id": 6,
+      "start_time": "2025-04-07T20:03:00.000Z",
+      "end_time": "2025-04-07T20:07:00.000Z",
+      "description": "qqq",
+      "id": 37
+    },
+    {
+      "project_id": 7,
+      "start_time": "2025-04-15T18:25:00.000Z",
+      "end_time": "2025-04-15T21:25:00.000Z",
+      "description": "фффф",
+      "id": 38
+    },
+    {
       "project_id": 8,
-      "start_time": "2025-04-06T15:01:00.000Z",
-      "end_time": "2025-04-07T05:16:00.000Z",
-      "description": "new treck",
-      "id": 26
+      "start_time": "2025-04-15T21:02:00.000Z",
+      "end_time": "2025-04-15T21:25:00.000Z",
+      "description": "йййй",
+      "id": 39
     },
     {
       "project_id": 9,
-      "start_time": "2025-04-06T15:01:00.000Z",
-      "end_time": "2025-04-07T05:16:00.000Z",
-      "description": "new treck",
-      "id": 27
+      "start_time": "2025-05-02T18:32:00.000Z",
+      "end_time": "2025-05-03T17:02:00.000Z",
+      "description": "sss",
+      "id": 40
     },
     {
-      "project_id": 10,
-      "start_time": "2025-04-06T15:01:00.000Z",
-      "end_time": "2025-04-07T05:16:00.000Z",
-      "description": "new treck",
-      "id": 28
+      "project_id": 3,
+      "start_time": "2025-05-03T18:30:00.000Z",
+      "end_time": "2025-05-03T22:22:00.000Z",
+      "description": "ййййййй",
+      "id": 41
     },
     {
-      "project_id": 8,
-      "start_time": "2025-04-06T15:22:00.000Z",
-      "end_time": "2025-04-07T06:02:00.000Z",
-      "description": "treck",
-      "id": 29
-    },
-    {
-      "project_id": 8,
-      "start_time": "2025-04-06T15:22:00.000Z",
-      "end_time": "2025-04-07T06:02:00.000Z",
-      "description": "treck",
-      "id": 30
-    },
-    {
-      "project_id": 9,
-      "start_time": "2025-04-06T15:27:00.000Z",
-      "end_time": "2025-04-06T18:27:00.000Z",
-      "description": "qwewewewe",
-      "id": 31
-    },
-    {
-      "project_id": 10,
-      "start_time": "2025-04-05T19:28:00.000Z",
-      "end_time": "2025-04-06T18:28:00.000Z",
-      "description": "qqq11",
-      "id": 32
-    },
-    {
-      "project_id": 11,
-      "start_time": "2025-04-06T15:30:00.000Z",
-      "end_time": "2025-04-06T18:30:00.000Z",
-      "description": "newww",
-      "id": 33
-    },
-    {
-      "project_id": 12,
-      "start_time": "2025-04-06T15:31:00.000Z",
-      "end_time": "2025-04-06T18:31:00.000Z",
-      "description": "NIGGA",
-      "id": 34
-    },
-    {
-      "project_id": 13,
-      "start_time": "2025-04-06T15:21:00.000Z",
-      "end_time": "2025-04-07T05:34:00.000Z",
-      "description": "one",
-      "id": 35
+      "project_id": 3,
+      "start_time": "2025-05-04T19:14:00.000Z",
+      "end_time": "2025-05-04T23:14:00.000Z",
+      "description": "111111 1 11 1 1 ",
+      "id": 42
     }
   ],
   "sessions": [
@@ -269,6 +228,76 @@
         "registred_at": "2025-04-02 08:23"
       },
       "id": 1
+    },
+    {
+      "hash": "0.18314301139073307922444655559957027435302734375000",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 2
+    },
+    {
+      "hash": "0.60514617547957638699074323085369542241096496582031",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 3
+    },
+    {
+      "hash": "0.62169468487319123894963013299275189638137817382813",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 4
+    },
+    {
+      "hash": "0.87836407695915563742516951606376096606254577636719",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 5
+    },
+    {
+      "hash": "0.60522720910118055215320964634884148836135864257813",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 6
+    },
+    {
+      "hash": "0.22699618188837034082894206221681088209152221679688",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 7
+    },
+    {
+      "hash": "0.40471650027367456203819529036991298198699951171875",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 8
     }
   ]
 }

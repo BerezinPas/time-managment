@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { Link, useMatch, useParams } from 'react-router-dom';
+import { Link, useMatch, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProject, selectTreckedTimes } from '../../selectors';
+import { selectProject, selectTracks } from '../../selectors';
 import {
 	deleteProjectAsync,
 	loadProjectAsync,
@@ -9,7 +9,7 @@ import {
 } from '../../actions';
 import { ProjectForm } from './components/project-form/project-form';
 import { Button } from '../../components';
-import { TreckedTimeRow } from './components';
+import { TrackRow } from './components';
 import styles from './project.module.scss';
 import { initialStateProject } from '../../reducers/project-reducer';
 
@@ -19,8 +19,9 @@ export const Project = () => {
 	const isEditing = !!useMatch('/project/:id/edit');
 	const dispatch = useDispatch();
 	const project = useSelector(selectProject);
-	const treckedTimes = useSelector(selectTreckedTimes);
+	const tracks = useSelector(selectTracks);
 	const [isLoading, setIsloading] = useState(true);
+	const navigate = useNavigate();
 
 	// console.log(isEditing);
 
@@ -39,7 +40,9 @@ export const Project = () => {
 	}, [params.id, dispatch]);
 
 	const onDelete = (id) => {
-		dispatch(deleteProjectAsync(id));
+		dispatch(deleteProjectAsync(id)).then(() => {
+			navigate('/projects');
+		});
 	};
 
 	const projectContent = (
@@ -55,24 +58,22 @@ export const Project = () => {
 					</Button>
 				</div>
 			</h2>
-			<div className={styles.treckedTimesList}>
+			<div className={styles.tracksList}>
 				<div className="row rowHeader">
 					<div className={styles.descCol}>Описание</div>
 					<div className={styles.durationCol}>Длительность</div>
 					<div className={styles.timeCol}>Время</div>
 				</div>
-				{treckedTimes.map(
-					({ id, projectId, startTime, endTime, description }) => (
-						<TreckedTimeRow
-							key={id}
-							id={id}
-							projectId={projectId}
-							startTime={startTime}
-							endTime={endTime}
-							description={description}
-						/>
-					),
-				)}
+				{tracks.map(({ id, projectId, startTime, endTime, description }) => (
+					<TrackRow
+						key={id}
+						id={id}
+						projectId={projectId}
+						startTime={startTime}
+						endTime={endTime}
+						description={description}
+					/>
+				))}
 			</div>
 		</div>
 	);
@@ -81,10 +82,7 @@ export const Project = () => {
 
 	const content =
 		isCreating || isEditing ? (
-			<ProjectForm
-				project={isCreating ? initialStateProject : project}
-				isCreating={isCreating}
-			/>
+			<ProjectForm project={project} isCreating={isCreating} />
 		) : (
 			projectContent
 		);

@@ -5,12 +5,12 @@ export const FormItemTrack = ({
 	id,
 	register,
 	unregister,
-	setDeleteTrecksId,
-	setNewTreckedTimes,
+	setDeleteTracksId,
+	setNewTracks,
 }) => {
 	const onDelete = () => {
 		if (!String(id).includes('generated')) {
-			setDeleteTrecksId((prev) => [...prev, id]);
+			setDeleteTracksId((prev) => [...prev, id]);
 		}
 		unregister([
 			`description-${id}`,
@@ -18,7 +18,7 @@ export const FormItemTrack = ({
 			`endTime-${id}`,
 			`startDay-${id}`,
 		]);
-		setNewTreckedTimes((prev) => [...prev.filter((el) => id !== el.id)]);
+		setNewTracks((prev) => [...prev.filter((el) => id !== el.id)]);
 	};
 
 	return (

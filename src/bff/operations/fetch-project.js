@@ -1,15 +1,22 @@
-import { getProject, getTreckedTimes } from '../api';
+import { getProject, getTracks } from '../api';
+import {
+	attachDurationToTrack,
+	attachSummuryDurationToProjects,
+} from '../utils';
 
 export const fetchProject = async (projectId) => {
 	const project = await getProject(projectId);
 
-	const treckedTimes = await getTreckedTimes(projectId);
+	const tracks = await getTracks(projectId);
 
-	// console.log(treckedTimes);
-	// console.log(Date.now());
+	const tracksWithDuration = tracks.map(attachDurationToTrack);
 
+	// let res = attachTracksToProjects(projects, tracksWithDuration);
+
+	// TODO добавить суммарную длительность
+	// attachSummuryDurationToProjects();
 	return {
 		error: null,
-		res: { ...project, treckedTimes },
+		res: { ...project, tracks },
 	};
 };

@@ -1,7 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.scss';
 import { Footer, Header } from './components';
-import { Authorization, Main, Project, Projects, Register } from './pages';
+import {
+	Analytics,
+	Authorization,
+	MainPage,
+	Project,
+	Projects,
+	Register,
+} from './pages';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect } from 'react';
 import { loadProjectsAsync, setUser } from './actions';
@@ -34,10 +41,10 @@ function App() {
 			<Header />
 			<div className={styles.pageContent}>
 				<Routes>
-					<Route path="/" element={<Main />} />
+					<Route path="/" element={<MainPage />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/authorization" element={<Authorization />} />
-					<Route path="/analitics" element={<div>analitics</div>} />
+					<Route path="/analitics" element={<Analytics />} />
 					<Route path="/projects" element={<Projects />} />
 					<Route path="/project" element={<Project />} />
 					<Route path="/project/:id" element={<Project />} />

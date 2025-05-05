@@ -3,7 +3,7 @@ import { ACTION_TYPE } from '../actions/action-type';
 export const initialStateProject = {
 	id: null,
 	name: '',
-	treckedTimes: [],
+	tracks: [],
 };
 
 export const projectReducer = (
@@ -17,26 +17,24 @@ export const projectReducer = (
 				...payload,
 			};
 
-		case ACTION_TYPE.CREATE_TRECKED_TIME:
+		case ACTION_TYPE.CREATE_TRACK:
 			return {
 				...state,
-				treckedTimes: [...state.treckedTimes, payload],
+				tracks: [...state.tracks, payload],
 			};
 
-		case ACTION_TYPE.UPDATE_TRECKED_TIME:
+		case ACTION_TYPE.UPDATE_TRACK:
 			return {
 				...state,
-				treckedTimes: [
-					...state.treckedTimes.map((el) =>
-						el.id === payload.id ? payload : el,
-					),
+				tracks: [
+					...state.tracks.map((el) => (el.id === payload.id ? payload : el)),
 				],
 			};
 
-		case ACTION_TYPE.DELETE_TRECKED_TIME:
+		case ACTION_TYPE.DELETE_TRACK:
 			return {
 				...state,
-				treckedTimes: [...state.treckedTimes.filter((el) => el.id !== payload)],
+				tracks: [...state.tracks.filter((el) => el.id !== payload)],
 			};
 
 		case ACTION_TYPE.RESET_PROJECT_DATA:

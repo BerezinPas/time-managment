@@ -1,13 +1,13 @@
 import { server } from '../bff';
-import { createTreckedTime } from './create-trecked-time';
-import { deleteTreckedTime } from './delete-trecked-time';
-import { updateTreckedTime } from './update-trecked-time';
+import { createTrack } from './create-track';
+import { deleteTrack } from './delete-track';
+import { updateTrack } from './update-track';
 
-export const setTreckedTimes = (treckedTimes) => (dispatch) => {
+export const setTracks = (treckedTimes) => (dispatch) => {
 	return server.saveTreckedTimes(treckedTimes).then(({ res, error }) => {
-		res.created.map((el) => dispatch(createTreckedTime(el)));
-		res.updated.map((el) => dispatch(updateTreckedTime(el)));
-		res.deleted.map((el) => dispatch(deleteTreckedTime(el)));
+		res.created.map((el) => dispatch(createTrack(el)));
+		res.updated.map((el) => dispatch(updateTrack(el)));
+		res.deleted.map((el) => dispatch(deleteTrack(el)));
 
 		return res;
 	});

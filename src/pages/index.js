@@ -1,4 +1,5 @@
-export * from './main/main';
+export * from './analitics/analytics';
+export * from './main-page/main-page';
 export * from './register/register';
 export * from './authorization/authorization';
 export * from './projects/projects';

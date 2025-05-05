@@ -1,9 +1,9 @@
 import { server } from '../bff';
 import { addProject } from './add-project';
-import { createTreckedTime } from './create-trecked-time';
-import { deleteTreckedTime } from './delete-trecked-time';
+import { createTrack } from './create-track';
+import { deleteTrack } from './delete-track';
 import { setProject } from './set-project';
-import { updateTreckedTime } from './update-trecked-time';
+import { updateTrack } from './update-track';
 
 export const saveProjectAsync = (projectData) => (dispatch) => {
 	return server.saveProject(projectData).then(({ res, error }) => {
@@ -11,9 +11,9 @@ export const saveProjectAsync = (projectData) => (dispatch) => {
 			dispatch(addProject(res.project));
 		}
 
-		res.trecksData.res.created.map((el) => dispatch(createTreckedTime(el)));
-		res.trecksData.res.updated.map((el) => dispatch(updateTreckedTime(el)));
-		res.trecksData.res.deleted.map((el) => dispatch(deleteTreckedTime(el)));
+		res.tracksData.res.created.map((el) => dispatch(createTrack(el)));
+		res.tracksData.res.updated.map((el) => dispatch(updateTrack(el)));
+		res.tracksData.res.deleted.map((el) => dispatch(deleteTrack(el)));
 		dispatch(setProject(res.project));
 		return res;
 	});

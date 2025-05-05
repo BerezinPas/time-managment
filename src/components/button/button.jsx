@@ -8,7 +8,7 @@ import styles from './button.module.scss';
  *
  */
 
-export const Button = ({ variant, children, ...props }) => {
+export const Button = ({ variant, children, className, ...props }) => {
 	let classes = `${styles.btn} `;
 	switch (variant) {
 		case 'danger':
@@ -22,7 +22,7 @@ export const Button = ({ variant, children, ...props }) => {
 			break;
 	}
 	return (
-		<button className={classes} {...props}>
+		<button className={`${classes} ${className}`} {...props}>
 			{children}
 		</button>
 	);
