@@ -15,6 +15,7 @@ export const saveProjectAsync = (projectData) => (dispatch) => {
 		res.tracksData.res.updated.map((el) => dispatch(updateTrack(el)));
 		res.tracksData.res.deleted.map((el) => dispatch(deleteTrack(el)));
 		dispatch(setProject(res.project));
+
 		return res;
 	});
 };

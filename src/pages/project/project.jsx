@@ -1,5 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { Link, useMatch, useNavigate, useParams } from 'react-router-dom';
+import {
+	Link,
+	Navigate,
+	useMatch,
+	useNavigate,
+	useParams,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProject, selectTracks } from '../../selectors';
 import {
@@ -50,6 +56,10 @@ export const Project = () => {
 			<h2 className="h2">
 				{project.name}
 				<div className={styles.controlBtns}>
+					{/* TODO LINK TO ANALYTICS */}
+					<Link to={`/analytics/${params.id}`}>
+						<Button variant="secondary">смотреть аналитику</Button>
+					</Link>
 					<Link to={`/project/${project.id}/edit`}>
 						<Button>редактировать</Button>
 					</Link>

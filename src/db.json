@@ -51,11 +51,6 @@
       "name": "Медитация",
       "user_id": 1,
       "id": 6
-    },
-    {
-      "user_id": 1,
-      "name": "12121212",
-      "id": 7
     }
   ],
   "options": [],
@@ -97,22 +92,22 @@
     },
     {
       "project_id": 3,
-      "start_time": "2025-04-04T10:22:00.000Z",
+      "start_time": "2025-04-04T18:22:00.000Z",
       "end_time": "2025-04-05T10:01:00.000Z",
       "description": "Команда Лежать",
       "id": 8
     },
     {
       "project_id": 3,
-      "start_time": "2025-04-04T10:42:00.000Z",
+      "start_time": "2025-04-03T18:42:00.000Z",
       "end_time": "2025-04-04T10:52:00.000Z",
       "description": "Команда Дай лапу",
       "id": 12
     },
     {
       "project_id": 3,
-      "start_time": "2025-04-04T10:32:00.000Z",
-      "end_time": "2025-04-04T17:03:00.000Z",
+      "start_time": "2025-04-02T17:04:00.000Z",
+      "end_time": "2025-04-03T17:03:00.000Z",
       "description": "Команда Кружись",
       "id": 13
     },
@@ -166,13 +161,6 @@
       "id": 36
     },
     {
-      "project_id": 6,
-      "start_time": "2025-04-07T20:03:00.000Z",
-      "end_time": "2025-04-07T20:07:00.000Z",
-      "description": "qqq",
-      "id": 37
-    },
-    {
       "project_id": 3,
       "start_time": "2025-05-03T18:30:00.000Z",
       "end_time": "2025-05-03T22:22:00.000Z",
@@ -185,6 +173,27 @@
       "end_time": "2025-05-04T23:14:00.000Z",
       "description": "111111 1 11 1 1 ",
       "id": 42
+    },
+    {
+      "project_id": 6,
+      "start_time": "2025-05-04T18:52:00.000Z",
+      "end_time": "2025-05-04T20:52:00.000Z",
+      "description": "bev",
+      "id": 52
+    },
+    {
+      "project_id": 6,
+      "start_time": "2025-05-04T21:54:00.000Z",
+      "end_time": "2025-05-05T09:54:00.000Z",
+      "description": "redasssss",
+      "id": 53
+    },
+    {
+      "project_id": 6,
+      "start_time": "2025-05-01T18:01:00.000Z",
+      "end_time": "2025-05-02T05:02:00.000Z",
+      "description": "NEWWWWWWWWWW",
+      "id": 54
     }
   ],
   "sessions": [

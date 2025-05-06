@@ -1,4 +1,6 @@
 import { ACTION_TYPE } from '../actions/action-type';
+import { calcSumDuration } from '../bff/utils';
+import { formateTimeStampToHHMMSS } from '../utils';
 
 const initialState = [];
 
@@ -12,6 +14,50 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 
 		case ACTION_TYPE.DELETE_PROJECT:
 			return state.filter(({ id }) => id !== payload);
+
+		case ACTION_TYPE.SET_PROJECT:
+			console.log('payload', payload);
+
+			return state.map((project, index) =>
+				project.id !== payload.id
+					? project
+					: {
+							...state[index],
+							summuryDuration: formateTimeStampToHHMMSS(
+								calcSumDuration(state[index].tracks),
+							),
+							...payload,
+						},
+			);
+
+		case ACTION_TYPE.CREATE_TRACK:
+			return state.map((project) =>
+				project.id !== payload.projectId
+					? project
+					: { ...project, tracks: [...project.tracks, payload] },
+			);
+
+		case ACTION_TYPE.UPDATE_TRACK:
+			return state.map((project) =>
+				project.id !== payload.projectId
+					? project
+					: {
+							...project,
+							tracks: project.tracks.map((track) =>
+								track.id !== payload.id ? track : payload,
+							),
+						},
+			);
+
+		case ACTION_TYPE.DELETE_TRACK:
+			return state.map((project) =>
+				project.id !== payload.projectId
+					? project
+					: {
+							...project,
+							tracks: project.tracks.filter((track) => track.id !== payload.id),
+						},
+			);
 
 		default:
 			return state;

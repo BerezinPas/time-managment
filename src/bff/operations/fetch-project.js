@@ -17,6 +17,6 @@ export const fetchProject = async (projectId) => {
 	// attachSummuryDurationToProjects();
 	return {
 		error: null,
-		res: { ...project, tracks },
+		res: { ...project, tracks: tracksWithDuration },
 	};
 };

@@ -20,9 +20,11 @@ import {
 } from './utils';
 import { ONE_DAY_IN_MSECS } from '../../constants';
 import styles from './analytics.module.scss';
+import { useParams } from 'react-router-dom';
 
 export const Analytics = () => {
 	const [shouldGroup, setShouldGroup] = useState(true);
+	const { id } = useParams();
 
 	const [sortOption, setSortOption] = useState({
 		field: 'name',
@@ -45,8 +47,14 @@ export const Analytics = () => {
 	// console.log('timeZone', timeZone);
 
 	const projects = useSelector(selectProjects);
-	const [selectedProjectsId, setSelectedProjectsId] = useState([]);
+	console.log('projects', projects);
+
+	const [selectedProjectsId, setSelectedProjectsId] = useState(
+		id ? [Number(id)] : [],
+	);
 	// TODO dateGapStart
+	console.log('selectedProjectsId', selectedProjectsId);
+
 	const start = projects.reduce(
 		(accStart, curProject) => {
 			const curStart = curProject.tracks.reduce((minTrack, curTrack) =>
@@ -121,6 +129,9 @@ export const Analytics = () => {
 		.map((project) => attachPercentOfTotal(project, 'duration', total))
 		.map(attachDonutToolTipData)
 		.sort(sortFunc());
+
+	console.log('enhancedTracks', enhancedTracks);
+	console.log('enhancedProjects', enhancedProjects);
 
 	return (
 		<div className="container">

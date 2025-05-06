@@ -1,13 +1,8 @@
 import { formateTimeStampToHHMMSS } from '../../utils';
+import { calcSumDuration } from './calc-sum-duration';
 
 export const attachSummuryDurationToProjects = (projects) =>
 	projects.map((project) => ({
 		...project,
-		summuryDuration: formateTimeStampToHHMMSS(
-			project.tracks.reduce((sum, curTrack) => {
-				return (
-					sum + Date.parse(curTrack.endTime) - Date.parse(curTrack.startTime)
-				);
-			}, 0),
-		),
+		summuryDuration: formateTimeStampToHHMMSS(calcSumDuration(project.tracks)),
 	}));
