@@ -4,13 +4,14 @@ import { selectProjects, selectUserId } from '../../selectors';
 import { loadProjectsAsync } from '../../actions';
 import { ProjectRow } from './components';
 import { Link } from 'react-router-dom';
-import { Button } from '../../components';
+import { Button, LoadMore } from '../../components';
+import { PAGINATION_LIMIT } from '../../constants';
 
 export const Projects = () => {
 	const dispatch = useDispatch();
 	const userId = useSelector(selectUserId);
 	const projects = useSelector(selectProjects);
-
+	const [page, setPage] = useState(1);
 	return (
 		<div className="container">
 			<div>
@@ -22,14 +23,19 @@ export const Projects = () => {
 				</h2>
 			</div>
 
-			{projects.map(({ id, name, summuryDuration }) => (
-				<ProjectRow
-					key={id}
-					id={id}
-					name={name}
-					summuryDuration={summuryDuration}
-				/>
-			))}
+			{projects
+				.slice(0, PAGINATION_LIMIT * page)
+				.map(({ id, name, summuryDuration }) => (
+					<ProjectRow
+						key={id}
+						id={id}
+						name={name}
+						summuryDuration={summuryDuration}
+					/>
+				))}
+			{projects.length > PAGINATION_LIMIT * page && (
+				<LoadMore onClick={() => setPage((prev) => prev + 1)} />
+			)}
 		</div>
 	);
 };

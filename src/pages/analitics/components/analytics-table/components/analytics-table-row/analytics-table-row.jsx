@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import styles from './analytics-table-row.module.scss';
+import { LoadMore } from '../../../../../../components';
+import { PAGINATION_LIMIT } from '../../../../../../constants';
 
 export const AnalyticsTableRow = ({ rowData, shouldGroup }) => {
 	const [showSpoilerData, setShowSpoilerData] = useState(false);
 
 	const onToggle = () => setShowSpoilerData(!showSpoilerData);
+	// const [page, setPage] = useState(1);
 
 	const content = shouldGroup ? (
 		<div key={rowData.id} className={`${styles.projectWrapper} hover`}>
@@ -17,22 +20,28 @@ export const AnalyticsTableRow = ({ rowData, shouldGroup }) => {
 			</div>
 			<div className={styles.tracksWrapper}>
 				{showSpoilerData &&
+					// rowData.tracks.slice(0, PAGINATION_LIMIT * page).map((track) => {
 					rowData.tracks.map((track) => {
-						// console.log(track.startTime.slice(0, 10));
-
 						return (
-							<div className="row " key={track.id}>
-								<div className={styles.colName}>{track.description}</div>
-								<div className={styles.colDate}>
-									{new Date(track.startTime).toLocaleDateString().slice(0, 10)}
+							<>
+								<div className="row " key={track.id}>
+									<div className={styles.colName}>{track.description}</div>
+									<div className={styles.colDate}>
+										{new Date(track.startTime)
+											.toLocaleDateString()
+											.slice(0, 10)}
+									</div>
+									<div className={styles.colDuration}>{track.duration}</div>
+									<div className={styles.colProcent}>
+										{track.percentageOfTotal.toFixed(2)}%
+									</div>
 								</div>
-								<div className={styles.colDuration}>{track.duration}</div>
-								<div className={styles.colProcent}>
-									{track.percentageOfTotal.toFixed(2)}%
-								</div>
-							</div>
+							</>
 						);
 					})}
+				{/* {showSpoilerData && rowData.tracks.length > PAGINATION_LIMIT * page && (
+					<LoadMore onClick={() => setPage((prev) => prev + 1)} />
+				)} */}
 			</div>
 		</div>
 	) : (

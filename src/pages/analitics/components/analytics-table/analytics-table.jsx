@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { LoadMore } from '../../../../components';
+import { PAGINATION_LIMIT } from '../../../../constants';
 import styles from './analytics-table.module.scss';
 import { AnalyticsTableRow } from './components';
 
@@ -7,7 +10,7 @@ export const AnalyticsTable = ({
 	sortOption,
 	setSortOption,
 }) => {
-	console.log('sortOption', sortOption);
+	const [page, setPage] = useState(1);
 
 	return (
 		<>
@@ -69,13 +72,16 @@ export const AnalyticsTable = ({
 				<div className={styles.colProcent}>процент</div>
 			</div>
 
-			{data.map((rowData) => (
+			{data.slice(0, page * PAGINATION_LIMIT).map((rowData) => (
 				<AnalyticsTableRow
 					key={rowData.id}
 					shouldGroup={shouldGroup}
 					rowData={rowData}
 				/>
 			))}
+			{data.length > PAGINATION_LIMIT * page && (
+				<LoadMore onClick={() => setPage((prev) => prev + 1)} />
+			)}
 		</>
 	);
 };

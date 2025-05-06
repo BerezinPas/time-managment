@@ -22,3 +22,4 @@ export const MOUNTH = [
 	'ноя',
 	'дек',
 ];
+export const PAGINATION_LIMIT = 3;

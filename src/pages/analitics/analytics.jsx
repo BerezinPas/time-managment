@@ -60,14 +60,18 @@ export const Analytics = () => {
 		)
 		.reduce(
 			(accStart, curProject) => {
-				const curStart = curProject.tracks.reduce((minTrack, curTrack) =>
-					minTrack.startTime > curTrack.startTime ? curTrack : minTrack,
+				const curStart = curProject.tracks.reduce(
+					(minStartTimeTrack, curTrack) => {
+						return minStartTimeTrack > Date.parse(curTrack.startTime)
+							? Date.parse(curTrack.startTime)
+							: minStartTimeTrack;
+					},
+					new Date().setHours(0, 0, 0, 0),
 				);
-				console.log('curStart', curStart);
 
-				return Date.parse(curStart.startTime) < accStart
-					? Date.parse(curStart.startTime)
-					: accStart;
+				console.log('curStart!!!!!!!', curStart);
+
+				return curStart < accStart ? curStart : accStart;
 			},
 			new Date().setHours(0, 0, 0, 0),
 		);
