@@ -3,8 +3,9 @@ import { selectProjects } from '../../../../selectors';
 import Select from 'react-select';
 import { Button, Input } from '../../../../components';
 import styles from './analytics-control-panel.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ONE_HOUR_IN_MSECS } from '../../../../constants';
+import { useNavigate } from 'react-router-dom';
 
 export const AnalyticsControlPanel = ({
 	checked,
@@ -15,10 +16,16 @@ export const AnalyticsControlPanel = ({
 	selectedProjectsId,
 	setSelectedProjectsId,
 	timeZone,
+	initialOptionsFilter,
 }) => {
 	const [dateGapInput, setDateGapInput] = useState({ ...dateGap });
 	const [error, setError] = useState(null);
 	const projects = useSelector(selectProjects);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		setDateGapInput({ ...dateGap });
+	}, [dateGap]);
 
 	// console.log(',QWEQWE', new Date(dateGap.start).toString());
 	// console.log('@@@', new Date(dateGap.start).toISOString());
@@ -33,8 +40,10 @@ export const AnalyticsControlPanel = ({
 	// console.log(options);
 
 	const resetFilters = () => {
+		navigate('/analytics');
 		setChecked(true);
 		setSelectedProjectsId([]);
+		setDateGap(() => initialOptionsFilter.dateGap);
 	};
 
 	// TODO VALIDATION ON DATE!!!

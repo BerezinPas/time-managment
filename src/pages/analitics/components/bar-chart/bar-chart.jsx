@@ -70,9 +70,6 @@ export const BarChart = ({ tracks, dateGap, timeZone }) => {
 	} else {
 		dateStep = DATE_STEP.MOUNTH;
 
-		console.log('dateGap.start', dateGap.start);
-		console.log('dateGap.start', dateGap.start - timeZone * ONE_HOUR_IN_MSECS);
-
 		const startDate = new Date(dateGap.start - timeZone * ONE_HOUR_IN_MSECS);
 		const endDate = new Date(dateGap.end - timeZone * ONE_HOUR_IN_MSECS);
 		const startMounth = startDate.getMonth();

@@ -4,7 +4,7 @@ import {
 	formateHHMMSSToTimeStamp,
 	formateTimeStampToHHMMSS,
 } from '../../utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	AnalyticsControlPanel,
 	DonutChart,
@@ -23,7 +23,6 @@ import styles from './analytics.module.scss';
 import { useParams } from 'react-router-dom';
 
 export const Analytics = () => {
-	const [shouldGroup, setShouldGroup] = useState(true);
 	const { id } = useParams();
 
 	const [sortOption, setSortOption] = useState({
@@ -55,24 +54,52 @@ export const Analytics = () => {
 	// TODO dateGapStart
 	console.log('selectedProjectsId', selectedProjectsId);
 
-	const start = projects.reduce(
-		(accStart, curProject) => {
-			const curStart = curProject.tracks.reduce((minTrack, curTrack) =>
-				minTrack.startTime > curTrack.startTime ? curTrack : minTrack,
-			);
+	const start = projects
+		.filter((project) =>
+			id === undefined ? project : project.id === Number(id),
+		)
+		.reduce(
+			(accStart, curProject) => {
+				const curStart = curProject.tracks.reduce((minTrack, curTrack) =>
+					minTrack.startTime > curTrack.startTime ? curTrack : minTrack,
+				);
+				console.log('curStart', curStart);
 
-			return new Date().setHours(0, 0, 0);
-			return Date.parse(curStart.startTime) < accStart
-				? curStart.startTime
-				: accStart;
+				return Date.parse(curStart.startTime) < accStart
+					? Date.parse(curStart.startTime)
+					: accStart;
+			},
+			new Date().setHours(0, 0, 0, 0),
+		);
+
+	const initialOptionsFilter = {
+		shouldGroup: id === undefined,
+		dateGap: {
+			start: start,
+			end: new Date().setHours(0, 0, 0, 0),
 		},
-		new Date().setHours(0, 0, 0, 0),
+	};
+	const [shouldGroup, setShouldGroup] = useState(
+		initialOptionsFilter.shouldGroup,
 	);
 
+	console.log('start', start);
+	console.log('stainitialOptionsFilterrt', initialOptionsFilter);
+
 	const [dateGap, setDateGap] = useState({
-		start: start,
-		end: new Date().setHours(0, 0, 0, 0),
+		start: new Date().setHours(0, 0, 0, 0),
+		end: initialOptionsFilter.dateGap.end,
 	});
+
+	useEffect(() => {
+		setDateGap({
+			...dateGap,
+			start: start,
+			end: new Date().setHours(0, 0, 0, 0),
+		});
+	}, [projects, id]);
+
+	console.log('dateGap', dateGap);
 
 	const selectedProjects = selectedProjectsId.length
 		? projects.filter((project) => selectedProjectsId.includes(project.id))
@@ -149,6 +176,7 @@ export const Analytics = () => {
 						setDateGap={setDateGap}
 						dateGap={dateGap}
 						timeZone={timeZone}
+						initialOptionsFilter={initialOptionsFilter}
 					/>
 					<AnalyticsTable
 						data={shouldGroup ? enhancedProjects : enhancedTracks}
