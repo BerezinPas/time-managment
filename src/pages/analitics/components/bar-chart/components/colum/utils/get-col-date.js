@@ -11,7 +11,7 @@ export const getColDate = (date, dateStep) => {
 			startDate = new Date(date);
 			start = `${startDate.getDate()}.${startDate.getMonth() + 1}`;
 
-			endDate = new Date(date + ONE_WEEK_IN_MSECS);
+			endDate = new Date(date + ONE_WEEK_IN_MSECS - 1);
 			end = `${endDate.getDate()}.${endDate.getMonth() + 1}`;
 
 			return `${start} - ${end}`;

@@ -13,7 +13,7 @@ export const getToolTipDate = (timeStamp, dateStep) => {
 		case DATE_STEP.DAY:
 			return `${date.getDate()} ${MOUNTH[date.getMonth()]}`;
 		case DATE_STEP.WEEK:
-			endDate = new Date(timeStamp + ONE_WEEK_IN_MSECS);
+			endDate = new Date(timeStamp + ONE_WEEK_IN_MSECS - 1);
 
 			start = `${date.getDate()} ${MOUNTH[date.getMonth()]}`;
 

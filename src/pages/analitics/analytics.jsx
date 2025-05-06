@@ -54,7 +54,7 @@ export const Analytics = () => {
 	// TODO dateGapStart
 	console.log('selectedProjectsId', selectedProjectsId);
 
-	const start = projects
+	let start = projects
 		.filter((project) =>
 			id === undefined ? project : project.id === Number(id),
 		)
@@ -71,6 +71,8 @@ export const Analytics = () => {
 			},
 			new Date().setHours(0, 0, 0, 0),
 		);
+
+	start = new Date(start).setHours(0, 0, 0, 0);
 
 	const initialOptionsFilter = {
 		shouldGroup: id === undefined,
