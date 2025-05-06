@@ -74,16 +74,18 @@ export const Project = () => {
 					<div className={styles.durationCol}>Длительность</div>
 					<div className={styles.timeCol}>Время</div>
 				</div>
-				{tracks.map(({ id, projectId, startTime, endTime, description }) => (
-					<TrackRow
-						key={id}
-						id={id}
-						projectId={projectId}
-						startTime={startTime}
-						endTime={endTime}
-						description={description}
-					/>
-				))}
+				{tracks
+					.sort((a, b) => Date.parse(b.startTime) - Date.parse(a.startTime))
+					.map(({ id, projectId, startTime, endTime, description }) => (
+						<TrackRow
+							key={id}
+							id={id}
+							projectId={projectId}
+							startTime={startTime}
+							endTime={endTime}
+							description={description}
+						/>
+					))}
 			</div>
 		</div>
 	);

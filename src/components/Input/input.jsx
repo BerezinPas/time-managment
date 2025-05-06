@@ -1,8 +1,8 @@
 import styles from './input.module.scss';
 
-export const Input = ({ isValid = true, ...props }) => (
+export const Input = ({ isValid = true, className, ...props }) => (
 	<input
 		{...props}
-		className={`${styles.input} ${isValid ? '' : styles.inValid}`}
+		className={`${className} ${styles.input} ${isValid ? '' : styles.inValid}`}
 	/>
 );

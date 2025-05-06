@@ -1,0 +1,34 @@
+.wrapper {
+	max-width: 800px;
+	padding: 0 15px;
+	margin: auto;
+}
+.top {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	// gap: 10px;
+	margin-bottom: 25px;
+	margin-top: 50px;
+	width: 570px;
+	margin: 50px auto 25px;
+}
+
+.timer {
+	font-size: 80px;
+	color: $mainColor;
+	// background-color: #fff;
+	padding: 10px;
+	// border-radius: 10px;
+	min-width: 205px;
+	width: fit-content;
+}
+.btns {
+	display: flex;
+	gap: 10px;
+	margin-left: auto;
+}
+
+.input {
+	margin-top: 25px;
+}

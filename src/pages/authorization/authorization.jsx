@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { loginSchema, passwordSchema } from '../../schemes';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../actions';
+import { loadProjectsAsync, setUser } from '../../actions';
 import styles from './authorization.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { server } from '../../bff';
@@ -47,6 +47,8 @@ export const Authorization = () => {
 			return;
 		}
 		dispatch(setUser(res));
+		dispatch(loadProjectsAsync(res.id));
+
 		sessionStorage.setItem('userData', JSON.stringify(res));
 		navigate('/');
 	};
