@@ -1,3 +1,5 @@
+import { dateToYYYYMMDD } from '../../../../../utils';
+
 export const initFormValues = (project) =>
 	project.tracks.reduce(
 		(obj, cur) => {
@@ -10,9 +12,8 @@ export const initFormValues = (project) =>
 			obj[`endTime-${cur.id}`] = new Date(cur.endTime)
 				.toLocaleTimeString()
 				.slice(0, -3);
-			obj[`startDay-${cur.id}`] = new Date(cur.endTime)
-				.toISOString()
-				.slice(0, 10);
+			obj[`startDay-${cur.id}`] = dateToYYYYMMDD(new Date(cur.endTime));
+
 			return obj;
 		},
 		{

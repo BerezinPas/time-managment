@@ -6,6 +6,7 @@ import styles from './analytics-control-panel.module.scss';
 import { useEffect, useState } from 'react';
 import { ONE_HOUR_IN_MSECS } from '../../../../constants';
 import { useNavigate } from 'react-router-dom';
+import { dateToYYYYMMDD } from '../../../../utils';
 
 export const AnalyticsControlPanel = ({
 	checked,
@@ -78,18 +79,6 @@ export const AnalyticsControlPanel = ({
 	// const setValue =(ValueType, ActionTypes) => void
 	// console.log('OPTIONS', options);
 
-	const toYYYYMMDD = (date = new Date()) => {
-		// console.log('datedate', date);
-		// console.log('datedate', date.getDate());
-		// console.log('datedate', date.getMonth());
-
-		const mounth = `0${date.getMonth() + 1}`.slice(-2);
-		const day = `0${date.getDate()}`.slice(-2);
-		console.log(`${date.getFullYear()}-${day}-${mounth}`);
-
-		return `${date.getFullYear()}-${mounth}-${day}`;
-	};
-
 	return (
 		<div className={styles.controlPanel}>
 			<label className={styles.groupCheckbox}>
@@ -107,7 +96,7 @@ export const AnalyticsControlPanel = ({
 					name="start"
 					onChange={onDateChange}
 					// value={new Date(dateGapInput.start).toISOString().slice(0, 10)}
-					value={toYYYYMMDD(new Date(dateGapInput.start))}
+					value={dateToYYYYMMDD(new Date(dateGapInput.start))}
 					// value={new Date(dateGapInput.start)
 					// 	.toLocaleString('ru', {
 					// 		timeZone: 'Asia/Novosibirsk',
@@ -118,7 +107,7 @@ export const AnalyticsControlPanel = ({
 					type="date"
 					name="end"
 					onChange={onDateChange}
-					value={toYYYYMMDD(new Date(dateGapInput.end))}
+					value={dateToYYYYMMDD(new Date(dateGapInput.end))}
 				/>
 			</div>
 			{error && <div className="error">{error}</div>}

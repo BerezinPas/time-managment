@@ -54,6 +54,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 		);
 
 		const tracksData = groupByTracks(formData, project.id);
+		console.log('tracksData', tracksData);
 
 		const createdTracks = tracksData.filter(({ id }) =>
 			id.includes('generated'),

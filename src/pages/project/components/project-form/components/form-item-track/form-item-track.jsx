@@ -30,7 +30,7 @@ export const FormItemTrack = ({
 				<Input type="time" {...register(`startTime-${id}`)} />
 				{' - '}
 				<Input type="time" {...register(`endTime-${id}`)} />
-				<Input type="date" {...register(`startDay-${id}`)} max="2028-12-31" />
+				<Input type="date" {...register(`startDay-${id}`)} max="2108-12-31" />
 			</div>
 			{/* <div className={styles.date}></div> */}
 			<Button type="button" variant="danger" onClick={onDelete}>
