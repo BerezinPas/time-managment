@@ -19,14 +19,14 @@ export const Header = () => {
 						Аналитика
 					</Link>
 				</div>
-				<div className={styles.user}>
+				<Link to="/user" className={styles.user}>
 					<div>{login}</div>
 					<img
 						src="https://placehold.jp/3d4070/ffffff/40x40.png"
 						alt="avtar"
 						className={styles.avatar}
 					/>
-				</div>
+				</Link>
 			</div>
 		</header>
 	);

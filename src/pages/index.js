@@ -4,3 +4,4 @@ export * from './register/register';
 export * from './authorization/authorization';
 export * from './projects/projects';
 export * from './project/project';
+export * from './user-page/user-page';

@@ -104,11 +104,7 @@ export const MainPage = () => {
 				</div>
 				<Select
 					value={selectedProject}
-					onChange={(e) => {
-						console.log('SELEC', e);
-
-						setSelectedProject(e);
-					}}
+					onChange={(e) => setSelectedProject(e)}
 					options={options}
 				/>
 				<Input

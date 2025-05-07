@@ -8,10 +8,11 @@ import {
 	Project,
 	Projects,
 	Register,
+	UserPage,
 } from './pages';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect } from 'react';
-import { loadProjectsAsync, setUser } from './actions';
+import { loadOptionsAsync, loadProjectsAsync, setUser } from './actions';
 
 function App() {
 	const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
 			}),
 		);
 		dispatch(loadProjectsAsync(currentUserData.id));
+		dispatch(loadOptionsAsync(currentUserData.id));
 	}, [dispatch]);
 
 	return (
@@ -50,6 +52,7 @@ function App() {
 					<Route path="/project" element={<Project />} />
 					<Route path="/project/:id" element={<Project />} />
 					<Route path="/project/:id/edit" element={<Project />} />
+					<Route path="/user" element={<UserPage />} />
 					{/* <Route path="/projects" element={<Projects />} /> */}
 				</Routes>
 			</div>

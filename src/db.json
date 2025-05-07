@@ -29,6 +29,18 @@
       "password": "qweqwe",
       "registred_at": "2025-04-02 09:38",
       "id": 5
+    },
+    {
+      "login": "123",
+      "password": "qweqwe",
+      "registred_at": "2025-05-07 05:44",
+      "id": 6
+    },
+    {
+      "login": "asd",
+      "password": "asdasd",
+      "registred_at": "2025-05-07 05:48",
+      "id": 7
     }
   ],
   "projects": [
@@ -73,7 +85,14 @@
       "id": 10
     }
   ],
-  "options": [],
+  "options": [
+    {
+      "id": 1,
+      "userId": 1,
+      "imageURL": "qqq",
+      "defaultStartTimeInAnalytics": "mouth"
+    }
+  ],
   "tracks": [
     {
       "project_id": 5,
@@ -520,6 +539,66 @@
         "registred_at": "22222"
       },
       "id": 15
+    },
+    {
+      "hash": "0.73090034612175380779319766588741913437843322753906",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 16
+    },
+    {
+      "hash": "0.05522544089411596246463886927813291549682617187500",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 17
+    },
+    {
+      "hash": "0.80897672491228145297270657465560361742973327636719",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 18
+    },
+    {
+      "hash": "0.68245770320822551902040231652790680527687072753906",
+      "user": {
+        "id": 6,
+        "login": "123",
+        "password": "qweqwe",
+        "registred_at": "2025-05-07 05:44"
+      },
+      "id": 19
+    },
+    {
+      "hash": "0.08806924054598952444905535230645909905433654785156",
+      "user": {
+        "id": 7,
+        "login": "asd",
+        "password": "asdasd",
+        "registred_at": "2025-05-07 05:48"
+      },
+      "id": 20
+    },
+    {
+      "hash": "0.28196713034970888323016424692468717694282531738281",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 21
     }
   ]
 }
