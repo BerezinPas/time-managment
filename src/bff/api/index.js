@@ -1,3 +1,4 @@
+export * from './create-options';
 export * from './create-project';
 export * from './create-session';
 export * from './create-track';

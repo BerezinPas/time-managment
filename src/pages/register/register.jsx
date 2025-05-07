@@ -10,7 +10,13 @@ import {
 import styles from './register.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loadOptionsAsync, loadProjectsAsync, setUser } from '../../actions';
+import {
+	loadOptionsAsync,
+	loadProjectsAsync,
+	RESET_PROJECTS_DATA,
+	setOptions,
+	setUser,
+} from '../../actions';
 import { useNavigate } from 'react-router-dom';
 import { server } from '../../bff';
 
@@ -52,10 +58,10 @@ export const Register = () => {
 			setServerError(error);
 			return;
 		}
-		dispatch(setUser(res));
-		dispatch(loadProjectsAsync(res.id));
-		dispatch(loadOptionsAsync(res.id));
-		sessionStorage.setItem('userData', JSON.stringify(res));
+		dispatch(setUser(res.user));
+		dispatch(RESET_PROJECTS_DATA);
+		dispatch(setOptions(res.options));
+		sessionStorage.setItem('userData', JSON.stringify(res.user));
 		navigate('/');
 	};
 

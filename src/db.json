@@ -41,6 +41,24 @@
       "password": "asdasd",
       "registred_at": "2025-05-07 05:48",
       "id": 7
+    },
+    {
+      "login": "qws",
+      "password": "qweqwe",
+      "registred_at": "2025-05-07 06:21",
+      "id": 8
+    },
+    {
+      "login": "ssss",
+      "password": "qweqwe",
+      "registred_at": "2025-05-07 06:22",
+      "id": 9
+    },
+    {
+      "login": "qww2",
+      "password": "qweqwe",
+      "registred_at": "2025-05-07 06:29",
+      "id": 10
     }
   ],
   "projects": [
@@ -89,8 +107,14 @@
     {
       "id": 1,
       "userId": 1,
-      "imageURL": "qqq",
-      "defaultStartTimeInAnalytics": "mouth"
+      "imageURL": "",
+      "defaultStartTimeInAnalytics": "WEEK"
+    },
+    {
+      "userId": 10,
+      "imageURL": "",
+      "defaultStartTimeInAnalytics": "max",
+      "id": 2
     }
   ],
   "tracks": [
@@ -599,6 +623,36 @@
         "registred_at": "22222"
       },
       "id": 21
+    },
+    {
+      "hash": "0.52076111155070292646485086152097210288047790527344",
+      "user": {
+        "id": 8,
+        "login": "qws",
+        "password": "qweqwe",
+        "registred_at": "2025-05-07 06:21"
+      },
+      "id": 22
+    },
+    {
+      "hash": "0.89884081935348958403153574181487783789634704589844",
+      "user": {
+        "id": 9,
+        "login": "ssss",
+        "password": "qweqwe",
+        "registred_at": "2025-05-07 06:22"
+      },
+      "id": 23
+    },
+    {
+      "hash": "0.08299758973571380593625690380576997995376586914063",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 24
     }
   ]
 }

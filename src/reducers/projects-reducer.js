@@ -59,6 +59,9 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 						},
 			);
 
+		case ACTION_TYPE.RESET_PROJECTS_DATA:
+			return initialState;
+
 		default:
 			return state;
 	}

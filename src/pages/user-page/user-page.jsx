@@ -5,26 +5,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOptionsAsync } from '../../actions';
 import { selectOptions } from '../../selectors';
+import { OPTIONS_START_TIME_DEFAULT } from '../../constants';
 
 export const UserPage = () => {
-	const options = [
-		{
-			value: 'max',
-			label: 'с первого трека',
-		},
-		{
-			value: 'week',
-			label: 'текущая неделя',
-		},
-		{
-			value: 'mouth',
-			label: 'текущий месяц',
-		},
-		{
-			value: 'year',
-			label: 'текущий год',
-		},
-	];
 	const [value, setValue] = useState('');
 	const userOptions = useSelector(selectOptions);
 	console.log('userOtions', userOptions);
@@ -40,7 +23,7 @@ export const UserPage = () => {
 	} = useForm({
 		defaultValues: {
 			avatar: userOptions.imageURL,
-			select: options.find(
+			select: OPTIONS_START_TIME_DEFAULT.find(
 				(option) => option.value === userOptions.defaultStartTimeInAnalytics,
 			),
 		},
@@ -78,7 +61,7 @@ export const UserPage = () => {
 								{...field}
 								// value={selectedValue}
 								// onChange={(e) => setSelectedValue(e)}
-								options={options}
+								options={OPTIONS_START_TIME_DEFAULT}
 							/>
 						)}
 					/>

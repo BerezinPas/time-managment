@@ -1,4 +1,4 @@
-import { createUser, getUser } from '../api';
+import { createOptions, createUser, getUser } from '../api';
 import { sessions } from '../sessions';
 
 export const register = async (regLogin, regPassword) => {
@@ -13,15 +13,11 @@ export const register = async (regLogin, regPassword) => {
 	}
 
 	const user = await createUser(regLogin, regPassword);
-	console.log('register user', user);
+	// console.log('register user', user);
+	const options = await createOptions(user.id);
 
 	return {
 		error: null,
-		res: {
-			id: user.id,
-			login: user.login,
-			registredAt: user.registredAt,
-			sessions: sessions.create(user),
-		},
+		res: { user, options },
 	};
 };

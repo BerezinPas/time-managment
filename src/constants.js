@@ -23,3 +23,29 @@ export const MOUNTH = [
 	'дек',
 ];
 export const PAGINATION_LIMIT = 3;
+
+export const OPTIONS_START_TIME_DEFAULT_VALUE = {
+	MAX: 'MAX',
+	WEEK: 'WEEK',
+	MOUNTH: 'MOUNTH',
+	YEAR: 'YEAR',
+};
+
+export const OPTIONS_START_TIME_DEFAULT = [
+	{
+		value: OPTIONS_START_TIME_DEFAULT_VALUE.MAX,
+		label: 'с первого трека',
+	},
+	{
+		value: OPTIONS_START_TIME_DEFAULT_VALUE.WEEK,
+		label: 'текущая неделя',
+	},
+	{
+		value: OPTIONS_START_TIME_DEFAULT_VALUE.MOUNTH,
+		label: 'текущий месяц',
+	},
+	{
+		value: OPTIONS_START_TIME_DEFAULT_VALUE.YEAR,
+		label: 'текущий год',
+	},
+];

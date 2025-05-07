@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectProjects } from '../../selectors';
+import { selectOptions, selectProjects } from '../../selectors';
 import {
 	formateHHMMSSToTimeStamp,
 	formateTimeStampToHHMMSS,
@@ -17,8 +17,13 @@ import {
 	sortedByName,
 	attachPercentOfTotal,
 	attachDonutToolTipData,
+	initDateGapStartTime,
 } from './utils';
-import { ONE_DAY_IN_MSECS } from '../../constants';
+import {
+	ONE_DAY_IN_MSECS,
+	OPTIONS_START_TIME_DEFAULT,
+	OPTIONS_START_TIME_DEFAULT_VALUE,
+} from '../../constants';
 import styles from './analytics.module.scss';
 import { useParams } from 'react-router-dom';
 
@@ -51,30 +56,13 @@ export const Analytics = () => {
 	const [selectedProjectsId, setSelectedProjectsId] = useState(
 		id ? [Number(id)] : [],
 	);
-	// TODO dateGapStart
-	console.log('selectedProjectsId', selectedProjectsId);
 
-	let start = projects
-		.filter((project) =>
-			id === undefined ? project : project.id === Number(id),
-		)
-		.reduce(
-			(accStart, curProject) => {
-				const curStart = curProject.tracks.reduce(
-					(minStartTimeTrack, curTrack) => {
-						return minStartTimeTrack > Date.parse(curTrack.startTime)
-							? Date.parse(curTrack.startTime)
-							: minStartTimeTrack;
-					},
-					new Date().setHours(0, 0, 0, 0),
-				);
-
-				console.log('curStart!!!!!!!', curStart);
-
-				return curStart < accStart ? curStart : accStart;
-			},
-			new Date().setHours(0, 0, 0, 0),
-		);
+	const userOptions = useSelector(selectOptions);
+	let start = initDateGapStartTime(
+		projects,
+		id,
+		userOptions.defaultStartTimeInAnalytics,
+	);
 
 	start = new Date(start).setHours(0, 0, 0, 0);
 

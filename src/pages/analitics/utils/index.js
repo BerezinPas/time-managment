@@ -3,3 +3,4 @@ export * from './sorted-by-duration';
 export * from './sorted-by-name';
 export * from './attach-percent-of-total';
 export * from './attach-donut-tooltip-data';
+export * from './init-start-time-date-gap';
