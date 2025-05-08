@@ -20,6 +20,13 @@ export const userReducer = (state = userInitialState, { type, payload }) => {
 				...state,
 				isReady: true,
 			};
+
+		case ACTION_TYPE.LOGOUT:
+			return {
+				...userInitialState,
+				isReady: true,
+			};
+
 		default:
 			return state;
 	}

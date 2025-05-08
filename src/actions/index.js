@@ -7,6 +7,7 @@ export * from './delete-track';
 export * from './load-options-async';
 export * from './load-project-async';
 export * from './load-projects-async';
+export * from './logout';
 export * from './reset-project-data';
 export * from './reset-projects-data';
 export * from './save-project-async';

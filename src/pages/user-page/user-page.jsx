@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { Input } from '../../components';
+import { Button, Input } from '../../components';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptionsAsync } from '../../actions';
-import { selectOptions } from '../../selectors';
+import { logout, setOptionsAsync } from '../../actions';
+import { selectOptions, selectUserSessions } from '../../selectors';
 import { OPTIONS_START_TIME_DEFAULT } from '../../constants';
 
 export const UserPage = () => {
 	const [value, setValue] = useState('');
 	const userOptions = useSelector(selectOptions);
+	const userHash = useSelector(selectUserSessions);
 	console.log('userOtions', userOptions);
 
 	// const [selectedValue, setSelectedValue] = useState(options[0]);
@@ -37,6 +38,11 @@ export const UserPage = () => {
 		};
 		console.log('onSubmit', data);
 		dispatch(setOptionsAsync(data));
+	};
+
+	const onLogout = () => {
+		dispatch(logout(userHash));
+		sessionStorage.removeItem('userData');
 	};
 	return (
 		<div>
@@ -68,6 +74,9 @@ export const UserPage = () => {
 					<button type="submit">Save</button>
 				</div>
 			</form>
+			<Button variant="danger" onClick={onLogout}>
+				Выход
+			</Button>
 			{/* <img src={value} alt="" /> */}
 		</div>
 	);

@@ -60,6 +60,7 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 			);
 
 		case ACTION_TYPE.RESET_PROJECTS_DATA:
+		case ACTION_TYPE.LOGOUT:
 			return initialState;
 
 		default:

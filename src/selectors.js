@@ -4,6 +4,8 @@ export const selectUserId = ({ user }) => user.id;
 
 export const selectUserIsReady = ({ user }) => user.isReady;
 
+export const selectUserSessions = ({ user }) => user.sessions;
+
 export const selectProjects = ({ projects }) => projects;
 
 export const selectProject = ({ project }) => project;
