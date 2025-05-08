@@ -22,6 +22,7 @@ export const Projects = () => {
 					</Link>
 				</h2>
 			</div>
+			{projects.length === 0 && <>Нет ниодного проекта</>}
 
 			{projects
 				.slice(0, PAGINATION_LIMIT * page)

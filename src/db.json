@@ -84,18 +84,8 @@
     },
     {
       "user_id": 2,
-      "name": "qqq",
-      "id": 8
-    },
-    {
-      "user_id": 2,
       "name": "ssss",
-      "id": 9
-    },
-    {
-      "user_id": 2,
-      "name": "sadsd",
-      "id": 10
+      "id": 7
     }
   ],
   "options": [
@@ -406,6 +396,13 @@
       "end_time": "2025-05-06T21:35:46.660Z",
       "description": "",
       "id": 78
+    },
+    {
+      "project_id": 7,
+      "start_time": "2025-05-07T18:03:00.000Z",
+      "end_time": "2025-05-08T05:03:00.000Z",
+      "description": "ssssss",
+      "id": 79
     }
   ],
   "sessions": [

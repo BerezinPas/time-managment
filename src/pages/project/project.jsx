@@ -27,6 +27,7 @@ export const Project = () => {
 	const tracks = useSelector(selectTracks);
 	const [isLoading, setIsloading] = useState(true);
 	const navigate = useNavigate();
+	const [errorMessage, setErrorMessage] = useState(null);
 
 	// console.log(isEditing);
 
@@ -39,8 +40,13 @@ export const Project = () => {
 			setIsloading(false);
 			return;
 		}
-		dispatch(loadProjectAsync(params.id)).then(() => {
+		dispatch(loadProjectAsync(params.id)).then((res) => {
 			setIsloading(false);
+			console.log('res', res);
+
+			if (res.id === undefined) {
+				setErrorMessage('Проект не найден');
+			}
 		});
 	}, [params.id, dispatch]);
 
@@ -67,29 +73,41 @@ export const Project = () => {
 					</Button>
 				</div>
 			</h2>
-			<div className={styles.tracksList}>
-				<div className="row rowHeader">
-					<div className={styles.descCol}>Описание</div>
-					<div className={styles.durationCol}>Длительность</div>
-					<div className={styles.timeCol}>Время</div>
+			{tracks.length === 0 ? (
+				'Нет ни одного трека'
+			) : (
+				<div className={styles.tracksList}>
+					<div className="row rowHeader">
+						<div className={styles.descCol}>Описание</div>
+						<div className={styles.durationCol}>Длительность</div>
+						<div className={styles.timeCol}>Время</div>
+					</div>
+					{tracks
+						.sort((a, b) => Date.parse(b.startTime) - Date.parse(a.startTime))
+						.map(({ id, projectId, startTime, endTime, description }) => (
+							<TrackRow
+								key={id}
+								id={id}
+								projectId={projectId}
+								startTime={startTime}
+								endTime={endTime}
+								description={description}
+							/>
+						))}
 				</div>
-				{tracks
-					.sort((a, b) => Date.parse(b.startTime) - Date.parse(a.startTime))
-					.map(({ id, projectId, startTime, endTime, description }) => (
-						<TrackRow
-							key={id}
-							id={id}
-							projectId={projectId}
-							startTime={startTime}
-							endTime={endTime}
-							description={description}
-						/>
-					))}
-			</div>
+			)}
 		</div>
 	);
 
 	console.log('project', project);
+
+	if (errorMessage) {
+		return (
+			<div className="container">
+				<div className="error">{errorMessage}</div>
+			</div>
+		);
+	}
 
 	const content =
 		isCreating || isEditing ? (
