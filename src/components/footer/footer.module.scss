@@ -1,5 +1,15 @@
 .footer {
 	color: $mainColor;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+	height: 56px;
+}
+
+.link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
 }
