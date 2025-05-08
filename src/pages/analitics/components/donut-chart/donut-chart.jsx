@@ -2,6 +2,9 @@ import styles from './donut-chart.module.scss';
 import { Segment } from './components';
 
 export const DonutChart = ({ segments = [], title }) => {
+	if (segments.length === 0) {
+		return;
+	}
 	const DIAGRAM_COLORS = [
 		'#3f50ce',
 		'#e15759',

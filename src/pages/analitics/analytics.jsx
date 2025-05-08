@@ -19,13 +19,9 @@ import {
 	attachDonutToolTipData,
 	initDateGapStartTime,
 } from './utils';
-import {
-	ONE_DAY_IN_MSECS,
-	OPTIONS_START_TIME_DEFAULT,
-	OPTIONS_START_TIME_DEFAULT_VALUE,
-} from '../../constants';
+import { ONE_DAY_IN_MSECS } from '../../constants';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './analytics.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
 
 export const Analytics = () => {
 	const { id: projectId } = useParams();
@@ -166,31 +162,46 @@ export const Analytics = () => {
 	console.log('enhancedTracks', enhancedTracks);
 	console.log('enhancedProjects', enhancedProjects);
 
+	const projectsIsEmpty = !projects.some(
+		(project) => project.tracks.length !== 0,
+	);
+
+	console.log('projectsIsEmpty', projectsIsEmpty);
+
 	return (
 		<div className="container">
 			<BarChart tracks={enhancedTracks} dateGap={dateGap} timeZone={timeZone} />
 			<div className={styles.wrapper}>
-				<div className={styles.table}>
-					<AnalyticsControlPanel
-						checked={shouldGroup}
-						setChecked={setShouldGroup}
-						onSelectChange={(e) =>
-							setSelectedProjectsId(e.map((el) => el.value))
-						}
-						selectedProjectsId={selectedProjectsId}
-						setSelectedProjectsId={setSelectedProjectsId}
-						setDateGap={setDateGap}
-						dateGap={dateGap}
-						timeZone={timeZone}
-						initialOptionsFilter={initialOptionsFilter}
-					/>
-					<AnalyticsTable
-						data={shouldGroup ? enhancedProjects : enhancedTracks}
-						shouldGroup={shouldGroup}
-						sortOption={sortOption}
-						setSortOption={setSortOption}
-					/>
-				</div>
+				{projectsIsEmpty ? (
+					<div className={styles.empty}>
+						Нет ни одного трека, добавить можно на
+						<Link to="/"> Главной </Link>
+						или в самом <Link to="/projects"> проекте </Link>
+					</div>
+				) : (
+					<div className={styles.table}>
+						<AnalyticsControlPanel
+							checked={shouldGroup}
+							setChecked={setShouldGroup}
+							onSelectChange={(e) =>
+								setSelectedProjectsId(e.map((el) => el.value))
+							}
+							selectedProjectsId={selectedProjectsId}
+							setSelectedProjectsId={setSelectedProjectsId}
+							setDateGap={setDateGap}
+							dateGap={dateGap}
+							timeZone={timeZone}
+							initialOptionsFilter={initialOptionsFilter}
+						/>
+						<AnalyticsTable
+							data={shouldGroup ? enhancedProjects : enhancedTracks}
+							shouldGroup={shouldGroup}
+							sortOption={sortOption}
+							setSortOption={setSortOption}
+						/>
+					</div>
+				)}
+
 				<div className={styles.donuts}>
 					{shouldGroup && (
 						<DonutChart segments={enhancedProjects} title="Проекты" />

@@ -11,7 +11,10 @@ import {
 	UserPage,
 } from '../pages';
 
-export const AppRouter = () => {
+export const AppRouter = ({ isLoading }) => {
+	if (isLoading) {
+		return <span className="loader"></span>;
+	}
 	return (
 		<Routes>
 			<Route

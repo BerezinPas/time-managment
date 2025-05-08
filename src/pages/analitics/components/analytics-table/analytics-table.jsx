@@ -12,6 +12,10 @@ export const AnalyticsTable = ({
 }) => {
 	const [page, setPage] = useState(1);
 
+	if (data.length === 0) {
+		return 'В данном диапазоне нет ни одного трека.';
+	}
+
 	return (
 		<>
 			<div className={`${styles.analyticsRow} row rowHeader rowDark`}>
