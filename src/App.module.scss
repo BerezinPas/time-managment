@@ -27,6 +27,11 @@ body {
 	padding: 0 15px;
 	max-width: 1230px;
 	margin: 0 auto;
+
+	&__auth {
+		max-width: 500px;
+		margin-top: 150px;
+	}
 }
 
 :global .h2 {
@@ -72,15 +77,6 @@ body {
 	background-color: #fee9e9;
 	border-radius: 6px;
 }
-
-// @keyframes logo-spin {
-// 	from {
-// 		transform: rotate(0deg);
-// 	}
-// 	to {
-// 		transform: rotate(360deg);
-// 	}
-// }
 
 :global {
 	.loader {

@@ -93,7 +93,7 @@
       "id": 1,
       "userId": 1,
       "imageURL": "",
-      "defaultStartTimeInAnalytics": "MAX"
+      "defaultStartTimeInAnalytics": "WEEK"
     },
     {
       "userId": 10,
@@ -407,12 +407,12 @@
   ],
   "sessions": [
     {
-      "hash": "0.52239202115571292672768777265446260571479797363281",
+      "hash": "0.78699145369478173961397260427474975585937500000000",
       "user": {
-        "id": 2,
-        "login": "qwe",
+        "id": 1,
+        "login": "admin",
         "password": "qweqwe",
-        "registred_at": "2025-04-02 08:23"
+        "registred_at": "22222"
       },
       "id": 1
     }

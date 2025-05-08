@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Input } from '../../components';
+import { Button, Input } from '../../components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -17,7 +17,7 @@ import {
 	setOptions,
 	setUser,
 } from '../../actions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { server } from '../../bff';
 
 export const Register = () => {
@@ -66,7 +66,9 @@ export const Register = () => {
 	};
 
 	return (
-		<div>
+		<div className="container container__auth">
+			<h2 className={`${styles.title} h2`}>Регистрация</h2>
+
 			<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 				<Input
 					isValid={!errors?.login}
@@ -86,8 +88,11 @@ export const Register = () => {
 					placeholder={'повторите пароль'}
 					{...register('passwordCheck')}
 				/>
-				<button type="submit">ok</button>
-				{errorMessage}
+				<Button type="submit">Зарегистрироваться</Button>
+				{errorMessage && <div className="error">{errorMessage}</div>}
+				<div>
+					Есть аккаунт? <Link to="/authorization">Авторизуйтесь</Link>
+				</div>
 			</form>
 		</div>
 	);

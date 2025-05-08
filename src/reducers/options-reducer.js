@@ -9,6 +9,8 @@ const userInitialState = {
 export const optionsReducer = (state = userInitialState, { type, payload }) => {
 	switch (type) {
 		case ACTION_TYPE.SET_OPTIONS:
+			console.log('payload', payload);
+
 			return {
 				...state,
 				...payload,
