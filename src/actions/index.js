@@ -16,4 +16,5 @@ export * from './set-project';
 export * from './set-projects';
 export * from './set-tracks';
 export * from './set-user';
+export * from './set-user-is-ready';
 export * from './update-track';

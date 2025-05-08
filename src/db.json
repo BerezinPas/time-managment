@@ -108,7 +108,7 @@
       "id": 1,
       "userId": 1,
       "imageURL": "",
-      "defaultStartTimeInAnalytics": "WEEK"
+      "defaultStartTimeInAnalytics": "MAX"
     },
     {
       "userId": 10,

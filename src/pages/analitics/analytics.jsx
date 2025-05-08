@@ -25,10 +25,23 @@ import {
 	OPTIONS_START_TIME_DEFAULT_VALUE,
 } from '../../constants';
 import styles from './analytics.module.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const Analytics = () => {
-	const { id } = useParams();
+	const { id: projectId } = useParams();
+	const projects = useSelector(selectProjects);
+
+	const navigate = useNavigate();
+
+	if (
+		projectId &&
+		!projects.some((project) => Number(projectId) === project.id)
+	) {
+		console.error('!!!!!!!!!!');
+		console.error(projects);
+
+		navigate('/analytics');
+	}
 
 	const [sortOption, setSortOption] = useState({
 		field: 'name',
@@ -50,24 +63,21 @@ export const Analytics = () => {
 	const timeZone = new Date().getTimezoneOffset() / 60;
 	// console.log('timeZone', timeZone);
 
-	const projects = useSelector(selectProjects);
 	console.log('projects', projects);
 
-	const [selectedProjectsId, setSelectedProjectsId] = useState(
-		id ? [Number(id)] : [],
-	);
+	const [selectedProjectsId, setSelectedProjectsId] = useState([]);
 
 	const userOptions = useSelector(selectOptions);
-	let start = initDateGapStartTime(
+	const start = initDateGapStartTime(
 		projects,
-		id,
+		projectId,
 		userOptions.defaultStartTimeInAnalytics,
 	);
 
-	start = new Date(start).setHours(0, 0, 0, 0);
+	// start = new Date(start).setHours(0, 0, 0, 0);
 
 	const initialOptionsFilter = {
-		shouldGroup: id === undefined,
+		shouldGroup: projectId === undefined,
 		dateGap: {
 			start: start,
 			end: new Date().setHours(0, 0, 0, 0),
@@ -77,8 +87,8 @@ export const Analytics = () => {
 		initialOptionsFilter.shouldGroup,
 	);
 
-	console.log('start', start);
-	console.log('stainitialOptionsFilterrt', initialOptionsFilter);
+	// console.log('start', start);
+	// console.log('stainitialOptionsFilterrt', initialOptionsFilter);
 
 	const [dateGap, setDateGap] = useState({
 		start: new Date().setHours(0, 0, 0, 0),
@@ -86,14 +96,16 @@ export const Analytics = () => {
 	});
 
 	useEffect(() => {
+		setSelectedProjectsId(projectId ? [Number(projectId)] : []);
 		setDateGap({
 			...dateGap,
 			start: start,
-			end: new Date().setHours(0, 0, 0, 0),
+			end: initialOptionsFilter.dateGap.end,
 		});
-	}, [projects, id]);
+	}, [projects, projectId]);
 
 	console.log('dateGap', dateGap);
+	console.log('selectedProjectsId', selectedProjectsId);
 
 	const selectedProjects = selectedProjectsId.length
 		? projects.filter((project) => selectedProjectsId.includes(project.id))

@@ -6,6 +6,8 @@ import { formateTimeStampToHHMMSS } from '../../utils';
 import { createTrackAsync } from '../../actions';
 import Select from 'react-select';
 import styles from './main-page.module.scss';
+import { useCheckAuthorizate } from '../../hooks';
+import { Navigate } from 'react-router-dom';
 
 export const MainPage = () => {
 	const dispatch = useDispatch();
@@ -78,6 +80,7 @@ export const MainPage = () => {
 
 	return (
 		<div className={styles.wrapper}>
+			<span className="loader"></span>
 			<div>
 				<div className={styles.top}>
 					<div className={styles.timer}>

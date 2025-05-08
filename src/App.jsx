@@ -1,30 +1,25 @@
-import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.scss';
 import { Footer, Header } from './components';
-import {
-	Analytics,
-	Authorization,
-	MainPage,
-	Project,
-	Projects,
-	Register,
-	UserPage,
-} from './pages';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect } from 'react';
-import { loadOptionsAsync, loadProjectsAsync, setUser } from './actions';
+import {
+	loadOptionsAsync,
+	loadProjectsAsync,
+	SET_USER_IS_READY,
+	setUser,
+} from './actions';
+import { useCheckAuthorizate } from './hooks';
+import { AppRouter } from './routes/app-router';
 
 function App() {
 	const dispatch = useDispatch();
-
-	// useLayoutEffect(() => {
-	// 	dispatch(loadProjectsAsync(userId));
-	// }, [userId, dispatch]);
+	const isAuth = useCheckAuthorizate();
 
 	useLayoutEffect(() => {
 		const currentUserDataJSON = sessionStorage.getItem('userData');
 
 		if (!currentUserDataJSON) {
+			dispatch(SET_USER_IS_READY);
 			return;
 		}
 		const currentUserData = JSON.parse(currentUserDataJSON);
@@ -40,23 +35,10 @@ function App() {
 
 	return (
 		<div className={styles.appColumn}>
-			<Header />
+			{isAuth && <Header />}
 			<div className={styles.pageContent}>
-				<Routes>
-					<Route path="/" element={<MainPage />} />
-					<Route path="/register" element={<Register />} />
-					<Route path="/authorization" element={<Authorization />} />
-					<Route path="/analytics" element={<Analytics />} />
-					<Route path="/analytics/:id" element={<Analytics />} />
-					<Route path="/projects" element={<Projects />} />
-					<Route path="/project" element={<Project />} />
-					<Route path="/project/:id" element={<Project />} />
-					<Route path="/project/:id/edit" element={<Project />} />
-					<Route path="/user" element={<UserPage />} />
-					{/* <Route path="/projects" element={<Projects />} /> */}
-				</Routes>
+				<AppRouter />
 			</div>
-
 			<Footer />
 		</div>
 	);

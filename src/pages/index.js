@@ -5,3 +5,4 @@ export * from './authorization/authorization';
 export * from './projects/projects';
 export * from './project/project';
 export * from './user-page/user-page';
+export * from './error-page/error-page';

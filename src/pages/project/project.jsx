@@ -56,7 +56,6 @@ export const Project = () => {
 			<h2 className="h2">
 				{project.name}
 				<div className={styles.controlBtns}>
-					{/* TODO LINK TO ANALYTICS */}
 					<Link to={`/analytics/${params.id}`}>
 						<Button variant="secondary">смотреть аналитику</Button>
 					</Link>
