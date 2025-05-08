@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects } from '../../selectors';
 import { useEffect, useRef, useState } from 'react';
-import { Input, Button } from '../../components';
+import { Input, Button, Loader } from '../../components';
 import { formateTimeStampToHHMMSS } from '../../utils';
 import { createTrackAsync } from '../../actions';
 import Select from 'react-select';
@@ -80,7 +80,7 @@ export const MainPage = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<span className="loader"></span>
+			<Loader />
 			<div>
 				<div className={styles.top}>
 					<div className={styles.timer}>

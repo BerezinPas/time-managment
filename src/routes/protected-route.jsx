@@ -2,13 +2,14 @@ import { Navigate } from 'react-router-dom';
 import { useCheckAuthorizate } from '../hooks';
 import { useSelector } from 'react-redux';
 import { selectUserIsReady } from '../selectors';
+import { Loader } from '../components';
 
 export const ProtectedRoute = ({ children, isInversed = false }) => {
 	const isAuth = useCheckAuthorizate();
 	const isReady = useSelector(selectUserIsReady);
 
 	if (!isReady) {
-		return <span className="loader"></span>;
+		return <Loader />;
 	}
 
 	if (isInversed && isAuth) {
