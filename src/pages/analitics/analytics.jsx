@@ -101,7 +101,9 @@ export const Analytics = () => {
 	}, [projects, projectId]);
 
 	console.log('dateGap', dateGap);
-	console.log('selectedProjectsId', selectedProjectsId);
+	console.log('STARTTT', new Date(dateGap.start));
+	console.log('ENDDD', new Date(dateGap.end));
+	// console.log('selectedProjectsId', selectedProjectsId);
 
 	const selectedProjects = selectedProjectsId.length
 		? projects.filter((project) => selectedProjectsId.includes(project.id))
@@ -159,56 +161,62 @@ export const Analytics = () => {
 		.map(attachDonutToolTipData)
 		.sort(sortFunc());
 
-	console.log('enhancedTracks', enhancedTracks);
-	console.log('enhancedProjects', enhancedProjects);
+	// console.log('enhancedTracks', enhancedTracks);
+	// console.log('enhancedProjects', enhancedProjects);
 
 	const projectsIsEmpty = !projects.some(
 		(project) => project.tracks.length !== 0,
 	);
 
-	console.log('projectsIsEmpty', projectsIsEmpty);
+	// console.log('projectsIsEmpty', projectsIsEmpty);
 
 	return (
 		<div className="container">
-			<BarChart tracks={enhancedTracks} dateGap={dateGap} timeZone={timeZone} />
-			<div className={styles.wrapper}>
-				{projectsIsEmpty ? (
-					<div className={styles.empty}>
-						Нет ни одного трека, добавить можно на
-						<Link to="/"> Главной </Link>
-						или в самом <Link to="/projects"> проекте </Link>
-					</div>
-				) : (
-					<div className={styles.table}>
-						<AnalyticsControlPanel
-							checked={shouldGroup}
-							setChecked={setShouldGroup}
-							onSelectChange={(e) =>
-								setSelectedProjectsId(e.map((el) => el.value))
-							}
-							selectedProjectsId={selectedProjectsId}
-							setSelectedProjectsId={setSelectedProjectsId}
-							setDateGap={setDateGap}
-							dateGap={dateGap}
-							timeZone={timeZone}
-							initialOptionsFilter={initialOptionsFilter}
-						/>
-						<AnalyticsTable
-							data={shouldGroup ? enhancedProjects : enhancedTracks}
-							shouldGroup={shouldGroup}
-							sortOption={sortOption}
-							setSortOption={setSortOption}
-						/>
-					</div>
-				)}
-
-				<div className={styles.donuts}>
-					{shouldGroup && (
-						<DonutChart segments={enhancedProjects} title="Проекты" />
-					)}
-					<DonutChart segments={enhancedTracks} title="Треки" />
+			{projectsIsEmpty ? (
+				<div className={styles.empty}>
+					Нет ни одного трека, треки можно добавить на
+					<Link to="/"> Главной </Link>
+					или в самом <Link to="/projects"> проекте </Link>
 				</div>
-			</div>
+			) : (
+				<>
+					<BarChart
+						tracks={enhancedTracks}
+						dateGap={dateGap}
+						timeZone={timeZone}
+					/>
+					<div className={styles.wrapper}>
+						<div className={styles.table}>
+							<AnalyticsControlPanel
+								checked={shouldGroup}
+								setChecked={setShouldGroup}
+								onSelectChange={(e) =>
+									setSelectedProjectsId(e.map((el) => el.value))
+								}
+								selectedProjectsId={selectedProjectsId}
+								setSelectedProjectsId={setSelectedProjectsId}
+								setDateGap={setDateGap}
+								dateGap={dateGap}
+								timeZone={timeZone}
+								initialOptionsFilter={initialOptionsFilter}
+							/>
+							<AnalyticsTable
+								data={shouldGroup ? enhancedProjects : enhancedTracks}
+								shouldGroup={shouldGroup}
+								sortOption={sortOption}
+								setSortOption={setSortOption}
+							/>
+						</div>
+
+						<div className={styles.donuts}>
+							{shouldGroup && (
+								<DonutChart segments={enhancedProjects} title="Проекты" />
+							)}
+							<DonutChart segments={enhancedTracks} title="Треки" />
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

@@ -28,17 +28,10 @@ export const AnalyticsControlPanel = ({
 		setDateGapInput({ ...dateGap });
 	}, [dateGap]);
 
-	// console.log(',QWEQWE', new Date(dateGap.start).toString());
-	// console.log('@@@', new Date(dateGap.start).toISOString());
-	// console.log('@@@.end', new Date(dateGap.end));
-	// console.log('!!!!', new Date(dateGapInput.start));
-	// console.log('!!!!.end', new Date(dateGapInput.end));
-	// console.log(new Date().getTimezoneOffset() / 60);
 	const options = projects.map((project) => ({
 		value: project.id,
 		label: project.name,
 	}));
-	// console.log(options);
 
 	const resetFilters = () => {
 		navigate('/analytics');
@@ -48,9 +41,11 @@ export const AnalyticsControlPanel = ({
 	};
 
 	// TODO VALIDATION ON DATE!!!
-	const validateDateStart = (value) => dateGapInput.end >= Date.parse(value);
+	const validateDateStart = (value) =>
+		dateGapInput.end >= Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS;
 
-	const validateDateEnd = (value) => dateGapInput.start <= Date.parse(value);
+	const validateDateEnd = (value) =>
+		dateGapInput.start <= Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS;
 
 	const onDateChange = (e) => {
 		setDateGapInput((prev) => ({
