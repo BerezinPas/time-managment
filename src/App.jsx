@@ -1,5 +1,5 @@
 import styles from './App.module.scss';
-import { Footer, Header } from './components';
+import { Footer, Header, Modal } from './components';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect, useState } from 'react';
 import {
@@ -45,6 +45,7 @@ function App() {
 				<AppRouter isLoading={isLoading} />
 			</div>
 			<Footer />
+			<Modal />
 		</div>
 	);
 }

@@ -9,12 +9,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProject, selectTracks } from '../../selectors';
 import {
+	CLOSE_MODAL,
 	deleteProjectAsync,
 	loadProjectAsync,
+	openModal,
 	RESET_PROJECT_DATA,
 } from '../../actions';
 import { ProjectForm } from './components/project-form/project-form';
-import { Button } from '../../components';
+import { Button, Loader } from '../../components';
 import { TrackRow } from './components';
 import styles from './project.module.scss';
 
@@ -52,7 +54,7 @@ export const Project = () => {
 
 	const onDelete = (id) => {
 		const tracksId = tracks.map((track) => track.id);
-		dispatch(deleteProjectAsync(id, tracksId)).then(() => {
+		return dispatch(deleteProjectAsync(id, tracksId)).then(() => {
 			navigate('/projects');
 		});
 	};
@@ -68,7 +70,29 @@ export const Project = () => {
 					<Link to={`/project/${project.id}/edit`}>
 						<Button>редактировать</Button>
 					</Link>
-					<Button variant="danger" onClick={() => onDelete(project.id)}>
+					<Button
+						variant="danger"
+						onClick={() =>
+							dispatch(
+								openModal({
+									title: 'Удаление проекта',
+									text: 'Точно хотите удалить проект?',
+									onConfirm: () => {
+										setIsloading(true);
+										dispatch(CLOSE_MODAL);
+										onDelete(params.id).finaly(() => {
+											setIsloading(false);
+										});
+									},
+									onCancel: () => dispatch(CLOSE_MODAL),
+									buttonConfirm: {
+										variant: 'danger',
+										text: 'удалить',
+									},
+								}),
+							)
+						}
+					>
 						удалить
 					</Button>
 				</div>
@@ -116,5 +140,5 @@ export const Project = () => {
 			projectContent
 		);
 
-	return <div>{isLoading ? 'loading...' : content}</div>;
+	return <div>{isLoading ? <Loader /> : content}</div>;
 };

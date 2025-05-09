@@ -10,10 +10,11 @@ import {
 	Register,
 	UserPage,
 } from '../pages';
+import { Loader } from '../components';
 
 export const AppRouter = ({ isLoading }) => {
 	if (isLoading) {
-		return <span className="loader"></span>;
+		return <Loader />;
 	}
 	return (
 		<Routes>

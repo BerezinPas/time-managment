@@ -13,7 +13,7 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 			return [...state, payload];
 
 		case ACTION_TYPE.DELETE_PROJECT:
-			return state.filter(({ id }) => id !== payload);
+			return state.filter(({ id }) => id !== Number(payload));
 
 		case ACTION_TYPE.SET_PROJECT:
 			console.log('payload', payload);

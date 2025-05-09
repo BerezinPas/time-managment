@@ -13,3 +13,5 @@ export const selectProject = ({ project }) => project;
 export const selectTracks = ({ project }) => project.tracks;
 
 export const selectOptions = ({ options }) => options;
+
+export const selectModal = ({ app }) => app.modal;

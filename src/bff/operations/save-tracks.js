@@ -1,4 +1,5 @@
 import { createTrack, deleteTrack, updateTrack } from '../api';
+import { attachDurationToTrack } from '../utils';
 
 export const saveTracks = async (data) => {
 	console.log('saveTracks', data);
@@ -16,8 +17,8 @@ export const saveTracks = async (data) => {
 	return {
 		error: null,
 		res: {
-			created,
-			updated,
+			created: created.map(attachDurationToTrack),
+			updated: updated.map(attachDurationToTrack),
 			deleted: data.delete,
 		},
 	};
