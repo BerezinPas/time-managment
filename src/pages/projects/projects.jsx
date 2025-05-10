@@ -1,15 +1,12 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectProjects, selectUserId } from '../../selectors';
-import { loadProjectsAsync } from '../../actions';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectProjects } from '../../selectors';
 import { ProjectRow } from './components';
 import { Link } from 'react-router-dom';
 import { Button, LoadMore } from '../../components';
 import { PAGINATION_LIMIT } from '../../constants';
 
 export const Projects = () => {
-	const dispatch = useDispatch();
-	const userId = useSelector(selectUserId);
 	const projects = useSelector(selectProjects);
 	const [page, setPage] = useState(1);
 	return (

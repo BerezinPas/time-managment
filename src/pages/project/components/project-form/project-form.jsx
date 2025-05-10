@@ -8,7 +8,7 @@ import { saveProjectAsync } from '../../../../actions';
 import { useNavigate } from 'react-router-dom';
 import { selectUserId } from '../../../../selectors';
 import styles from './project-form.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormItemTrack } from './components';
 import {
 	groupByTracks,
@@ -38,6 +38,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 
 	const {
 		formState: { dirtyFields, errors },
+		setFocus,
 		register,
 		handleSubmit,
 		setValue,
@@ -55,7 +56,6 @@ export const ProjectForm = ({ project, isCreating }) => {
 		);
 
 		const tracksData = groupByTracks(formData, project.id);
-		console.log('tracksData', tracksData);
 
 		const createdTracks = tracksData.filter(({ id }) =>
 			id.includes('generated'),
@@ -88,6 +88,34 @@ export const ProjectForm = ({ project, isCreating }) => {
 	};
 
 	const errorMessage = Object.values(errors)[0]?.message;
+	const [createdTrackId, setCreatedTrackId] = useState(null);
+
+	useEffect(() => {
+		setFocus(`description-${createdTrackId}`);
+	}, [createdTrackId]);
+
+	const onAddTrack = () => {
+		const newId = generateId();
+		setCreatedTrackId(newId);
+		setFocus(`description-${newId}`);
+		setNewTracks((prev) => [
+			{
+				id: newId,
+				projectId: project.id,
+				startTime: Date.now(),
+				endTime: Date.now(),
+				description: '',
+			},
+			...prev,
+		]);
+
+		setValue(`startDay-${newId}`, new Date().toISOString().slice(0, 10));
+		setValue(
+			`startTime-${newId}`,
+			new Date().toLocaleTimeString().slice(0, -3),
+		);
+		setValue(`endTime-${newId}`, new Date().toLocaleTimeString().slice(0, -3));
+	};
 
 	const content = (
 		<>
@@ -100,37 +128,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 			<div className={styles.controlPanel}>
 				{errorMessage && <div className="error">{errorMessage}</div>}
 				<div className={styles.controlBtns}>
-					<Button
-						variant="secondary"
-						type="button"
-						// TODO FOCUS onCREATE DECS input
-						onClick={() => {
-							const newId = generateId();
-							setNewTracks((prev) => [
-								{
-									id: newId,
-									projectId: project.id,
-									startTime: Date.now(),
-									endTime: Date.now(),
-									description: '',
-								},
-								...prev,
-							]);
-
-							setValue(
-								`startDay-${newId}`,
-								new Date().toISOString().slice(0, 10),
-							);
-							setValue(
-								`startTime-${newId}`,
-								new Date().toLocaleTimeString().slice(0, -3),
-							);
-							setValue(
-								`endTime-${newId}`,
-								new Date().toLocaleTimeString().slice(0, -3),
-							);
-						}}
-					>
+					<Button variant="secondary" type="button" onClick={onAddTrack}>
 						добавить запись
 					</Button>
 					<Button

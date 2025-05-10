@@ -7,10 +7,10 @@ export const saveProject = async ({ id, name, userId, tracks }) => {
 
 	if (id !== null) {
 		project = await updateProject(id, name);
-		tracksData = await saveTracks(tracks);
+		tracksData = await saveTracks(tracks, project.id);
 	} else {
 		project = await createProject(name, userId);
-		project = { ...project, tracks: [] };
+		project = { ...project };
 
 		tracksData = await saveTracks({
 			...tracks,
@@ -20,8 +20,6 @@ export const saveProject = async ({ id, name, userId, tracks }) => {
 			})),
 		});
 	}
-
-	console.log('PROJECT SAVE PROJCEC', project);
 
 	return {
 		error: null,

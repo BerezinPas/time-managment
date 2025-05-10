@@ -1,12 +1,6 @@
 import { formateTimeStampToHHMMSS } from '../../../../utils';
 import styles from './track-row.module.scss';
-export const TrackRow = ({
-	id,
-	projectId,
-	startTime,
-	endTime,
-	description,
-}) => {
+export const TrackRow = ({ startTime, endTime, description }) => {
 	return (
 		<div className="row">
 			<div className={styles.descCol}>{description}</div>

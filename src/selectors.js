@@ -8,9 +8,9 @@ export const selectUserSessions = ({ user }) => user.sessions;
 
 export const selectProjects = ({ projects }) => projects;
 
-export const selectProject = ({ project }) => project;
+// export const selectProject = ({ project }) => project;
 
-export const selectTracks = ({ project }) => project.tracks;
+// export const selectTracks = ({ project }) => project.tracks;
 
 export const selectOptions = ({ options }) => options;
 

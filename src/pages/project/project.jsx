@@ -1,20 +1,8 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import {
-	Link,
-	Navigate,
-	useMatch,
-	useNavigate,
-	useParams,
-} from 'react-router-dom';
+import { useLayoutEffect, useState } from 'react';
+import { Link, useMatch, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProject, selectTracks } from '../../selectors';
-import {
-	CLOSE_MODAL,
-	deleteProjectAsync,
-	loadProjectAsync,
-	openModal,
-	RESET_PROJECT_DATA,
-} from '../../actions';
+import { selectProjects } from '../../selectors';
+import { CLOSE_MODAL, deleteProjectAsync, openModal } from '../../actions';
 import { ProjectForm } from './components/project-form/project-form';
 import { Button, Loader } from '../../components';
 import { TrackRow } from './components';
@@ -25,39 +13,51 @@ export const Project = () => {
 	const isCreating = useMatch('/project');
 	const isEditing = !!useMatch('/project/:id/edit');
 	const dispatch = useDispatch();
-	const project = useSelector(selectProject);
-	const tracks = useSelector(selectTracks);
-	const [isLoading, setIsloading] = useState(true);
+	const [isLoading, setIsloading] = useState(false);
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState(null);
 
-	// console.log(isEditing);
+	const projects = useSelector(selectProjects);
+	const project = projects.find(
+		(findProject) => findProject.id === Number(params.id),
+	) || { name: '', id: null, tracks: [], userId: null };
 
-	useLayoutEffect(() => {
-		dispatch(RESET_PROJECT_DATA);
-	}, [dispatch, isCreating]);
+	const tracks = project?.tracks || [];
+	const tracksId = tracks.map((track) => track.id);
 
 	useLayoutEffect(() => {
 		if (isCreating) {
-			setIsloading(false);
 			return;
 		}
-		dispatch(loadProjectAsync(params.id)).then((res) => {
-			setIsloading(false);
-			console.log('res', res);
 
-			if (res.id === undefined) {
-				setErrorMessage('Проект не найден');
-			}
-		});
-	}, [params.id, dispatch]);
+		if (project.id === null) {
+			setErrorMessage('Проект не найден');
+		}
+	}, [params.id, dispatch, isCreating]);
 
-	const onDelete = (id) => {
-		const tracksId = tracks.map((track) => track.id);
-		return dispatch(deleteProjectAsync(id, tracksId)).then((res) => {
-			navigate('/projects');
-			return res;
-		});
+	const onDelete = (id, tracksId) => {
+		dispatch(
+			openModal({
+				title: 'Удаление проекта',
+				text: 'Точно хотите удалить проект?',
+				onConfirm: () => {
+					setIsloading(true);
+					dispatch(CLOSE_MODAL);
+					dispatch(deleteProjectAsync(id, tracksId))
+						.then(() => {
+							navigate('/projects');
+						})
+						.finally(() => {
+							setIsloading(false);
+						});
+				},
+				onCancel: () => dispatch(CLOSE_MODAL),
+				buttonConfirm: {
+					variant: 'danger',
+					text: 'удалить',
+				},
+			}),
+		);
 	};
 
 	const projectContent = (
@@ -73,26 +73,7 @@ export const Project = () => {
 					</Link>
 					<Button
 						variant="danger"
-						onClick={() =>
-							dispatch(
-								openModal({
-									title: 'Удаление проекта',
-									text: 'Точно хотите удалить проект?',
-									onConfirm: () => {
-										setIsloading(true);
-										dispatch(CLOSE_MODAL);
-										onDelete(params.id).finally(() => {
-											setIsloading(false);
-										});
-									},
-									onCancel: () => dispatch(CLOSE_MODAL),
-									buttonConfirm: {
-										variant: 'danger',
-										text: 'удалить',
-									},
-								}),
-							)
-						}
+						onClick={() => onDelete(project.id, tracksId)}
 					>
 						удалить
 					</Button>
@@ -109,11 +90,9 @@ export const Project = () => {
 					</div>
 					{tracks
 						.sort((a, b) => Date.parse(b.startTime) - Date.parse(a.startTime))
-						.map(({ id, projectId, startTime, endTime, description }) => (
+						.map(({ id, startTime, endTime, description }) => (
 							<TrackRow
 								key={id}
-								id={id}
-								projectId={projectId}
 								startTime={startTime}
 								endTime={endTime}
 								description={description}
@@ -123,8 +102,6 @@ export const Project = () => {
 			)}
 		</div>
 	);
-
-	console.log('project', project);
 
 	if (errorMessage) {
 		return (

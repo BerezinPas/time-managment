@@ -1,1 +1,1 @@
-export * from './project/project-row';
+export * from './project-row/project-row';

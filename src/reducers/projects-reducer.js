@@ -4,20 +4,20 @@ import { formateTimeStampToHHMMSS } from '../utils';
 
 const initialState = [];
 
+const initialProjectState = { id: null, name: '', tracks: [], userId: null };
+
 export const projectsReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case ACTION_TYPE.SET_PROJECTS:
 			return payload;
 
 		case ACTION_TYPE.ADD_PROJECT:
-			return [...state, payload];
+			return [...state, { ...initialProjectState, ...payload }];
 
 		case ACTION_TYPE.DELETE_PROJECT:
-			return state.filter(({ id }) => id !== Number());
+			return state.filter(({ id }) => id !== Number(payload));
 
 		case ACTION_TYPE.SET_PROJECT:
-			console.log('payload', payload);
-
 			return state.map((project, index) =>
 				project.id !== payload.id
 					? project
@@ -31,8 +31,6 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 			);
 
 		case ACTION_TYPE.CREATE_TRACK:
-			console.log('CREATE_TRACK', state);
-
 			return state.map((project) =>
 				project.id !== payload.projectId
 					? project
@@ -53,11 +51,13 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 
 		case ACTION_TYPE.DELETE_TRACK:
 			return state.map((project) =>
-				project.id !== payload.projectId
+				project.id !== Number(payload.projectId)
 					? project
 					: {
 							...project,
-							tracks: project.tracks.filter((track) => track.id !== payload.id),
+							tracks: project.tracks.filter(
+								(track) => Number(track.id) !== Number(payload.id),
+							),
 						},
 			);
 
