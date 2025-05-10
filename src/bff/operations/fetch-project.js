@@ -1,7 +1,7 @@
 import { getProject, getTracks } from '../api';
 import {
 	attachDurationToTrack,
-	attachSummuryDurationToProjects,
+	attachSummuryDurationToProject,
 } from '../utils';
 
 export const fetchProject = async (projectId) => {
@@ -11,12 +11,10 @@ export const fetchProject = async (projectId) => {
 
 	const tracksWithDuration = tracks.map(attachDurationToTrack);
 
-	// let res = attachTracksToProjects(projects, tracksWithDuration);
+	const projectWithTracks = { ...project, tracks: tracksWithDuration };
 
-	// TODO добавить суммарную длительность
-	// attachSummuryDurationToProjects();
 	return {
 		error: null,
-		res: { ...project, tracks: tracksWithDuration },
+		res: attachSummuryDurationToProject(projectWithTracks),
 	};
 };

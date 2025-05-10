@@ -26,12 +26,21 @@ export const MainPage = () => {
 	const [isTimeGoing, setIsTimeGoing] = useState(null);
 	const [currentTime, setCurrentTime] = useState(null);
 	const [description, setDescription] = useState('');
-	let pointPauseRef = useRef(null).current;
+	const [isLoading, setIsLoading] = useState(false);
+	const [pointPause, setPointPause] = useState(false);
+
+	const resetForm = () => {
+		setStartTime(null);
+		setPointPause(null);
+		setDescription('');
+		setIsTimeGoing(false);
+		setCurrentTime(null);
+	};
 
 	const onTimerStart = () => {
 		if (startTime) {
-			setStartTime(startTime + Date.now() - pointPauseRef);
-			pointPauseRef = null;
+			setStartTime(startTime + Date.now() - pointPause);
+			setPointPause(null);
 			setIsTimeGoing(true);
 
 			return;
@@ -42,12 +51,12 @@ export const MainPage = () => {
 
 	const onTimerPause = () => {
 		setIsTimeGoing(false);
-		pointPauseRef = Date.now();
+		setPointPause(Date.now());
 	};
 
 	const onTimerStop = () => {
-		setStartTime(null);
-		const endTime = pointPauseRef ? pointPauseRef : Date.now();
+		setIsLoading(true);
+		const endTime = pointPause ? pointPause : Date.now();
 
 		dispatch(
 			createTrackAsync({
@@ -56,11 +65,11 @@ export const MainPage = () => {
 				endTime: new Date(endTime).toISOString(),
 				description,
 			}),
-		);
-		pointPauseRef = null;
-		setDescription('');
-		setIsTimeGoing(false);
-		setCurrentTime(null);
+		)
+			.then(() => {
+				resetForm();
+			})
+			.finally(() => setIsLoading(false));
 	};
 
 	useEffect(() => {
@@ -80,43 +89,50 @@ export const MainPage = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<Loader />
-			<div>
-				<div className={styles.top}>
-					<div className={styles.timer}>
-						{formateTimeStampToHHMMSS(currentTime)}
+			{isLoading ? (
+				<Loader />
+			) : (
+				<div>
+					<div className={styles.top}>
+						<div className={styles.timer}>
+							{formateTimeStampToHHMMSS(currentTime)}
+						</div>
+						<div className={styles.btns}>
+							<Button
+								disabled={isTimeGoing || options.length === 0}
+								onClick={onTimerStart}
+							>
+								start
+							</Button>
+							<Button
+								onClick={onTimerPause}
+								disabled={!isTimeGoing}
+								variant="secondary"
+							>
+								pause
+							</Button>
+							<Button
+								onClick={onTimerStop}
+								disabled={!currentTime}
+								variant="danger"
+							>
+								stop
+							</Button>
+						</div>
 					</div>
-					<div className={styles.btns}>
-						<Button
-							disabled={isTimeGoing || options.length === 0}
-							onClick={onTimerStart}
-						>
-							start
-						</Button>
-						<Button
-							onClick={onTimerPause}
-							disabled={!isTimeGoing}
-							variant="secondary"
-						>
-							pause
-						</Button>
-						<Button onClick={onTimerStop} variant="danger">
-							stop
-						</Button>
-					</div>
+					<Select
+						value={selectedProject}
+						onChange={(e) => setSelectedProject(e)}
+						options={options}
+					/>
+					<Input
+						placeholder="описание"
+						className={styles.input}
+						value={description}
+						onChange={(e) => onDescriptionChange(e)}
+					/>
 				</div>
-				<Select
-					value={selectedProject}
-					onChange={(e) => setSelectedProject(e)}
-					options={options}
-				/>
-				<Input
-					placeholder="описание"
-					className={styles.input}
-					value={description}
-					onChange={(e) => onDescriptionChange(e)}
-				/>
-			</div>
+			)}
 		</div>
 	);
 };

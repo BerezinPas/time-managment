@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LoadMore } from '../../../../components';
 import { PAGINATION_LIMIT } from '../../../../constants';
 import styles from './analytics-table.module.scss';
-import { AnalyticsTableRow } from './components';
+import { AnalyticsTableRow, RowHeaderCol } from './components';
 
 export const AnalyticsTable = ({
 	data,
@@ -19,60 +19,27 @@ export const AnalyticsTable = ({
 	return (
 		<>
 			<div className={`${styles.analyticsRow} row rowHeader rowDark`}>
-				<div
-					onClick={() => {
-						if (sortOption.field === 'name' && sortOption.how === 'inc') {
-							setSortOption({ ...sortOption, how: 'dec' });
-						} else {
-							setSortOption({ ...sortOption, field: 'name', how: 'inc' });
-						}
-					}}
+				<RowHeaderCol
+					field="name"
+					setSortOption={setSortOption}
+					sortOption={sortOption}
+					text="Название"
 					className={styles.colName}
-				>
-					название
-					<div
-						className={`${sortOption.field === 'name' ? styles[sortOption.how] : ''} ${styles.arrows}`}
-					>
-						<div className={`${styles.arrow} ${styles.arrowDown}`}></div>
-						<div className={`${styles.arrow} ${styles.arrowUp}`}></div>
-					</div>
-				</div>
-				<div
-					onClick={() => {
-						if (sortOption.field === 'date' && sortOption.how === 'inc') {
-							setSortOption({ ...sortOption, how: 'dec' });
-						} else {
-							setSortOption({ ...sortOption, field: 'date', how: 'inc' });
-						}
-					}}
+				/>
+				<RowHeaderCol
+					field="date"
+					setSortOption={setSortOption}
+					sortOption={sortOption}
+					text="Дата"
 					className={styles.colDate}
-				>
-					дата
-					<div
-						className={`${sortOption.field === 'date' ? styles[sortOption.how] : ''} ${styles.arrows}`}
-					>
-						<div className={`${styles.arrow} ${styles.arrowDown}`}></div>
-						<div className={`${styles.arrow} ${styles.arrowUp}`}></div>
-					</div>
-				</div>
-				<div
-					onClick={() => {
-						if (sortOption.field === 'duration' && sortOption.how === 'inc') {
-							setSortOption({ ...sortOption, how: 'dec' });
-						} else {
-							setSortOption({ ...sortOption, field: 'duration', how: 'inc' });
-						}
-					}}
+				/>
+				<RowHeaderCol
+					field="duration "
+					setSortOption={setSortOption}
+					sortOption={sortOption}
+					text="Длительность"
 					className={styles.colDuration}
-				>
-					длительность
-					<div
-						className={`${sortOption.field === 'duration' ? styles[sortOption.how] : ''} ${styles.arrows}`}
-					>
-						<div className={`${styles.arrow} ${styles.arrowDown}`}></div>
-						<div className={`${styles.arrow} ${styles.arrowUp}`}></div>
-					</div>
-				</div>
+				/>
 				<div className={styles.colProcent}>процент</div>
 			</div>
 
@@ -89,15 +56,3 @@ export const AnalyticsTable = ({
 		</>
 	);
 };
-
-/* {data.map(({ id, name, tracks, summuryDuration, percentageOfTotal }) => (
-				<AnalyticsTableRow
-					key={id}
-					id={id}
-					name={name}
-					percentageOfTotal={percentageOfTotal}
-					tracks={tracks}
-					summuryDuration={summuryDuration}
-					shouldGroup={shouldGroup}
-				/>
-			))} */

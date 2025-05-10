@@ -1,4 +1,5 @@
 export * from './add-project';
+export * from './authorizate-async';
 export * from './close-modal';
 export * from './create-track-async';
 export * from './create-track';
@@ -10,6 +11,7 @@ export * from './load-project-async';
 export * from './load-projects-async';
 export * from './logout';
 export * from './open-modal';
+export * from './register-async';
 export * from './reset-project-data';
 export * from './reset-projects-data';
 export * from './save-project-async';

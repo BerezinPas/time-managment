@@ -71,7 +71,7 @@ export const UserPage = () => {
 							/>
 						)}
 					/>
-					<button type="submit">Save</button>
+					<Button type="submit">Save</Button>
 				</div>
 			</form>
 			<Button variant="danger" onClick={onLogout}>

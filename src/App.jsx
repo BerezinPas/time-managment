@@ -33,7 +33,7 @@ function App() {
 		Promise.all([
 			dispatch(loadProjectsAsync(currentUserData.id)),
 			dispatch(loadOptionsAsync(currentUserData.id)),
-		]).then(() => {
+		]).finally(() => {
 			setIsLoading(false);
 		});
 	}, [dispatch]);

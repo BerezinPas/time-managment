@@ -13,52 +13,22 @@
       "id": 2
     },
     {
-      "login": "qweq",
+      "login": "qweqwe",
       "password": "qweqwe",
-      "registred_at": "2025-04-02 09:36",
+      "registred_at": "2025-05-09 02:41",
       "id": 3
     },
     {
-      "login": "qwew",
+      "login": "qwe1",
       "password": "qweqwe",
-      "registred_at": "2025-04-02 09:38",
+      "registred_at": "2025-05-10T02:36:47.547Z",
       "id": 4
     },
     {
-      "login": "qwes",
+      "login": "qwe12",
       "password": "qweqwe",
-      "registred_at": "2025-04-02 09:38",
+      "registred_at": "2025-05-10T02:38:47.052Z",
       "id": 5
-    },
-    {
-      "login": "123",
-      "password": "qweqwe",
-      "registred_at": "2025-05-07 05:44",
-      "id": 6
-    },
-    {
-      "login": "asd",
-      "password": "asdasd",
-      "registred_at": "2025-05-07 05:48",
-      "id": 7
-    },
-    {
-      "login": "qws",
-      "password": "qweqwe",
-      "registred_at": "2025-05-07 06:21",
-      "id": 8
-    },
-    {
-      "login": "ssss",
-      "password": "qweqwe",
-      "registred_at": "2025-05-07 06:22",
-      "id": 9
-    },
-    {
-      "login": "qww2",
-      "password": "qweqwe",
-      "registred_at": "2025-05-07 06:29",
-      "id": 10
     }
   ],
   "projects": [
@@ -84,22 +54,45 @@
     },
     {
       "user_id": 2,
-      "name": "ssss",
+      "name": "ssss2132",
       "id": 7
+    },
+    {
+      "user_id": 1,
+      "name": "123",
+      "id": 8
     }
   ],
   "options": [
     {
       "id": 1,
-      "userId": 1,
-      "imageURL": "",
-      "defaultStartTimeInAnalytics": "WEEK"
+      "user_id": 1,
+      "image_url": "",
+      "default_start_time_in_analytics": "WEEK"
     },
     {
-      "userId": 10,
-      "imageURL": "",
-      "defaultStartTimeInAnalytics": "max",
+      "user_id": 10,
+      "image_url": "",
+      "default_start_time_in_analytics": "MAX",
       "id": 2
+    },
+    {
+      "user_id": 3,
+      "image_url": "",
+      "default_start_time_in_analytics": "MAX",
+      "id": 3
+    },
+    {
+      "user_id": 4,
+      "image_url": "",
+      "default_start_time_in_analytics": "MAX",
+      "id": 4
+    },
+    {
+      "user_id": 5,
+      "image_url": "",
+      "default_start_time_in_analytics": "MAX",
+      "id": 5
     }
   ],
   "tracks": [
@@ -401,7 +394,7 @@
       "project_id": 7,
       "start_time": "2025-05-07T18:03:00.000Z",
       "end_time": "2025-05-08T05:03:00.000Z",
-      "description": "ssssss",
+      "description": "ssssss222",
       "id": 79
     },
     {
@@ -424,16 +417,37 @@
       "end_time": "2025-05-09T01:37:00.000Z",
       "description": "",
       "id": 82
+    },
+    {
+      "project_id": 8,
+      "start_time": "2025-05-08T18:43:00.000Z",
+      "end_time": "2025-05-09T03:43:00.000Z",
+      "description": "swssssssss",
+      "id": 83
+    },
+    {
+      "project_id": 7,
+      "start_time": "2025-05-09T19:58:00.000Z",
+      "end_time": "2025-05-10T02:58:00.000Z",
+      "description": "123123",
+      "id": 84
+    },
+    {
+      "project_id": 7,
+      "start_time": "2025-05-09T18:58:00.000Z",
+      "end_time": "2025-05-10T02:58:00.000Z",
+      "description": "123123",
+      "id": 85
     }
   ],
   "sessions": [
     {
-      "hash": "0.74528930936773885029822395154042169451713562011719",
+      "hash": "0.99030589864877804906484470848226919770240783691406",
       "user": {
-        "id": 1,
-        "login": "admin",
+        "id": 2,
+        "login": "qwe",
         "password": "qweqwe",
-        "registred_at": "22222"
+        "registred_at": "2025-04-02 08:23"
       },
       "id": 1
     }

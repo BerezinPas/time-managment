@@ -4,6 +4,7 @@
 	top: 0;
 	width: 100%;
 	background-color: #fff;
+	color: $mainColor;
 }
 .container {
 	display: flex;
@@ -19,6 +20,9 @@
 .link {
 	padding: 10px;
 	&:hover {
+		opacity: 0.6;
+	}
+	&.active {
 		text-decoration: underline;
 	}
 }
@@ -27,6 +31,14 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+
+	&:hover div {
+		opacity: 0.6;
+	}
+	color: $mainColor;
+	&.active {
+		text-decoration: underline;
+	}
 }
 .avatar {
 	border-radius: 50%;

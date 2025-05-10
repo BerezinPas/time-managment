@@ -1,7 +1,7 @@
 import { getProjects, getTracks } from '../api';
 import {
 	attachDurationToTrack,
-	attachSummuryDurationToProjects,
+	attachSummuryDurationToProject,
 	attachTracksToProjects,
 } from '../utils';
 
@@ -15,15 +15,17 @@ export const fetchProjects = async (userId) => {
 
 	const tracksWithDuration = allTracks.map(attachDurationToTrack);
 
-	let res = attachTracksToProjects(projects, tracksWithDuration);
-	// console.log(res);
+	const projectWithTracks = attachTracksToProjects(
+		projects,
+		tracksWithDuration,
+	);
 
-	res = attachSummuryDurationToProjects(res);
-
-	// console.log(res);
+	const projectWithTracksAndSumDuration = projectWithTracks.map(
+		attachSummuryDurationToProject,
+	);
 
 	return {
 		error: null,
-		res,
+		res: projectWithTracksAndSumDuration,
 	};
 };

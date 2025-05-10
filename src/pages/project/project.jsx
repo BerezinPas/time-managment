@@ -54,8 +54,9 @@ export const Project = () => {
 
 	const onDelete = (id) => {
 		const tracksId = tracks.map((track) => track.id);
-		return dispatch(deleteProjectAsync(id, tracksId)).then(() => {
+		return dispatch(deleteProjectAsync(id, tracksId)).then((res) => {
 			navigate('/projects');
+			return res;
 		});
 	};
 
@@ -80,7 +81,7 @@ export const Project = () => {
 									onConfirm: () => {
 										setIsloading(true);
 										dispatch(CLOSE_MODAL);
-										onDelete(params.id).finaly(() => {
+										onDelete(params.id).finally(() => {
 											setIsloading(false);
 										});
 									},

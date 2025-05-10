@@ -1,4 +1,5 @@
 import { URL } from '../constants';
+import { transformOptions } from '../transformers';
 
 export const setOptions = ({
 	id,
@@ -16,4 +17,6 @@ export const setOptions = ({
 			defaultStartTimeInAnalytics,
 			UserId,
 		}),
-	}).then((options) => options.json());
+	})
+		.then((options) => options.json())
+		.then((options) => transformOptions(options));

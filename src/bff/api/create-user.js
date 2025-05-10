@@ -1,6 +1,5 @@
 import { URL } from '../constants';
 import { transformUser } from '../transformers';
-import { createDate } from '../utils';
 
 export const createUser = (login, password) =>
 	fetch(`${URL}/users`, {
@@ -9,7 +8,7 @@ export const createUser = (login, password) =>
 		body: JSON.stringify({
 			login,
 			password,
-			registred_at: createDate(),
+			registred_at: new Date().toISOString(),
 		}),
 	})
 		.then((user) => user.json())

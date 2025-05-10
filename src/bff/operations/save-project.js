@@ -10,6 +10,8 @@ export const saveProject = async ({ id, name, userId, tracks }) => {
 		tracksData = await saveTracks(tracks);
 	} else {
 		project = await createProject(name, userId);
+		project = { ...project, tracks: [] };
+
 		tracksData = await saveTracks({
 			...tracks,
 			create: tracks.create.map((track) => ({
@@ -18,6 +20,8 @@ export const saveProject = async ({ id, name, userId, tracks }) => {
 			})),
 		});
 	}
+
+	console.log('PROJECT SAVE PROJCEC', project);
 
 	return {
 		error: null,

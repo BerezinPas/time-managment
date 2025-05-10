@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Button, Input } from '../../components';
+import { Button, Input, Loader } from '../../components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -10,20 +10,14 @@ import {
 import styles from './register.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-	loadOptionsAsync,
-	loadProjectsAsync,
-	RESET_PROJECTS_DATA,
-	setOptions,
-	setUser,
-} from '../../actions';
+import { registerAsync } from '../../actions';
 import { Link, useNavigate } from 'react-router-dom';
-import { server } from '../../bff';
 
 export const Register = () => {
 	const dispatch = useDispatch();
 	const [serverError, setServerError] = useState(null);
 	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const registerFormSchema = yup.object().shape({
 		login: loginSchema,
@@ -51,49 +45,51 @@ export const Register = () => {
 
 	const errorMessage = serverError || formError;
 
-	// console.log(errors);
 	const onSubmit = async ({ login, password }) => {
-		const { error, res } = await server.register(login, password);
-		if (error) {
-			setServerError(error);
-			return;
-		}
-		dispatch(setUser(res.user));
-		dispatch(RESET_PROJECTS_DATA);
-		dispatch(setOptions(res.options));
-		sessionStorage.setItem('userData', JSON.stringify(res.user));
-		navigate('/');
+		setIsLoading(true);
+		dispatch(registerAsync(login, password))
+			.then(({ error, res }) => {
+				if (error) {
+					setServerError(error);
+					return;
+				}
+				navigate('/');
+			})
+			.finally(() => setIsLoading(false));
 	};
 
 	return (
 		<div className="container container__auth">
 			<h2 className={`${styles.title} h2`}>Регистрация</h2>
-
-			<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-				<Input
-					isValid={!errors?.login}
-					type="text"
-					placeholder={'логин'}
-					{...register('login')}
-				/>
-				<Input
-					isValid={!errors?.password}
-					type="password"
-					placeholder={'пароль'}
-					{...register('password')}
-				/>
-				<Input
-					isValid={!errors?.passwordCheck}
-					type="password"
-					placeholder={'повторите пароль'}
-					{...register('passwordCheck')}
-				/>
-				<Button type="submit">Зарегистрироваться</Button>
-				{errorMessage && <div className="error">{errorMessage}</div>}
-				<div>
-					Есть аккаунт? <Link to="/authorization">Авторизуйтесь</Link>
-				</div>
-			</form>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+					<Input
+						isValid={!errors?.login}
+						type="text"
+						placeholder={'логин'}
+						{...register('login')}
+					/>
+					<Input
+						isValid={!errors?.password}
+						type="password"
+						placeholder={'пароль'}
+						{...register('password')}
+					/>
+					<Input
+						isValid={!errors?.passwordCheck}
+						type="password"
+						placeholder={'повторите пароль'}
+						{...register('passwordCheck')}
+					/>
+					<Button type="submit">Зарегистрироваться</Button>
+					{errorMessage && <div className="error">{errorMessage}</div>}
+					<div>
+						Есть аккаунт? <Link to="/authorization">Авторизуйтесь</Link>
+					</div>
+				</form>
+			)}
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Button, Input } from '../../../../components';
+import { Button, Input, Loader } from '../../../../components';
 import * as yup from 'yup';
 import { dataTrackSchema, nameProjectShema } from '../../../../schemes';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -25,6 +25,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 
 	const [newTracks, setNewTracks] = useState(project.tracks);
 	const [deletedTracksId, setDeleteTracksId] = useState([]);
+	const [isLoading, setIsloading] = useState(false);
 
 	const projectFormSchema = yup.object().shape({
 		name: nameProjectShema,
@@ -59,7 +60,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 		const createdTracks = tracksData.filter(({ id }) =>
 			id.includes('generated'),
 		);
-
+		setIsloading(true);
 		dispatch(
 			saveProjectAsync({
 				id: project.id,
@@ -77,15 +78,21 @@ export const ProjectForm = ({ project, isCreating }) => {
 					delete: deletedTracksId || [],
 				},
 			}),
-		).then(({ project }) => {
-			navigate(`/project/${project.id}`);
-		});
+		)
+			.then(({ project }) => {
+				navigate(`/project/${project.id}`);
+			})
+			.finally(() => {
+				setIsloading(false);
+			});
 	};
 
 	const errorMessage = Object.values(errors)[0]?.message;
 
 	const content = (
 		<>
+			{isCreating ? <h2 className="h2">Новый проект</h2> : ''}
+
 			<div className=" ">
 				<Input placeholder="Название проекта" {...register(`name`)} />
 			</div>
@@ -149,10 +156,5 @@ export const ProjectForm = ({ project, isCreating }) => {
 		</>
 	);
 
-	return (
-		<div className="container">
-			{isCreating ? <h2 className="h2">Новый проект</h2> : ''}
-			{content}
-		</div>
-	);
+	return <div className="container">{isLoading ? <Loader /> : content}</div>;
 };

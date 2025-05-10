@@ -13,7 +13,7 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 			return [...state, payload];
 
 		case ACTION_TYPE.DELETE_PROJECT:
-			return state.filter(({ id }) => id !== Number(payload));
+			return state.filter(({ id }) => id !== Number());
 
 		case ACTION_TYPE.SET_PROJECT:
 			console.log('payload', payload);
@@ -31,6 +31,8 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 			);
 
 		case ACTION_TYPE.CREATE_TRACK:
+			console.log('CREATE_TRACK', state);
+
 			return state.map((project) =>
 				project.id !== payload.projectId
 					? project

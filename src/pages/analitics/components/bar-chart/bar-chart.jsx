@@ -1,105 +1,18 @@
 import { useState } from 'react';
-import {
-	DATE_STEP,
-	ONE_DAY_IN_MSECS,
-	ONE_HOUR_IN_MSECS,
-	ONE_WEEK_IN_MSECS,
-} from '../../../../constants';
-import {
-	formateHHMMSSToTimeStamp,
-	formateTimeStampToHHMMSS,
-} from '../../../../utils';
+import { ONE_HOUR_IN_MSECS } from '../../../../constants';
+import { formateHHMMSSToTimeStamp } from '../../../../utils';
 import styles from './bar-chart.module.scss';
 import { Colum } from './components';
+import { calculateDurationStats } from './utils';
 
 export const BarChart = ({ tracks, dateGap, timeZone }) => {
 	const [showColsDate, setShowColsDate] = useState(true);
-	const days = Math.floor((dateGap.end - dateGap.start) / ONE_DAY_IN_MSECS) + 1;
 
-	let stepInDays = 'days';
-	let durationCols;
-	let dateStep;
-	if (days < 32) {
-		stepInDays = 1;
-		dateStep = DATE_STEP.DAY;
-		durationCols = tracks.reduce(
-			(acc, curTrack) => {
-				const index = Math.floor(
-					(Date.parse(curTrack.startTime) -
-						dateGap.start -
-						timeZone * ONE_HOUR_IN_MSECS) /
-						ONE_DAY_IN_MSECS,
-				);
-				if (acc[index]) {
-					acc[index] = formateTimeStampToHHMMSS(
-						formateHHMMSSToTimeStamp(acc[index]) +
-							formateHHMMSSToTimeStamp(curTrack.duration),
-					);
-				} else {
-					acc[index] = curTrack.duration;
-				}
-				return acc;
-			},
-			new Array(days / stepInDays).fill('0:00:00'),
-		);
-	} else if (days < 150) {
-		stepInDays = 7;
-		dateStep = DATE_STEP.WEEK;
-
-		durationCols = tracks.reduce(
-			(acc, curTrack) => {
-				const index = Math.floor(
-					(Date.parse(curTrack.startTime) -
-						dateGap.start -
-						timeZone * ONE_HOUR_IN_MSECS) /
-						ONE_WEEK_IN_MSECS,
-				);
-				if (acc[index]) {
-					acc[index] = formateTimeStampToHHMMSS(
-						formateHHMMSSToTimeStamp(acc[index]) +
-							formateHHMMSSToTimeStamp(curTrack.duration),
-					);
-				} else {
-					acc[index] = curTrack.duration;
-				}
-				return acc;
-			},
-			new Array(Math.ceil(days / stepInDays)).fill('0:00:00'),
-		);
-		// } else if (days < 367) {
-	} else {
-		dateStep = DATE_STEP.MOUNTH;
-
-		const startDate = new Date(dateGap.start - timeZone * ONE_HOUR_IN_MSECS);
-		const endDate = new Date(dateGap.end - timeZone * ONE_HOUR_IN_MSECS);
-		const startMounth = startDate.getMonth();
-		const startYear = startDate.getFullYear();
-		const endMounth = endDate.getMonth();
-		const endYear = endDate.getFullYear();
-		const mouthsQuantity = endMounth - startMounth + (endYear - startYear) * 12;
-
-		durationCols = tracks.reduce((acc, curTrack) => {
-			const trackDate = new Date(
-				Date.parse(curTrack.startTime) - timeZone * ONE_HOUR_IN_MSECS,
-			);
-
-			const index =
-				trackDate.getMonth() -
-				startMounth +
-				(trackDate.getFullYear() - startYear) * 12;
-
-			if (acc[index]) {
-				acc[index] = formateTimeStampToHHMMSS(
-					formateHHMMSSToTimeStamp(acc[index]) +
-						formateHHMMSSToTimeStamp(curTrack.duration),
-				);
-			} else {
-				acc[index] = curTrack.duration;
-			}
-			return acc;
-		}, new Array(mouthsQuantity).fill('0:00:00'));
-	}
-	// console.log('groupedTracks', durationCols);
+	const { dateStep, durationCols } = calculateDurationStats(
+		dateGap,
+		tracks,
+		timeZone,
+	);
 
 	const total = durationCols.reduce((maxDurationCol, curDurationCol) => {
 		return formateHHMMSSToTimeStamp(curDurationCol) > maxDurationCol
@@ -112,7 +25,6 @@ export const BarChart = ({ tracks, dateGap, timeZone }) => {
 	durationStep = durationStep > 0 ? durationStep : 1;
 
 	let classes = `${styles.barChart} ${showColsDate ? '' : 'hideColsDate'}`;
-
 	classes += ` ${durationCols.length > 15 ? 'showOddCols' : ''}`;
 
 	return (

@@ -1,23 +1,11 @@
 import styles from './donut-chart.module.scss';
 import { Segment } from './components';
+import { DIAGRAM_COLORS } from './diagrams-colors';
 
 export const DonutChart = ({ segments = [], title }) => {
 	if (segments.length === 0) {
 		return;
 	}
-	const DIAGRAM_COLORS = [
-		'#3f50ce',
-		'#e15759',
-		'#7a76b7',
-		'#ca250f',
-		'#f28e2c',
-		'#ffea29',
-		'#0b3418',
-		'#88a19e',
-		'#76b6fa',
-		'#bd3fce',
-		'#3fcec2',
-	];
 
 	let totalAngle = 0;
 	const enhancedSegments = [...segments]

@@ -20,36 +20,6 @@
 	display: flex;
 }
 
-.arrows {
-	position: relative;
-	height: 20px;
-	margin-left: 8px;
-	&.inc .arrowUp {
-		border-bottom-color: $mainColor;
-	}
-	&.dec .arrowDown {
-		border-top-color: $mainColor;
-	}
-}
-.arrow {
-	width: 8px;
-	// height: 4px;
-	height: 10px;
-	position: absolute;
-	// background-color: #a02222;
-	border: 5px solid transparent;
-	// transform: rotate(180deg);
-	&Up {
-		top: 0;
-		border-bottom-color: #5d33c739;
-	}
-
-	&Down {
-		bottom: -5px;
-		border-top-color: #5d33c739;
-	}
-}
-
 .analyticsRow {
 	& .colName,
 	& .colDuration,

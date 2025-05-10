@@ -2,17 +2,17 @@ export const getToolTipCoors = (percentageOfTotal, angle) => {
 	const angleEnd = (percentageOfTotal * 360) / 100 + angle;
 
 	if (angleEnd < 180) {
-		const diff =
+		const diffHeight =
 			Math.cos((((angleEnd - angle) / 2 + angle) * Math.PI) / 180) * 50;
 
-		const top = 50 - diff;
+		const top = 50 - diffHeight;
 
 		return { top, right: 0 };
 	} else {
-		const diff =
-			Math.cos((((angleEnd - angle) / 2 + angle - 180) * Math.PI) / 180) * 50;
+		const diffHeight =
+			-Math.cos((((angleEnd - angle) / 2 + angle - 180) * Math.PI) / 180) * 50;
 
-		const top = 50 + diff;
+		const top = 50 - diffHeight;
 		if (angle < 270 && angleEnd > 270) {
 			return { top, right: 50 };
 		}
