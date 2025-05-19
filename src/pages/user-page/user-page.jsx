@@ -11,7 +11,7 @@ export const UserPage = () => {
 	const [value, setValue] = useState('');
 	const userOptions = useSelector(selectOptions);
 	const userHash = useSelector(selectUserSessions);
-	console.log('userOtions', userOptions);
+	console.log('UserPageuserOtions', userOptions);
 
 	// const [selectedValue, setSelectedValue] = useState(options[0]);
 

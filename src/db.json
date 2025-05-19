@@ -68,7 +68,8 @@
       "id": 1,
       "user_id": 1,
       "image_url": "",
-      "default_start_time_in_analytics": "WEEK"
+      "default_start_time_in_analytics": "MOUNTH",
+      "imageURL": ""
     },
     {
       "user_id": 10,
@@ -445,18 +446,35 @@
       "end_time": "2025-05-10T09:23:00.000Z",
       "description": "",
       "id": 101
+    },
+    {
+      "project_id": 5,
+      "start_time": "2025-05-10T08:28:58.023Z",
+      "end_time": "2025-05-10T08:54:00.408Z",
+      "description": "",
+      "id": 102
     }
   ],
   "sessions": [
     {
-      "hash": "0.99030589864877804906484470848226919770240783691406",
+      "hash": "0.36985164894235378341136311064474284648895263671875",
       "user": {
-        "id": 2,
-        "login": "qwe",
+        "id": 1,
+        "login": "admin",
         "password": "qweqwe",
-        "registred_at": "2025-04-02 08:23"
+        "registred_at": "22222"
       },
       "id": 1
+    },
+    {
+      "hash": "0.48653774117660675280205850867787376046180725097656",
+      "user": {
+        "id": 1,
+        "login": "admin",
+        "password": "qweqwe",
+        "registred_at": "22222"
+      },
+      "id": 2
     }
   ]
 }

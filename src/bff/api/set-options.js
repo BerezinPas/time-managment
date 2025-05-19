@@ -6,16 +6,14 @@ export const setOptions = ({
 	imageURL,
 	userId,
 	defaultStartTimeInAnalytics,
-	UserId,
 }) =>
 	fetch(`${URL}/options/${id}`, {
 		method: 'PATCH',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
 		body: JSON.stringify({
-			imageURL,
-			userId,
-			defaultStartTimeInAnalytics,
-			UserId,
+			image_url: imageURL,
+			user_id: userId,
+			default_start_time_in_analytics: defaultStartTimeInAnalytics,
 		}),
 	})
 		.then((options) => options.json())
