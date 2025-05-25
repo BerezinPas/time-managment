@@ -1,0 +1,10 @@
+export const OPTIONS_START_TIME_DEFAULT_VALUE = {
+  MAX: "MAX",
+  WEEK: "WEEK",
+  MOUNTH: "MOUNTH",
+  YEAR: "YEAR",
+};
+
+export const OPTIONS_START_TIME = Object.values(
+  OPTIONS_START_TIME_DEFAULT_VALUE
+);
