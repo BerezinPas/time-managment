@@ -1,4 +1,4 @@
-import { server } from '../bff';
+import { request } from '../utils';
 import { addProject } from './add-project';
 import { createTrack } from './create-track';
 import { deleteTrack } from './delete-track';
@@ -6,20 +6,34 @@ import { setProject } from './set-project';
 import { updateTrack } from './update-track';
 
 export const saveProjectAsync = (projectData) => (dispatch) => {
-	return server.saveProject(projectData).then(({ res, error }) => {
+	const saveRequest =
+		projectData.id === null
+			? request('/projects', 'POST', projectData)
+			: request(`/projects/${projectData.id}`, 'PATCH', projectData);
+	return saveRequest.then(({ res, error }) => {
+		if (error) {
+			console.log('error', error);
+			return { error };
+		}
 		if (projectData.id === null) {
 			dispatch(addProject(res.project));
 		}
 
-		console.log('saveProjectAsync', res.tracksData);
-		console.log('saveProjectAsync', res.project);
+		console.log('res', res);
+		// console.log('saveProjectAsync', res.project);
 
-		res.tracksData.res.created.map((el) => dispatch(createTrack(el)));
-		res.tracksData.res.updated.map((el) => dispatch(updateTrack(el)));
-		res.tracksData.res.deleted.map((el) => dispatch(deleteTrack(el)));
+		res.tracksData.created.map((el) => dispatch(createTrack(el)));
+		res.tracksData.updated.map((el) => dispatch(updateTrack(el)));
+		res.tracksData.deleted.map((el) => dispatch(deleteTrack(el)));
 
-		dispatch(setProject(res.project));
+		dispatch(
+			setProject({
+				id: res.project.id,
+				name: res.project.name,
+				sumDuration: res.project.sumDuration,
+			}),
+		);
 
-		return res;
+		return { res: res.project, error };
 	});
 };

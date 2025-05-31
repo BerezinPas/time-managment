@@ -5,15 +5,13 @@ export const calculateDurationColsOnFlatGap = (
 	tracks,
 	days,
 	startDate,
-	timeZone,
+
 	stepInDays = 1,
 ) => {
 	return tracks.reduce(
 		(acc, curTrack) => {
 			const index = Math.floor(
-				(Date.parse(curTrack.startTime) -
-					startDate -
-					timeZone * ONE_HOUR_IN_MSECS) /
+				(Date.parse(curTrack.startTime) - startDate) /
 					(ONE_DAY_IN_MSECS * stepInDays),
 			);
 			return updateDurationCols(acc, index, curTrack.duration);

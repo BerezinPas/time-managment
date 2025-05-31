@@ -59,8 +59,7 @@ export const MainPage = () => {
 		const endTime = pointPause ? pointPause : Date.now();
 
 		dispatch(
-			createTrackAsync({
-				projectId: selectedProject.value,
+			createTrackAsync(selectedProject.value, {
 				startTime: new Date(startTime).toISOString(),
 				endTime: new Date(endTime).toISOString(),
 				description,

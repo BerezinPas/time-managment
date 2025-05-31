@@ -5,14 +5,10 @@ import styles from './bar-chart.module.scss';
 import { Colum } from './components';
 import { calculateDurationStats } from './utils';
 
-export const BarChart = ({ tracks, dateGap, timeZone }) => {
+export const BarChart = ({ tracks, dateGap }) => {
 	const [showColsDate, setShowColsDate] = useState(true);
 
-	const { dateStep, durationCols } = calculateDurationStats(
-		dateGap,
-		tracks,
-		timeZone,
-	);
+	const { dateStep, durationCols } = calculateDurationStats(dateGap, tracks);
 
 	const total = durationCols.reduce((maxDurationCol, curDurationCol) => {
 		return formateHHMMSSToTimeStamp(curDurationCol) > maxDurationCol

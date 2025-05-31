@@ -1,8 +1,8 @@
-import { server } from '../bff';
+import { request } from '../utils';
 import { setProjects } from './set-projects';
 
-export const loadProjectsAsync = (userId) => (dispatch) => {
-	return server.fetchProjects(userId).then(({ error, res }) => {
+export const loadProjectsAsync = () => (dispatch) => {
+	return request('/projects').then(({ error, res }) => {
 		dispatch(setProjects(res));
 	});
 };

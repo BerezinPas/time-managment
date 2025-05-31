@@ -27,12 +27,12 @@ function App() {
 		dispatch(
 			setUser({
 				...currentUserData,
-				id: Number(currentUserData.id),
+				id: currentUserData.id,
 			}),
 		);
 		Promise.all([
 			dispatch(loadProjectsAsync(currentUserData.id)),
-			dispatch(loadOptionsAsync(currentUserData.id)),
+			// dispatch(loadOptionsAsync(currentUserData.id)),
 		]).finally(() => {
 			setIsLoading(false);
 		});

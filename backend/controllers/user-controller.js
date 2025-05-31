@@ -43,9 +43,10 @@ export const updateUser = async (userId, userData) => {
   // if (!OPTIONS_START_TIME.includes(userData.User.defaultStartTimeInAnalytics)) {
   //   throw new Error("field defaultStartTimeInAnalytics invalid");
   // }
-  return await User.findByIdAndUpdate(userId, userData, {
-    returnDocumnet: "after",
+  const user = await User.findByIdAndUpdate(userId, userData, {
+    returnDocument: "after",
   });
+  return user;
 };
 
 // TODO mapperi

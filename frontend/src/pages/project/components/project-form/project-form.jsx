@@ -17,6 +17,7 @@ import {
 	formateTrack,
 	generateId,
 } from './utils';
+import { dateToYYYYMMDD } from '../../../../utils';
 
 export const ProjectForm = ({ project, isCreating }) => {
 	const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 	const [deletedTracksId, setDeleteTracksId] = useState([]);
 	const [isLoading, setIsloading] = useState(false);
 
+	const [serverError, setServerError] = useState('');
 	const projectFormSchema = yup.object().shape({
 		name: nameProjectShema,
 
@@ -64,7 +66,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 		dispatch(
 			saveProjectAsync({
 				id: project.id,
-				userId,
+				// userId,
 				name: formData.name,
 				tracks: {
 					create: createdTracks.map(formateTrack) || [],
@@ -72,22 +74,27 @@ export const ProjectForm = ({ project, isCreating }) => {
 						updatedTracks.map((el) =>
 							formateTrack(
 								el,
-								tracksData.find(({ id }) => Number(el.id) === Number(id)),
+								tracksData.find(({ id }) => el.id === id),
 							),
 						) || [],
 					delete: deletedTracksId || [],
 				},
 			}),
 		)
-			.then(({ project }) => {
-				navigate(`/project/${project.id}`);
+			.then(({ res, error }) => {
+				if (error) {
+					console.log(error);
+					setServerError(error);
+					return;
+				}
+				navigate(`/project/${res.id}`);
 			})
 			.finally(() => {
 				setIsloading(false);
 			});
 	};
 
-	const errorMessage = Object.values(errors)[0]?.message;
+	const errorMessage = serverError || Object.values(errors)[0]?.message;
 	const [createdTrackId, setCreatedTrackId] = useState(null);
 
 	useEffect(() => {
@@ -109,7 +116,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 			...prev,
 		]);
 
-		setValue(`startDay-${newId}`, new Date().toISOString().slice(0, 10));
+		setValue(`startDay-${newId}`, dateToYYYYMMDD(new Date()));
 		setValue(
 			`startTime-${newId}`,
 			new Date().toLocaleTimeString().slice(0, -3),

@@ -12,14 +12,14 @@ import { mapProject } from "../helpers/map-project.js";
 const router = express.Router({ mergeParams: true });
 
 router.post("/", auth, async (req, res) => {
-  const project = await addProject(
+  const { project, tracksData } = await addProject(
     {
       name: req.body.name,
       user: req.user.id,
     },
-    req.body.tracks
+    req.body.tracks.create
   );
-  res.send({ res: mapProject(project) });
+  res.send({ res: { project: mapProject(project), tracksData }, error: null });
 });
 
 router.delete("/:id", auth, async (req, res) => {
@@ -52,13 +52,17 @@ router.get("/:id", auth, async (req, res) => {
 
 router.patch("/:id", auth, async (req, res) => {
   try {
-    const project = await updateProject(
+    const { project, tracksCUD } = await updateProject(
       req.user.id,
       req.params.id,
       { name: req.body.name },
       req.body.tracks
     );
-    res.send({ res: mapProject(project), error: null });
+
+    res.send({
+      res: { project: mapProject(project), tracksData: tracksCUD },
+      error: null,
+    });
   } catch (error) {
     res.send({ res: null, error: error.message });
   }

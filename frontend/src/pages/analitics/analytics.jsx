@@ -1,6 +1,10 @@
 import { useSelector } from 'react-redux';
-import { selectOptions, selectProjects } from '../../selectors';
-import { formateHHMMSSToTimeStamp } from '../../utils';
+import {
+	selectOptions,
+	selectProjects,
+	selectUserStartTime,
+} from '../../selectors';
+import { formateHHMMSSToTimeStamp, request } from '../../utils';
 import { useEffect, useState } from 'react';
 import {
 	AnalyticsControlPanel,
@@ -15,19 +19,24 @@ import {
 	getSortFunc,
 	attachDurationToProject,
 } from './utils';
-import { ONE_DAY_IN_MSECS } from '../../constants';
+import {
+	ONE_DAY_IN_MSECS,
+	OPTIONS_START_TIME_DEFAULT_VALUE,
+} from '../../constants';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './analytics.module.scss';
 
+// TODO рефакторинг все кода
+// dateGap end сделать время 23:59:99999
+//  refactoring backenda
+
+// починить бек
 export const Analytics = () => {
 	const { id: projectId } = useParams();
 	const projects = useSelector(selectProjects);
 	const navigate = useNavigate();
 
-	if (
-		projectId &&
-		!projects.some((project) => Number(projectId) === project.id)
-	) {
+	if (projectId && !projects.some((project) => projectId === project.id)) {
 		navigate('/analytics');
 	}
 
@@ -35,24 +44,27 @@ export const Analytics = () => {
 		field: 'name',
 		how: 'inc',
 	});
+	const defaultStartTimeInAnalytics = useSelector(selectUserStartTime);
+
 	const sortFunc = getSortFunc(sortOption);
 
-	const timeZone = new Date().getTimezoneOffset() / 60;
+	// const timeZone = new Date().getTimezoneOffset() / 60;
 
 	const [selectedProjectsId, setSelectedProjectsId] = useState([]);
 
-	const userOptions = useSelector(selectOptions);
 	const start = initDateGapStartTime(
 		projects,
 		projectId,
-		userOptions.defaultStartTimeInAnalytics,
+		defaultStartTimeInAnalytics,
 	);
+	console.log('start', new Date(start));
+	console.log('start', start);
 
 	const initialOptionsFilter = {
 		shouldGroup: projectId === undefined,
 		dateGap: {
 			start: start,
-			end: new Date().setHours(0, 0, 0, 0),
+			end: new Date().setHours(23, 59, 59, 99),
 		},
 	};
 	const [shouldGroup, setShouldGroup] = useState(
@@ -60,12 +72,13 @@ export const Analytics = () => {
 	);
 
 	const [dateGap, setDateGap] = useState({
-		start: new Date().setHours(0, 0, 0, 0),
+		start: new Date(),
 		end: initialOptionsFilter.dateGap.end,
 	});
 
+	const [tracks, setTracks] = useState([]);
 	useEffect(() => {
-		setSelectedProjectsId(projectId ? [Number(projectId)] : []);
+		setSelectedProjectsId(projectId ? [projectId] : []);
 		setDateGap({
 			...dateGap,
 			start: start,
@@ -73,22 +86,50 @@ export const Analytics = () => {
 		});
 	}, [projects, projectId]);
 
+	useEffect(() => {
+		const query = selectedProjectsId.length
+			? selectedProjectsId.map((id) => `projectIds=${id}`).join('&')
+			: projects.map(({ id }) => `projectIds=${id}`).join('&');
+
+		// DateGap type number
+		request(
+			`/tracks?${query}&startTime=${dateGap.start}&endTime=${dateGap.end}`,
+		).then(({ res, error }) => {
+			console.log('error', error);
+
+			console.log(res);
+			if (res) {
+				setTracks(res);
+			}
+		});
+	}, [selectedProjectsId, dateGap]);
+
+	console.log('DATE');
+	console.log(new Date(dateGap.start));
+	console.log(new Date(dateGap.end));
 	const selectedProjects = selectedProjectsId.length
 		? projects.filter((project) => selectedProjectsId.includes(project.id))
 		: projects;
 
-	const filtredProjects = selectedProjects
-		.map((project) => {
-			// filtred tracks on date
-			const tracks = project.tracks.filter((track) => {
-				return (
-					Date.parse(track.startTime) >= dateGap.start &&
-					Date.parse(track.startTime) <= dateGap.end + ONE_DAY_IN_MSECS - 1
-				);
-			});
+	const projectsWithTracks = selectedProjects.map((project) => ({
+		...project,
+		tracks: tracks.filter((track) => track.projectId === project.id),
+	}));
+	console.log('projectsWithTracks', projectsWithTracks);
 
-			return { ...project, tracks };
-		})
+	// const filtredProjects = selectedProjects
+	// 	.map((project) => {
+	// 		// filtred tracks on date
+	// 		const tracks = project.tracks.filter((track) => {
+	// 			return (
+	// 				Date.parse(track.startTime) >= dateGap.start &&
+	// 				Date.parse(track.startTime) <= dateGap.end + ONE_DAY_IN_MSECS - 1
+	// 			);
+	// 		});
+
+	// 		return { ...project, tracks };
+	// 	})
+	const filtredProjects = projectsWithTracks
 		// filtred empty PROJECTS
 		.filter((project) => project.tracks.length !== 0)
 		// add field 'duration' to project
@@ -121,11 +162,13 @@ export const Analytics = () => {
 			}));
 	}
 
-	const enhancedTracks = filtredProjects
-		.reduce((tracks, curProject) => [...tracks, ...curProject.tracks], [])
-		.map((project) => attachPercentOfTotal(project, 'duration', totalDuration))
-		.map(attachDonutToolTipData)
-		.sort(sortFunc());
+	const enhancedTracks =
+		//  tracks
+		filtredProjects
+			.reduce((tracks, curProject) => [...tracks, ...curProject.tracks], [])
+			.map((track) => attachPercentOfTotal(track, 'duration', totalDuration))
+			.map(attachDonutToolTipData)
+			.sort(sortFunc());
 
 	const projectsIsEmpty = !projects.some(
 		(project) => project.tracks.length !== 0,
@@ -141,11 +184,7 @@ export const Analytics = () => {
 				</div>
 			) : (
 				<>
-					<BarChart
-						tracks={enhancedTracks}
-						dateGap={dateGap}
-						timeZone={timeZone}
-					/>
+					<BarChart tracks={enhancedTracks} dateGap={dateGap} />
 					<div className={styles.wrapper}>
 						<div className={styles.table}>
 							<AnalyticsControlPanel
@@ -158,7 +197,6 @@ export const Analytics = () => {
 								setSelectedProjectsId={setSelectedProjectsId}
 								setDateGap={setDateGap}
 								dateGap={dateGap}
-								timeZone={timeZone}
 								initialOptionsFilter={initialOptionsFilter}
 							/>
 							<AnalyticsTable

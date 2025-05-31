@@ -2,17 +2,30 @@ import { Project, Track } from "../models/index.js";
 import { addTracks, deleteTracks, upadateTracks } from "./track-controller.js";
 
 // add
-export const addProject = async (projectData, tracks) => {
+export const addProject = async (projectData, tracks = []) => {
   const project = await Project.create(projectData);
-  // console.log(project.id);
+
   const createdTracks = await addTracks(project.id, tracks);
 
-  await Project.findByIdAndUpdate(project.id, {
-    $push: { tracks: createdTracks },
-  });
-  await project.calcSumDuration();
+  const newProject = await Project.findByIdAndUpdate(
+    project._id,
+    {
+      $push: { tracks: createdTracks },
+    },
+    { returnDocument: "after" }
+  );
 
-  return project;
+  await newProject.calcSumDuration();
+  await newProject.calcStartTime();
+
+  return {
+    project: newProject,
+    tracksData: {
+      created: createdTracks,
+      updated: [],
+      deleted: [],
+    },
+  };
 };
 
 // delete
@@ -34,7 +47,13 @@ export const deleteProject = async (userId, projectId) => {
 // get
 
 export const getProject = async (userId, projectId) => {
-  const project = await Project.findOne({ _id: projectId });
+  let project;
+  try {
+    project = await Project.findOne({ _id: projectId });
+  } catch (error) {
+    throw new Error("Project not found");
+  }
+
   if (!project) {
     throw new Error("Project not found");
   }
@@ -79,26 +98,33 @@ export const updateProject = async (
     }
   );
 
-  const createdTracks = await addTracks(projectId, tracksCUD.create);
+  const createdTracks = await addTracks(projectId, tracksCUD.create || []);
   await Project.findByIdAndUpdate(project.id, {
     $push: { tracks: createdTracks },
   });
 
-  console.log("TRACKS", tracksCUD.update);
-  const updatedTracks = await upadateTracks(projectId, tracksCUD.update);
-  console.log("updatedTracks", updatedTracks);
+  // console.log("TRACKS", tracksCUD.update);
+  const updatedTracks = await upadateTracks(projectId, tracksCUD.update || []);
+  // console.log("updatedTracks", updatedTracks);
 
-  await deleteTracks(tracksCUD.delete);
-  await Project.findByIdAndUpdate(project.id, {
-    $pull: { tracks: tracksCUD.delete },
-  });
+  await deleteTracks(tracksCUD.delete || []);
+  const lastp = await Project.findByIdAndUpdate(
+    project.id,
+    {
+      $pull: { tracks: tracksCUD.delete },
+    },
+    {
+      returnDocument: "after",
+    }
+  );
+
+  await lastp.calcSumDuration();
+  await lastp.calcStartTime();
 
   // return UpdatedProject.populate("tracks");
 
-  await UpdatedProject.calcSumDuration();
-
   return {
-    project: UpdatedProject,
+    project: lastp,
     tracksCUD: {
       created: createdTracks,
       updated: updatedTracks,

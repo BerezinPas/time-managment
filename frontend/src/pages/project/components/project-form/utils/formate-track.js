@@ -1,6 +1,9 @@
 import { ONE_DAY_IN_MSECS } from '../../../../../constants';
 
 export const formateTrack = (track, fields) => {
+	console.log('track', track);
+	console.log('fields', fields);
+
 	if (
 		track.startTime === undefined &&
 		track.endTime === undefined &&

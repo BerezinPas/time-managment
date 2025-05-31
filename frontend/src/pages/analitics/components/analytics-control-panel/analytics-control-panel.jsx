@@ -17,7 +17,6 @@ export const AnalyticsControlPanel = ({
 	dateGap,
 	selectedProjectsId,
 	setSelectedProjectsId,
-	timeZone,
 	initialOptionsFilter,
 }) => {
 	const [dateGapInput, setDateGapInput] = useState({ ...dateGap });
@@ -43,9 +42,12 @@ export const AnalyticsControlPanel = ({
 
 	const validateDate = (value, isStart) => {
 		let error = null;
+		// const condition = isStart
+		// 	? dateGapInput.end < Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS
+		// 	: dateGapInput.start > Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS;
 		const condition = isStart
-			? dateGapInput.end < Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS
-			: dateGapInput.start > Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS;
+			? dateGapInput.end < Date.parse(value)
+			: dateGapInput.start > Date.parse(value);
 		try {
 			dataTrackSchema.validateSync(value);
 
@@ -66,7 +68,9 @@ export const AnalyticsControlPanel = ({
 		setDateGapInput((prev) => ({
 			...prev,
 			[e.target.name]:
-				Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS,
+				e.target.name === 'end'
+					? new Date(e.target.value).setHours(23, 59, 59, 99)
+					: new Date(e.target.value).setHours(0, 0, 0, 0),
 		}));
 
 		let error = validateDate(e.target.value, true);
@@ -87,7 +91,12 @@ export const AnalyticsControlPanel = ({
 		setDateGap({
 			...dateGapInput,
 			[e.target.name]:
-				Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS,
+				e.target.name === 'end'
+					? new Date(e.target.value).setHours(23, 59, 59, 99)
+					: new Date(e.target.value).setHours(0, 0, 0, 0),
+			// e.target.name === 'end'
+			// 	? Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS
+			// 	: Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS,
 		});
 	};
 

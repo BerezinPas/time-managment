@@ -1,12 +1,7 @@
 import { ONE_DAY_IN_MSECS, ONE_HOUR_IN_MSECS } from '../../../../../constants';
 import { updateDurationCols } from './update-duration-cols';
 
-export const calculateDurationColsOnMouth = (
-	tracks,
-	startTime,
-	endTime,
-	timeZone,
-) => {
+export const calculateDurationColsOnMouth = (tracks, startTime, endTime) => {
 	const startDate = new Date(startTime);
 	const endDate = new Date(endTime + ONE_DAY_IN_MSECS - 1);
 	const startMounth = startDate.getMonth();
@@ -23,9 +18,7 @@ export const calculateDurationColsOnMouth = (
 	console.log('start', new Date(startTime));
 
 	return tracks.reduce((acc, curTrack) => {
-		const trackDate = new Date(
-			Date.parse(curTrack.startTime) - timeZone * ONE_HOUR_IN_MSECS,
-		);
+		const trackDate = new Date(Date.parse(curTrack.startTime));
 
 		const index =
 			trackDate.getMonth() -

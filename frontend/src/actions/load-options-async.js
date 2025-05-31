@@ -6,3 +6,5 @@ export const loadOptionsAsync = (userId) => (dispatch) => {
 		dispatch(setOptions(res));
 	});
 };
+
+// TODO DELETE

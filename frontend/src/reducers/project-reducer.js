@@ -3,6 +3,7 @@ import { ACTION_TYPE } from '../actions/action-type';
 export const initialStateProject = {
 	id: null,
 	name: '',
+	userId: '',
 	tracks: [],
 };
 

@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { thunk } from 'redux-thunk';
 import {
 	appReducer,
-	// projectReducer,
+	projectReducer,
 	projectsReducer,
 	userReducer,
 	optionsReducer,
@@ -14,7 +14,7 @@ const reducer = combineReducers({
 	user: userReducer,
 	app: appReducer,
 	projects: projectsReducer,
-	// project: projectReducer,
+	project: projectReducer,
 	options: optionsReducer,
 });
 

@@ -4,4 +4,5 @@ export const mapTrack = (track) => ({
   projectId: track.project,
   startTime: track.startTime,
   endTime: track.endTime,
+  duration: track.duration,
 });

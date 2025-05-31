@@ -23,13 +23,8 @@ export const Projects = () => {
 
 			{projects
 				.slice(0, PAGINATION_LIMIT * page)
-				.map(({ id, name, summuryDuration }) => (
-					<ProjectRow
-						key={id}
-						id={id}
-						name={name}
-						summuryDuration={summuryDuration}
-					/>
+				.map(({ id, name, sumDuration }) => (
+					<ProjectRow key={id} id={id} name={name} sumDuration={sumDuration} />
 				))}
 			{projects.length > PAGINATION_LIMIT * page && (
 				<LoadMore onClick={() => setPage((prev) => prev + 1)} />

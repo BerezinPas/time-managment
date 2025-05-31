@@ -3,16 +3,22 @@ import { Button, Input } from '../../components';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, setOptionsAsync } from '../../actions';
-import { selectOptions, selectUserSessions } from '../../selectors';
+import { logout, setOptionsAsync, setUser, setUserAsync } from '../../actions';
+import {
+	selectOptions,
+	selectUserImageURL,
+	selectUserSessions,
+	selectUserStartTime,
+} from '../../selectors';
 import { OPTIONS_START_TIME_DEFAULT } from '../../constants';
 
 export const UserPage = () => {
 	const [value, setValue] = useState('');
-	const userOptions = useSelector(selectOptions);
+	// const userOptions = useSelector(selectOptions);
 	const userHash = useSelector(selectUserSessions);
-	console.log('UserPageuserOtions', userOptions);
-
+	// console.log('UserPageuserOtions', userOptions);
+	const userStartTime = useSelector(selectUserStartTime);
+	const userImageURL = useSelector(selectUserImageURL);
 	// const [selectedValue, setSelectedValue] = useState(options[0]);
 
 	const dispatch = useDispatch();
@@ -23,25 +29,24 @@ export const UserPage = () => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			avatar: userOptions.imageURL,
+			avatar: userImageURL,
 			select: OPTIONS_START_TIME_DEFAULT.find(
-				(option) => option.value === userOptions.defaultStartTimeInAnalytics,
+				(option) => option.value === userStartTime,
 			),
 		},
 	});
 
 	const onSubmit = (optionsData) => {
 		const data = {
-			...userOptions,
 			imageURL: optionsData.avatar,
 			defaultStartTimeInAnalytics: optionsData.select.value,
 		};
 		console.log('onSubmit', data);
-		dispatch(setOptionsAsync(data));
+		dispatch(setUserAsync(data));
 	};
 
 	const onLogout = () => {
-		dispatch(logout(userHash));
+		dispatch(logout());
 		sessionStorage.removeItem('userData');
 	};
 	return (
