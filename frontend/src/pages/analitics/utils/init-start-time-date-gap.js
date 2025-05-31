@@ -5,24 +5,19 @@ export const initDateGapStartTime = (projects, id, option) => {
 	const date = new Date();
 	date.setHours(0, 0, 0, 0);
 	switch (option) {
-		case OPTIONS_START_TIME_DEFAULT_VALUE.MAX:
+		case OPTIONS_START_TIME_DEFAULT_VALUE.MAX: {
+			const filtredProjects = projects.filter((project) =>
+				id === undefined ? project : project.id === id,
+			);
+			if (!filtredProjects.some((project) => project?.tracks.length !== 0)) {
+				return date;
+			}
 			return new Date(
-				projects
-					.filter((project) => (id === undefined ? project : project.id === id))
-					.reduce((accStart, curProject) => {
-						// const curStart = curProject.tracks.reduce(
-						// 	(minStartTimeTrack, curTrack) => {
-						// 		return minStartTimeTrack > Date.parse(curTrack.startTime)
-						// 			? Date.parse(curTrack.startTime)
-						// 			: minStartTimeTrack;
-						// 	},
-						// 	new Date().setHours(0, 0, 0, 0),
-						// );
-						return curProject.startTime < accStart.startTime
-							? curProject
-							: accStart;
-					}).startTime,
+				filtredProjects.reduce((min, curProject) => {
+					return curProject.startTime < min.startTime ? curProject : min;
+				}).startTime,
 			).setHours(0, 0, 0, 0);
+		}
 
 		case OPTIONS_START_TIME_DEFAULT_VALUE.WEEK:
 			return date.setDate(curDate.getDate() - curDate.getUTCDay());
