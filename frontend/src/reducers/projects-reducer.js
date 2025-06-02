@@ -26,6 +26,7 @@ export const projectsReducer = (state = initialState, { type, payload }) => {
 					: {
 							...state[index],
 							...payload,
+							tracks: payload.tracks.map((track) => track.id),
 						},
 			);
 

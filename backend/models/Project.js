@@ -23,6 +23,7 @@ const ProjectSchema = mongoose.Schema(
     },
     startTime: {
       type: Date,
+      default: new Date(),
     },
   },
   { timestamps: true }
@@ -46,9 +47,12 @@ ProjectSchema.methods.calcStartTime = async function () {
   const project = await this.populate("tracks");
   // console.log("calcStartTime", this);
 
-  const startTime = this.tracks.reduce((min, curTrack) => {
-    return min > curTrack.startTime ? curTrack.startTime : min;
-  }, this.startTime);
+  const startTime =
+    this.tracks.length === 0
+      ? this.createdAt
+      : this.tracks.reduce((min, curTrack) => {
+          return min.startTime > curTrack.startTime ? curTrack : min;
+        }).startTime;
 
   project.set("startTime", startTime);
   // console.log("startTime", startTime);

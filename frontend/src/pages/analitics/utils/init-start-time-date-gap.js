@@ -10,7 +10,7 @@ export const initDateGapStartTime = (projects, id, option) => {
 				id === undefined ? project : project.id === id,
 			);
 			if (!filtredProjects.some((project) => project?.tracks.length !== 0)) {
-				return date;
+				return date.setHours(0, 0, 0, 0);
 			}
 			return new Date(
 				filtredProjects.reduce((min, curProject) => {
