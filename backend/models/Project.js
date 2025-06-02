@@ -44,14 +44,14 @@ ProjectSchema.methods.calcSumDuration = async function () {
 
 ProjectSchema.methods.calcStartTime = async function () {
   const project = await this.populate("tracks");
-  console.log("calcStartTime", this);
+  // console.log("calcStartTime", this);
 
   const startTime = this.tracks.reduce((min, curTrack) => {
     return min > curTrack.startTime ? curTrack.startTime : min;
   }, this.startTime);
 
   project.set("startTime", startTime);
-  console.log("startTime", startTime);
+  // console.log("startTime", startTime);
 
   await project.save();
 };

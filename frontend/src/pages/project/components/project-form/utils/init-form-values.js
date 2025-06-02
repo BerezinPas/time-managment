@@ -12,7 +12,7 @@ export const initFormValues = (project) =>
 			obj[`endTime-${cur.id}`] = new Date(cur.endTime)
 				.toLocaleTimeString()
 				.slice(0, -3);
-			obj[`startDay-${cur.id}`] = dateToYYYYMMDD(new Date(cur.endTime));
+			obj[`startDay-${cur.id}`] = dateToYYYYMMDD(new Date(cur.startTime));
 
 			return obj;
 		},

@@ -7,19 +7,14 @@ export const addProject = async (projectData, tracks = []) => {
 
   const createdTracks = await addTracks(project.id, tracks);
 
-  const newProject = await Project.findByIdAndUpdate(
-    project._id,
-    {
-      $push: { tracks: createdTracks },
-    },
-    { returnDocument: "after" }
-  );
+  project.tracks.push(...createdTracks);
+  await project.save();
 
-  await newProject.calcSumDuration();
-  await newProject.calcStartTime();
+  await project.calcSumDuration();
+  await project.calcStartTime();
 
   return {
-    project: newProject,
+    project: project,
     tracksData: {
       created: createdTracks,
       updated: [],
@@ -29,7 +24,6 @@ export const addProject = async (projectData, tracks = []) => {
 };
 
 // delete
-// TODO CHECK USER_ID
 export const deleteProject = async (userId, projectId) => {
   const project = await Project.findOne({ _id: projectId });
   if (!project) {
@@ -64,7 +58,7 @@ export const getProject = async (userId, projectId) => {
 
   // await project.populate({ path: "tracks", populate: "project" });
   await project.populate("tracks");
-
+  // TODO limit
   return project;
 };
 
@@ -82,7 +76,10 @@ export const updateProject = async (
   projectData,
   tracksCUD
 ) => {
-  const project = await Project.findOne({ _id: projectId });
+  const project = await Project.findByIdAndUpdate(projectId, projectData, {
+    returnDocument: "after",
+  });
+
   if (!project) {
     throw new Error("Project not found");
   }
@@ -90,41 +87,34 @@ export const updateProject = async (
   if (!project.user.equals(userId)) {
     throw new Error("User not are owner of this project");
   }
-  const UpdatedProject = await Project.findByIdAndUpdate(
-    projectId,
-    projectData,
-    {
-      returnDocument: "after",
-    }
-  );
 
-  const createdTracks = await addTracks(projectId, tracksCUD.create || []);
+  const [createdTracks, updatedTracks] = await Promise.all([
+    addTracks(projectId, tracksCUD.create || []),
+    upadateTracks(projectId, tracksCUD.update || []),
+    deleteTracks(tracksCUD.delete || []),
+  ]);
+
   await Project.findByIdAndUpdate(project.id, {
-    $push: { tracks: createdTracks },
+    $pull: { tracks: tracksCUD.delete },
   });
 
-  // console.log("TRACKS", tracksCUD.update);
-  const updatedTracks = await upadateTracks(projectId, tracksCUD.update || []);
-  // console.log("updatedTracks", updatedTracks);
-
-  await deleteTracks(tracksCUD.delete || []);
-  const lastp = await Project.findByIdAndUpdate(
+  const UpdatedProject = await Project.findByIdAndUpdate(
     project.id,
     {
-      $pull: { tracks: tracksCUD.delete },
+      $push: { tracks: createdTracks },
     },
     {
       returnDocument: "after",
     }
   );
 
-  await lastp.calcSumDuration();
-  await lastp.calcStartTime();
+  await UpdatedProject.calcSumDuration();
+  await UpdatedProject.calcStartTime();
 
-  // return UpdatedProject.populate("tracks");
+  // console.log("updatedTracks", updatedTracks);
 
   return {
-    project: lastp,
+    project: UpdatedProject,
     tracksCUD: {
       created: createdTracks,
       updated: updatedTracks,
@@ -132,5 +122,3 @@ export const updateProject = async (
     },
   };
 };
-
-// TODO middlewares hasOwner

@@ -8,6 +8,7 @@ import {
   updateProject,
 } from "../controllers/index.js";
 import { mapProject } from "../helpers/map-project.js";
+import { mapTrack } from "../helpers/map-track.js";
 
 const router = express.Router({ mergeParams: true });
 
@@ -60,7 +61,14 @@ router.patch("/:id", auth, async (req, res) => {
     );
 
     res.send({
-      res: { project: mapProject(project), tracksData: tracksCUD },
+      res: {
+        project: mapProject(project),
+        tracksData: {
+          created: tracksCUD.created.map(mapTrack),
+          updated: tracksCUD.updated.map(mapTrack),
+          deleted: tracksCUD.deleted,
+        },
+      },
       error: null,
     });
   } catch (error) {

@@ -8,7 +8,7 @@ export const registerAsync = (login, password) => (dispatch) => {
 			if (error) {
 				return { res, error };
 			}
-			dispatch(setUser(res.user));
+			dispatch(setUser(res));
 			// dispatch(setOptions(res.options));
 			dispatch(RESET_PROJECTS_DATA);
 			sessionStorage.setItem('userData', JSON.stringify(res));

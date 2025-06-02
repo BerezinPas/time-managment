@@ -19,20 +19,16 @@ export const AnalyticsTableRow = ({ rowData, shouldGroup }) => {
 				{showSpoilerData &&
 					rowData.tracks.map((track) => {
 						return (
-							<>
-								<div className="row " key={track.id}>
-									<div className={styles.colName}>{track.description}</div>
-									<div className={styles.colDate}>
-										{new Date(track.startTime)
-											.toLocaleDateString()
-											.slice(0, 10)}
-									</div>
-									<div className={styles.colDuration}>{track.duration}</div>
-									<div className={styles.colProcent}>
-										{track.percentageOfTotal.toFixed(2)}%
-									</div>
+							<div className="row " key={track.id}>
+								<div className={styles.colName}>{track.description}</div>
+								<div className={styles.colDate}>
+									{new Date(track.startTime).toLocaleDateString().slice(0, 10)}
 								</div>
-							</>
+								<div className={styles.colDuration}>{track.duration}</div>
+								<div className={styles.colProcent}>
+									{track.percentageOfTotal.toFixed(2)}%
+								</div>
+							</div>
 						);
 					})}
 			</div>

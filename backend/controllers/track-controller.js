@@ -19,17 +19,6 @@ export const getTracks = async (
   page = 1,
   sort
 ) => {
-  // console.log("dateGap", dateGap);
-  // console.log("projectId", projectIds);
-  // const query = {
-  //   project: { $in: projectIds },
-  // };
-  // if (dateGap.startTime) {
-  //   query.startTime = { $gte: new Date(dateGap.startTime) };
-  // }
-  // if (dateGap.endTime) {
-  //   query.endTime = { $lte: new Date(dateGap.startTime) };
-  // }
   const [tracks, count] = await Promise.all([
     Track.find({
       project: { $in: projectIds },
@@ -77,7 +66,10 @@ export const upadateTracks = async (projectId, tracks) => {
 
   const res = await Promise.all(
     tracks.map((track) =>
-      Track.findByIdAndUpdate(track.id, track, { runValidators: true })
+      Track.findByIdAndUpdate(track.id, track, {
+        returnDocument: "after",
+        runValidators: true,
+      })
     )
   );
 

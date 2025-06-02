@@ -40,13 +40,8 @@ export const login = async (login, password) => {
 // logout
 
 export const updateUser = async (userId, userData) => {
-  // if (!OPTIONS_START_TIME.includes(userData.User.defaultStartTimeInAnalytics)) {
-  //   throw new Error("field defaultStartTimeInAnalytics invalid");
-  // }
   const user = await User.findByIdAndUpdate(userId, userData, {
     returnDocument: "after",
   });
   return user;
 };
-
-// TODO mapperi
