@@ -3,15 +3,18 @@ import { selectProjects } from '../../../selectors';
 import { useEffect } from 'react';
 import { request } from '../../../utils';
 import { useState } from 'react';
+import { useAlert } from '../../../context';
 
 export const useAnalyticsData = (dateGap, projectId) => {
 	const projects = useSelector(selectProjects);
-	const [selectedProjectsId, setSelectedProjectsId] = useState([]);
-
+	const [selectedProjectsId, setSelectedProjectsId] = useState(
+		projectId ? [projectId] : [],
+	);
+	const { createAlert } = useAlert();
 	const [tracks, setTracks] = useState([]);
-	useEffect(() => {
-		setSelectedProjectsId(projectId ? [projectId] : []);
-	}, [projects, projectId]);
+	// useEffect(() => {
+	// 	setSelectedProjectsId(projectId ? [projectId] : []);
+	// }, [projects, projectId]);
 
 	useEffect(() => {
 		const query = selectedProjectsId.length
@@ -22,9 +25,12 @@ export const useAnalyticsData = (dateGap, projectId) => {
 		request(
 			`/tracks?${query}&startTime=${dateGap.start}&endTime=${dateGap.end}`,
 		).then(({ res, error }) => {
-			console.log('error', error);
+			if (error) {
+				createAlert(error, 'danger');
+				return;
+			}
 
-			console.log(res);
+			// console.log(res);
 			if (res) {
 				setTracks(res);
 			}

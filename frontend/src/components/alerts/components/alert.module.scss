@@ -1,0 +1,36 @@
+.alert {
+	width: 300px;
+	position: relative;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+	& + & {
+		margin-top: 20px;
+	}
+	span {
+		margin-right: 7px;
+	}
+
+	&.success {
+		color: #2e7d32;
+
+		background-color: #e8f5e9;
+		border: 1px solid #a5d6a7;
+	}
+
+	&.danger {
+		color: #c62828;
+		background-color: #ffebee;
+		border: 1px solid #ef9a9a;
+	}
+}
+
+.close {
+	position: absolute;
+	top: 16px;
+	right: 8px;
+	line-height: 1;
+	padding: 2px;
+	color: #000;
+}

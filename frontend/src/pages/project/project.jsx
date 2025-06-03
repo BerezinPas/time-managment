@@ -13,6 +13,7 @@ import { ProjectForm } from './components/project-form/project-form';
 import { Button, Loader, Pagination } from '../../components';
 import { TrackRow } from './components';
 import styles from './project.module.scss';
+import { useAlert } from '../../context';
 
 export const Project = () => {
 	const params = useParams();
@@ -25,6 +26,8 @@ export const Project = () => {
 	const project = useSelector(selectProject);
 	const [page, setPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
+	const { createAlert } = useAlert();
+
 	// const projects = useSelector(selectProjects);
 	// const project = projects.find(
 	// 	(findProject) => findProject.id === params.id,
@@ -61,8 +64,12 @@ export const Project = () => {
 					setIsloading(true);
 					dispatch(CLOSE_MODAL);
 					dispatch(deleteProjectAsync(id))
-						// TODO ALERT
-						.then(() => {
+						.then(({ error, res }) => {
+							if (error) {
+								createAlert(error, 'danger');
+								return;
+							}
+							createAlert('Проект успешно удален!', 'success');
 							navigate('/projects');
 						})
 						.finally(() => {

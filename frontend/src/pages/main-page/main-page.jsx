@@ -8,10 +8,12 @@ import Select from 'react-select';
 import styles from './main-page.module.scss';
 import { useCheckAuthorizate } from '../../hooks';
 import { Navigate } from 'react-router-dom';
+import { useAlert } from '../../context';
 
 export const MainPage = () => {
 	const dispatch = useDispatch();
 	const projects = useSelector(selectProjects);
+	const { createAlert } = useAlert();
 	const options = projects.map((project) => ({
 		value: project.id,
 		label: project.name,
@@ -66,6 +68,7 @@ export const MainPage = () => {
 			}),
 		)
 			.then(() => {
+				createAlert('Трек успешно сохранен!');
 				resetForm();
 			})
 			.finally(() => setIsLoading(false));

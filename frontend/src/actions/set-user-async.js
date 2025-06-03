@@ -3,7 +3,9 @@ import { setUser } from './set-user';
 
 export const setUserAsync = (userData) => (dispatch) => {
 	return request(`/users/`, 'PATCH', userData).then(({ error, res }) => {
-		// TODO ALERT ERROR
+		if (error) {
+			return { error, res };
+		}
 		dispatch(setUser(res));
 		console.log('setUserAsync');
 		console.log(res);

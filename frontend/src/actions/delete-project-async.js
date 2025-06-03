@@ -3,8 +3,10 @@ import { deleteProject } from './delete-project';
 
 export const deleteProjectAsync = (projectId) => (dispatch) => {
 	return request(`/projects/${projectId}`, 'DELETE').then(({ error, res }) => {
-		// TODO ALERT ERROR
+		if (error) {
+			return { error, res };
+		}
 		dispatch(deleteProject(projectId));
-		return res;
+		return { error, res };
 	});
 };
