@@ -5,3 +5,4 @@ export * from './button/button';
 export * from './load-more/load-more';
 export * from './loader/loader';
 export * from './modal/modal';
+export * from './pagination/pagination';

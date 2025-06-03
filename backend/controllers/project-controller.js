@@ -40,7 +40,12 @@ export const deleteProject = async (userId, projectId) => {
 
 // get
 
-export const getProject = async (userId, projectId) => {
+export const getProject = async (
+  userId,
+  projectId,
+  limit = Number.MAX_SAFE_INTEGER,
+  page = 1
+) => {
   let project;
   try {
     project = await Project.findOne({ _id: projectId });
@@ -55,11 +60,19 @@ export const getProject = async (userId, projectId) => {
   if (!project.user.equals(userId)) {
     throw new Error("User not are owner of this project");
   }
+  const lastPage = Math.ceil(project.tracks.length / limit);
 
   // await project.populate({ path: "tracks", populate: "project" });
-  await project.populate("tracks");
-  // TODO limit
-  return project;
+  await project.populate({
+    path: "tracks",
+    options: {
+      sort: { startTime: 1 },
+      skip: (page - 1) * limit,
+      limit: limit,
+    },
+  });
+
+  return { project, lastPage };
 };
 
 // getAll

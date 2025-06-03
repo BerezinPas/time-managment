@@ -10,7 +10,7 @@ import {
 	RESET_PROJECT_DATA,
 } from '../../actions';
 import { ProjectForm } from './components/project-form/project-form';
-import { Button, Loader } from '../../components';
+import { Button, Loader, Pagination } from '../../components';
 import { TrackRow } from './components';
 import styles from './project.module.scss';
 
@@ -23,6 +23,8 @@ export const Project = () => {
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState(null);
 	const project = useSelector(selectProject);
+	const [page, setPage] = useState(1);
+	const [lastPage, setLastPage] = useState(1);
 	// const projects = useSelector(selectProjects);
 	// const project = projects.find(
 	// 	(findProject) => findProject.id === params.id,
@@ -34,19 +36,21 @@ export const Project = () => {
 	// const [project, setProject] = useState();
 
 	useLayoutEffect(() => {
+		setIsloading(true);
 		if (isCreating) {
 			setIsloading(false);
 			dispatch(RESET_PROJECT_DATA);
 			return;
 		}
-		dispatch(loadProjectAsync(params.id))
+		dispatch(loadProjectAsync(params.id, page, 10))
 			.then(({ error, res }) => {
 				if (error) {
 					setErrorMessage(error);
 				}
+				setLastPage(res.lastPage);
 			})
 			.finally(() => setIsloading(false));
-	}, [params.id, dispatch, isCreating]);
+	}, [params.id, dispatch, isCreating, page]);
 
 	const onDelete = (id) => {
 		dispatch(
@@ -113,6 +117,14 @@ export const Project = () => {
 								description={description}
 							/>
 						))}
+					{lastPage > 1 && (
+						<Pagination
+							style={{ marginTop: 25 }}
+							page={page}
+							setPage={setPage}
+							lastPage={lastPage}
+						/>
+					)}
 				</div>
 			)}
 		</div>

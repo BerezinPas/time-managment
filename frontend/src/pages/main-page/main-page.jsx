@@ -101,21 +101,21 @@ export const MainPage = () => {
 								disabled={isTimeGoing || options.length === 0}
 								onClick={onTimerStart}
 							>
-								start
+								▶
 							</Button>
 							<Button
 								onClick={onTimerPause}
 								disabled={!isTimeGoing}
 								variant="secondary"
 							>
-								pause
+								⏸
 							</Button>
 							<Button
 								onClick={onTimerStop}
 								disabled={!currentTime}
 								variant="danger"
 							>
-								stop
+								⏹
 							</Button>
 						</div>
 					</div>

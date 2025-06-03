@@ -22,7 +22,7 @@ export const MOUNTH = [
 	'ноя',
 	'дек',
 ];
-export const PAGINATION_LIMIT = 3;
+export const PAGINATION_LIMIT = 10;
 
 export const OPTIONS_START_TIME_DEFAULT_VALUE = {
 	MAX: 'MAX',
