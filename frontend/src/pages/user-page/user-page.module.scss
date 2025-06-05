@@ -1,0 +1,35 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: 800px;
+	gap: 15px;
+}
+
+.page {
+	max-width: 800px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.selectWrapper {
+	align-self: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+.question {
+	flex: 0 0 100%;
+}
+
+.select {
+	flex: 1 0 auto;
+}
+
+.btnLogout {
+	margin-left: auto;
+	margin-top: 40px;
+	// align-self: flex-start;
+}

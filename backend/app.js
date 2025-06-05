@@ -2,19 +2,6 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
-import {
-  addProject,
-  deleteProject,
-  getProject,
-  getProjects,
-  getTracks,
-  login,
-  register,
-  updateProject,
-  updateUser,
-} from "./controllers/index.js";
-import { mapUser } from "./helpers/map-user.js";
-import { auth } from "./middlewares/index.js";
 import { router } from "./routes/index.js";
 
 const PORT = 5001;
@@ -34,10 +21,12 @@ app.use(
 // console.log("__dirname", path.join(__dirname, "../frontend/dist"));
 
 app.use("/api", router);
+app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/*splat", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
+console.log("__dirname", path.join(__dirname, "uploads"));
 
 mongoose
   .connect(

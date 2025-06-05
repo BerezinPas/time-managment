@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import styles from './header.module.scss';
-import { selectUserLogin } from '../../selectors';
+import { selectUserImageURL, selectUserLogin } from '../../selectors';
 import { Link, useLocation, useMatch, useParams } from 'react-router-dom';
 
 export const Header = () => {
 	const login = useSelector(selectUserLogin);
+	const avatar = useSelector(selectUserImageURL);
 	const { pathname } = useLocation();
 	console.log('params', pathname);
 
@@ -37,7 +38,9 @@ export const Header = () => {
 				>
 					<div>{login}</div>
 					<img
-						src="https://placehold.jp/3d4070/ffffff/40x40.png"
+						// className={styles.avatar}
+						src={avatar}
+						// src="D:\web\react\diplom\front\time-managment\backend\uploads\opkh6eb2z4my2xz6cd2wlyqvc.png"
 						alt="avtar"
 						className={styles.avatar}
 					/>

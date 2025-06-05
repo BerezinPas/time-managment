@@ -1,33 +1,21 @@
-import { useState } from 'react';
-import { Button, Input } from '../../components';
+import { Button } from '../../components';
 import Select from 'react-select';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, setOptionsAsync, setUser, setUserAsync } from '../../actions';
-import {
-	selectOptions,
-	selectUserImageURL,
-	selectUserSessions,
-	selectUserStartTime,
-} from '../../selectors';
+import { logout, setUserAsync } from '../../actions';
+import { selectUserImageURL, selectUserStartTime } from '../../selectors';
 import { OPTIONS_START_TIME_DEFAULT } from '../../constants';
+import { useAlert } from '../../context';
+import { InputAvatar } from './components';
+import styles from './user-page.module.scss';
 
 export const UserPage = () => {
-	const [value, setValue] = useState('');
-	// const userOptions = useSelector(selectOptions);
-	const userHash = useSelector(selectUserSessions);
-	// console.log('UserPageuserOtions', userOptions);
 	const userStartTime = useSelector(selectUserStartTime);
 	const userImageURL = useSelector(selectUserImageURL);
-	// const [selectedValue, setSelectedValue] = useState(options[0]);
-
+	const { createAlert } = useAlert();
 	const dispatch = useDispatch();
-	const {
-		register,
-		handleSubmit,
-		control,
-		formState: { errors },
-	} = useForm({
+
+	const { register, handleSubmit, watch, control, reset } = useForm({
 		defaultValues: {
 			avatar: userImageURL,
 			select: OPTIONS_START_TIME_DEFAULT.find(
@@ -36,60 +24,55 @@ export const UserPage = () => {
 		},
 	});
 
-	const onSubmit = (optionsData) => {
-		const data = {
-			imageURL: optionsData.avatar,
-			defaultStartTimeInAnalytics: optionsData.select.value,
-		};
-		console.log('onSubmit', data);
-		dispatch(setUserAsync(data));
+	const onSubmit = async (data) => {
+		const formData = new FormData();
+		formData.append('imageFile', data.avatar[0]);
+		formData.append('defaultStartTimeInAnalytics', data.select.value);
+
+		dispatch(setUserAsync(formData)).then(({ res, error }) => {
+			if (error) {
+				createAlert(error, 'danger');
+				return;
+			}
+			createAlert('Данные успешно обновлены!');
+			reset();
+		});
 	};
 
 	const onLogout = () => {
 		dispatch(logout());
-		sessionStorage.removeItem('userData');
 	};
+
 	return (
-		<div>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Input
-					type="text"
-					// value={value}
-					// onChange={(e) => {
-					// 	// console.log(e.target.value);
-					// 	// setValue(e.target.value);
-					// }}
-					{...register('avatar')}
-				/>
-				<div>
-					Времянной промежуток в аналитике по умолчанию
+		<div className={styles.page}>
+			<form
+				className={styles.form}
+				onSubmit={handleSubmit(onSubmit)}
+				encType="multipart/form-data"
+			>
+				<InputAvatar register={register} watch={watch} />
+				<div className={styles.selectWrapper}>
+					<p className={styles.question}>
+						Времянной промежуток в аналитике по умолчанию:
+					</p>
 					<Controller
 						name="select"
 						control={control}
 						rules={{ required: true }}
 						render={({ field }) => (
 							<Select
+								className={styles.select}
 								{...field}
-								// value={selectedValue}
-								// onChange={(e) => setSelectedValue(e)}
 								options={OPTIONS_START_TIME_DEFAULT}
 							/>
 						)}
 					/>
-					<Button type="submit">Save</Button>
+					<Button type="submit">Сохранить изменения</Button>
 				</div>
 			</form>
-			<Button variant="danger" onClick={onLogout}>
-				Выход
+			<Button className={styles.btnLogout} variant="danger" onClick={onLogout}>
+				Выйти из аккаунта
 			</Button>
-			{/* <img src={value} alt="" /> */}
 		</div>
 	);
 };
-{
-	/* <div>Сменить пароль</div>
-				<div>
-					<Input type="password" placeholder="Старый пароль" />
-					<Input type="password" placeholder="Новый пароль" />
-				</div> */
-}
