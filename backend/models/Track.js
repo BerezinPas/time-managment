@@ -30,7 +30,13 @@ const TrackSchema = mongoose.Schema({
       validator: function (val) {
         return new Date(val) >= new Date(this.get("startTime"));
       },
-      message: "Время конца, меньше времени старта",
+      message: "Время конца, меньше времени стартаss",
+    },
+    set: function (val) {
+      return new Date(val) - new Date(this.get("startTime")) < 1000 &&
+        new Date(val) >= new Date(this.get("startTime"))
+        ? new Date(Date.parse(this.get("startTime")) + 1999)
+        : val;
     },
   },
   duration: {
@@ -44,8 +50,6 @@ TrackSchema.methods.calcDuration = async function () {
   const duration = timeStampToHHMMSS(this.endTime - this.startTime);
 
   track.set("duration", duration);
-
-  console.log("duration", duration);
 
   await track.save();
 };

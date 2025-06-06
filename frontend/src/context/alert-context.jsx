@@ -8,10 +8,8 @@ const AlertContext = createContext({
 
 export const AlertProvider = ({ children }) => {
 	const [alerts, setAlerts] = useState([
-		{ text: 'BALLqwsdqwdBALA1LB', type: 'danger', id: 'sss', ms: 20200 },
-		{ text: 'BALLBqwde2121sasLB', type: 'danger', id: 'a1sd', ms: 30200 },
-		{ text: 'BALLBAasfsafsafLALB', id: 'asd2sd', ms: 30020 },
-		{ text: 'BALLBAasdLALB', id: 'asd4sd', ms: 30020 },
+		{ text: 'success-test', id: 'sss', ms: 202000 },
+		{ text: 'error-test', type: 'danger', id: 'a1sd', ms: 302000 },
 	]);
 	const createAlert = (text, type, ms = 50000) => {
 		setAlerts((prev) => [...prev, { text, type, ms, id: Date.now() }]);

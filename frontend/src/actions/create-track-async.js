@@ -6,8 +6,11 @@ export const createTrackAsync = (projectId, track) => (dispatch) => {
 		tracks: {
 			create: [track],
 		},
-	}).then(({ res }) => {
+	}).then(({ res, error }) => {
+		if (error) {
+			return { res, error };
+		}
 		dispatch(createTrack(res));
-		return res;
+		return { res, error };
 	});
 };

@@ -16,7 +16,14 @@ export const getDate = (dateStep, dateGap, step) => {
 			return date;
 
 		case DATE_STEP.WEEK:
-			return dateGap.start + step * ONE_WEEK_IN_MSECS;
+			if (step === 0) {
+				return dateGap.start;
+			}
+			return (
+				dateGap.start -
+				new Date(dateGap.start).getUTCDay() * ONE_DAY_IN_MSECS +
+				step * ONE_WEEK_IN_MSECS
+			);
 
 		case DATE_STEP.DAY:
 		default:

@@ -7,61 +7,45 @@ import {
 	AnalyticsTable,
 	BarChart,
 } from './components';
-import { initDateGapStartTime } from './utils';
-
+import { initOptionsFilter } from './utils';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import styles from './analytics.module.scss';
 import { useAnalyticsData, useEnhancedData } from './hooks';
+import styles from './analytics.module.scss';
 
 export const Analytics = () => {
-	const { id: projectId } = useParams();
+	const { id } = useParams();
 	const projects = useSelector(selectProjects);
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
+	let projectId = id;
 
 	if (projectId && !projects.some((project) => projectId === project.id)) {
-		navigate('/analytics');
+		// navigate('/analytics');
+		projectId = undefined;
 	}
 
-	const [sortOption, setSortOption] = useState({
-		field: 'name',
-		how: 'inc',
-	});
 	const defaultStartTimeInAnalytics = useSelector(selectUserStartTime);
 
-	const start = initDateGapStartTime(
+	const initialOptionsFilter = initOptionsFilter(
 		projects,
 		projectId,
 		defaultStartTimeInAnalytics,
 	);
-
-	console.log('start', start);
-
-	const initialOptionsFilter = {
-		shouldGroup: projectId === undefined,
-		dateGap: {
-			start: start,
-			end: new Date().setHours(23, 59, 59, 99),
-		},
-	};
 	const [shouldGroup, setShouldGroup] = useState(
 		initialOptionsFilter.shouldGroup,
 	);
 
-	const [dateGap, setDateGap] = useState({
-		start: start,
-		end: initialOptionsFilter.dateGap.end,
-	});
-
-	const { tracks, selectedProjectsId, setSelectedProjectsId } =
-		useAnalyticsData(dateGap, projectId);
-
-	const { enhancedProjects, enhancedTracks } = useEnhancedData(
-		projects,
-		selectedProjectsId,
+	const {
 		tracks,
-		shouldGroup,
-		sortOption,
-	);
+		selectedProjectsId,
+		setSelectedProjectsId,
+		dateGap,
+		setDateGap,
+	} = useAnalyticsData(initialOptionsFilter, projectId);
+	console.log('projectId', projectId);
+	console.log('selectedProjectsId', selectedProjectsId);
+
+	const { enhancedProjects, enhancedTracks, sortOption, setSortOption } =
+		useEnhancedData(projects, selectedProjectsId, tracks, shouldGroup);
 
 	const projectsIsEmpty = !projects.some(
 		(project) => project.tracks.length !== 0,

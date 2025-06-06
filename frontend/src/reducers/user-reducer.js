@@ -10,8 +10,6 @@ const userInitialState = {
 export const userReducer = (state = userInitialState, { type, payload }) => {
 	switch (type) {
 		case ACTION_TYPE.SET_USER:
-			console.log('SET__USER', payload);
-
 			return {
 				...state,
 				isReady: true,

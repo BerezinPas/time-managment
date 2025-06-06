@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from 'react';
 import { Link, useMatch, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProject, selectProjects } from '../../selectors';
+import { selectProject } from '../../selectors';
 import {
 	CLOSE_MODAL,
 	deleteProjectAsync,
@@ -14,29 +14,22 @@ import { Button, Loader, Pagination } from '../../components';
 import { TrackRow } from './components';
 import styles from './project.module.scss';
 import { useAlert } from '../../context';
+import { PAGINATION_LIMIT } from '../../constants';
 
 export const Project = () => {
 	const params = useParams();
+	const navigate = useNavigate();
 	const isCreating = useMatch('/project');
 	const isEditing = !!useMatch('/project/:id/edit');
+
 	const dispatch = useDispatch();
-	const [isLoading, setIsloading] = useState(true);
-	const navigate = useNavigate();
-	const [errorMessage, setErrorMessage] = useState(null);
+	const { createAlert } = useAlert();
 	const project = useSelector(selectProject);
+
+	const [isLoading, setIsloading] = useState(true);
+	const [errorMessage, setErrorMessage] = useState(null);
 	const [page, setPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
-	const { createAlert } = useAlert();
-
-	// const projects = useSelector(selectProjects);
-	// const project = projects.find(
-	// 	(findProject) => findProject.id === params.id,
-	// ) || { name: '', id: null, tracks: [], userId: null };
-
-	// const tracks = project?.tracks || [];
-	// const tracksId = tracks.map((track) => track.id);
-
-	// const [project, setProject] = useState();
 
 	useLayoutEffect(() => {
 		setIsloading(true);
@@ -45,10 +38,12 @@ export const Project = () => {
 			dispatch(RESET_PROJECT_DATA);
 			return;
 		}
-		dispatch(loadProjectAsync(params.id, page, 10))
+		dispatch(loadProjectAsync(params.id, page, PAGINATION_LIMIT))
 			.then(({ error, res }) => {
 				if (error) {
 					setErrorMessage(error);
+					// createAlert(error, 'danger');
+					return;
 				}
 				setLastPage(res.lastPage);
 			})
@@ -114,16 +109,14 @@ export const Project = () => {
 						<div className={styles.durationCol}>Длительность</div>
 						<div className={styles.timeCol}>Время</div>
 					</div>
-					{project.tracks
-						.sort((a, b) => Date.parse(b.startTime) - Date.parse(a.startTime))
-						.map(({ id, startTime, endTime, description }) => (
-							<TrackRow
-								key={id}
-								startTime={startTime}
-								endTime={endTime}
-								description={description}
-							/>
-						))}
+					{project.tracks.map(({ id, startTime, endTime, description }) => (
+						<TrackRow
+							key={id}
+							startTime={startTime}
+							endTime={endTime}
+							description={description}
+						/>
+					))}
 					{lastPage > 1 && (
 						<Pagination
 							style={{ marginTop: 25 }}
@@ -152,5 +145,5 @@ export const Project = () => {
 			projectContent
 		);
 
-	return <div>{content}</div>;
+	return content;
 };

@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects } from '../../selectors';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Button, Loader } from '../../components';
 import { formateTimeStampToHHMMSS } from '../../utils';
 import { createTrackAsync } from '../../actions';
 import Select from 'react-select';
 import styles from './main-page.module.scss';
-import { useCheckAuthorizate } from '../../hooks';
-import { Navigate } from 'react-router-dom';
 import { useAlert } from '../../context';
+import { ControlPanel } from './components';
 
 export const MainPage = () => {
 	const dispatch = useDispatch();
@@ -19,10 +18,7 @@ export const MainPage = () => {
 		label: project.name,
 	}));
 	const [selectedProject, setSelectedProject] = useState(options[0]);
-
-	useEffect(() => {
-		setSelectedProject(options[0]);
-	}, [projects]);
+	console.log('projects', projects);
 
 	const [startTime, setStartTime] = useState(null);
 	const [isTimeGoing, setIsTimeGoing] = useState(null);
@@ -44,7 +40,6 @@ export const MainPage = () => {
 			setStartTime(startTime + Date.now() - pointPause);
 			setPointPause(null);
 			setIsTimeGoing(true);
-
 			return;
 		}
 		setIsTimeGoing(true);
@@ -62,12 +57,16 @@ export const MainPage = () => {
 
 		dispatch(
 			createTrackAsync(selectedProject.value, {
-				startTime: new Date(startTime).toISOString(),
-				endTime: new Date(endTime).toISOString(),
+				startTime: new Date(startTime),
+				endTime: new Date(endTime),
 				description,
 			}),
 		)
-			.then(() => {
+			.then(({ res, error }) => {
+				if (error) {
+					createAlert(error, 'danger');
+					return;
+				}
 				createAlert('Трек успешно сохранен!');
 				resetForm();
 			})
@@ -99,28 +98,15 @@ export const MainPage = () => {
 						<div className={styles.timer}>
 							{formateTimeStampToHHMMSS(currentTime)}
 						</div>
-						<div className={styles.btns}>
-							<Button
-								disabled={isTimeGoing || options.length === 0}
-								onClick={onTimerStart}
-							>
-								▶
-							</Button>
-							<Button
-								onClick={onTimerPause}
-								disabled={!isTimeGoing}
-								variant="secondary"
-							>
-								⏸
-							</Button>
-							<Button
-								onClick={onTimerStop}
-								disabled={!currentTime}
-								variant="danger"
-							>
-								⏹
-							</Button>
-						</div>
+						<ControlPanel
+							className={styles.btns}
+							isTimeGoing={isTimeGoing}
+							currentTime={currentTime}
+							onTimerPause={onTimerPause}
+							onTimerStart={onTimerStart}
+							onTimerStop={onTimerStop}
+							options={options}
+						/>
 					</div>
 					<Select
 						value={selectedProject}

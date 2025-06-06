@@ -9,7 +9,6 @@ export const registerAsync = (login, password) => (dispatch) => {
 				return { res, error };
 			}
 			dispatch(setUser(res));
-			// dispatch(setOptions(res.options));
 			dispatch(RESET_PROJECTS_DATA);
 			sessionStorage.setItem('userData', JSON.stringify(res));
 			return { res, error };

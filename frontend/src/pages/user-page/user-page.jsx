@@ -40,7 +40,11 @@ export const UserPage = () => {
 	};
 
 	const onLogout = () => {
-		dispatch(logout());
+		dispatch(logout()).then(({ res, error }) => {
+			if (error) {
+				createAlert(error, 'danger');
+			}
+		});
 	};
 
 	return (

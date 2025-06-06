@@ -19,7 +19,7 @@ export const saveProjectAsync = (projectData) => (dispatch) => {
 			dispatch(addProject(res.project));
 		}
 
-		console.log('res', res);
+		// console.log('res', res);
 		// console.log('saveProjectAsync', res.project);
 
 		res.tracksData.created.map((el) => dispatch(createTrack(el)));

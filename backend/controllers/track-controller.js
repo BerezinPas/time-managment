@@ -1,5 +1,5 @@
 import { Project, Track } from "../models/index.js";
-// TODO переделать контроллеры
+
 // add
 export const addTracks = async (projectId, tracks) => {
   const newTracks = await Track.create(
@@ -22,14 +22,16 @@ export const getTracks = async (
   const [tracks, count] = await Promise.all([
     Track.find({
       project: { $in: projectIds },
-      startTime: { $gte: new Date(dateGap.startTime) },
-      endTime: { $lte: new Date(dateGap.endTime) },
+      startTime: {
+        $gte: new Date(dateGap.startTime),
+        $lte: new Date(dateGap.endTime),
+      },
     })
       .limit(limit)
       .skip((page - 1) * limit),
     Track.countDocuments({
       startTime: { $gte: dateGap.startTime },
-      endTime: { $lte: dateGap.endTime },
+      startTime: { $lte: dateGap.endTime },
     }),
   ]);
 

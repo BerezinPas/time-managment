@@ -5,7 +5,6 @@ import {
 	projectReducer,
 	projectsReducer,
 	userReducer,
-	optionsReducer,
 } from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -15,7 +14,6 @@ const reducer = combineReducers({
 	app: appReducer,
 	projects: projectsReducer,
 	project: projectReducer,
-	options: optionsReducer,
 });
 
 export const store = createStore(

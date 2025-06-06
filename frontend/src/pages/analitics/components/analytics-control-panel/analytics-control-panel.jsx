@@ -4,7 +4,6 @@ import Select from 'react-select';
 import { Button, Input } from '../../../../components';
 import styles from './analytics-control-panel.module.scss';
 import { useEffect, useState } from 'react';
-import { ONE_HOUR_IN_MSECS } from '../../../../constants';
 import { useNavigate } from 'react-router-dom';
 import { dateToYYYYMMDD } from '../../../../utils';
 import { dataTrackSchema } from '../../../../schemes';
@@ -34,17 +33,14 @@ export const AnalyticsControlPanel = ({
 	}));
 
 	const resetFilters = () => {
-		navigate('/analytics');
-		setChecked(true);
+		// navigate('/analytics');
+		setChecked(initialOptionsFilter.shouldGroup);
 		setSelectedProjectsId([]);
 		setDateGap(() => initialOptionsFilter.dateGap);
 	};
 
 	const validateDate = (value, isStart) => {
 		let error = null;
-		// const condition = isStart
-		// 	? dateGapInput.end < Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS
-		// 	: dateGapInput.start > Date.parse(value) + timeZone * ONE_HOUR_IN_MSECS;
 		const condition = isStart
 			? dateGapInput.end < Date.parse(value)
 			: dateGapInput.start > Date.parse(value);
@@ -73,16 +69,9 @@ export const AnalyticsControlPanel = ({
 					: new Date(e.target.value).setHours(0, 0, 0, 0),
 		}));
 
-		let error = validateDate(e.target.value, true);
+		const error = validateDate(e.target.value, e.target.name === 'start');
 
-		if (e.target.name === 'start' && error !== null) {
-			setErrorMessage(error);
-			return;
-		}
-
-		error = validateDate(e.target.value, false);
-
-		if (e.target.name === 'end' && error !== null) {
+		if (error !== null) {
 			setErrorMessage(error);
 			return;
 		}
@@ -94,9 +83,6 @@ export const AnalyticsControlPanel = ({
 				e.target.name === 'end'
 					? new Date(e.target.value).setHours(23, 59, 59, 99)
 					: new Date(e.target.value).setHours(0, 0, 0, 0),
-			// e.target.name === 'end'
-			// 	? Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS
-			// 	: Date.parse(e.target.value) + timeZone * ONE_HOUR_IN_MSECS,
 		});
 	};
 

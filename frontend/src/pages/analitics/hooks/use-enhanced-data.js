@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { formateHHMMSSToTimeStamp } from '../../../utils';
 import {
 	attachDonutToolTipData,
@@ -11,8 +12,12 @@ export const useEnhancedData = (
 	selectedProjectsId,
 	tracks,
 	shouldGroup,
-	sortOption,
 ) => {
+	const [sortOption, setSortOption] = useState({
+		field: 'name',
+		how: 'inc',
+	});
+
 	const sortFunc = getSortFunc(sortOption);
 	const selectedProjects = selectedProjectsId.length
 		? projects.filter((project) => selectedProjectsId.includes(project.id))
@@ -56,13 +61,11 @@ export const useEnhancedData = (
 			}));
 	}
 
-	const enhancedTracks =
-		//  tracks
-		filtredProjects
-			.reduce((tracks, curProject) => [...tracks, ...curProject.tracks], [])
-			.map((track) => attachPercentOfTotal(track, 'duration', totalDuration))
-			.map(attachDonutToolTipData)
-			.sort(sortFunc());
+	const enhancedTracks = filtredProjects
+		.reduce((tracks, curProject) => [...tracks, ...curProject.tracks], [])
+		.map((track) => attachPercentOfTotal(track, 'duration', totalDuration))
+		.map(attachDonutToolTipData)
+		.sort(sortFunc());
 
-	return { enhancedProjects, enhancedTracks };
+	return { enhancedProjects, enhancedTracks, sortOption, setSortOption };
 };

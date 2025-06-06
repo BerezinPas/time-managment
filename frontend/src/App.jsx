@@ -2,12 +2,7 @@ import styles from './App.module.scss';
 import { Alerts, Footer, Header, Modal } from './components';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect, useState } from 'react';
-import {
-	loadOptionsAsync,
-	loadProjectsAsync,
-	SET_USER_IS_READY,
-	setUser,
-} from './actions';
+import { loadProjectsAsync, SET_USER_IS_READY, setUser } from './actions';
 import { useCheckAuthorizate } from './hooks';
 import { AppRouter } from './routes/app-router';
 
@@ -30,10 +25,7 @@ function App() {
 				id: currentUserData.id,
 			}),
 		);
-		Promise.all([
-			dispatch(loadProjectsAsync(currentUserData.id)),
-			// dispatch(loadOptionsAsync(currentUserData.id)),
-		]).finally(() => {
+		dispatch(loadProjectsAsync(currentUserData.id)).finally(() => {
 			setIsLoading(false);
 		});
 	}, [dispatch]);

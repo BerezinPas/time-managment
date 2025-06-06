@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ONE_HOUR_IN_MSECS } from '../../../../../../constants';
 import { formateHHMMSSToTimeStamp } from '../../../../../../utils';
 import styles from './colum.module.scss';
-import { getColDate, getDate, getToolTipDate } from './utils';
+import { getColDate, getDate } from './utils';
 
 export const Colum = ({
 	duration,
@@ -11,6 +11,7 @@ export const Colum = ({
 	step,
 	durationStep,
 	setShowColsDate,
+	isLast,
 }) => {
 	let height = 0;
 	let date = getDate(dateStep, dateGap, step);
@@ -42,7 +43,15 @@ export const Colum = ({
 			<div className={styles.colWrapper}>
 				{toolTipIsOpen && (
 					<div className={styles.toolTip} style={{ bottom: `${height}px` }}>
-						<div className="">{getToolTipDate(date, dateStep)}</div>
+						<div>
+							{getColDate(
+								date,
+								dateStep,
+								false,
+								step === 0,
+								isLast && dateGap.end,
+							)}
+						</div>
 						<div>всего: {duration}</div>
 					</div>
 				)}
@@ -62,7 +71,7 @@ export const Colum = ({
 					onMouseEnter={() => showTooltip()}
 					onMouseLeave={() => hideToolTip()}
 				>
-					{getColDate(date, dateStep)}
+					{getColDate(date, dateStep, true, step === 0, isLast && dateGap.end)}
 				</div>
 			</div>
 		</>

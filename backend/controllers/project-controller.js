@@ -66,7 +66,7 @@ export const getProject = async (
   await project.populate({
     path: "tracks",
     options: {
-      sort: { startTime: 1 },
+      sort: { startTime: -1 },
       skip: (page - 1) * limit,
       limit: limit,
     },

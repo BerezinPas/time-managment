@@ -7,13 +7,10 @@ const router = express.Router({ mergeParams: true });
 router.post("/register", async (req, res) => {
   try {
     const { token, user } = await register(req.body.login, req.body.password);
-    // console.log("USERT", user);
     res
       .cookie("token", token, { httpOnly: true })
       .send({ res: mapUser(user), error: null });
   } catch (error) {
-    // console.log("error.message", error.message);
-
     res.status(422).send({ res: null, error: error.message });
   }
 });

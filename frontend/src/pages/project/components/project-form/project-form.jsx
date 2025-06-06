@@ -3,10 +3,9 @@ import { Button, Input, Loader } from '../../../../components';
 import * as yup from 'yup';
 import { dataTrackSchema, nameProjectShema } from '../../../../schemes';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { saveProjectAsync } from '../../../../actions';
 import { useNavigate } from 'react-router-dom';
-import { selectUserId } from '../../../../selectors';
 import styles from './project-form.module.scss';
 import { useEffect, useState } from 'react';
 import { FormItemTrack } from './components';
@@ -22,9 +21,8 @@ import { dateToYYYYMMDD } from '../../../../utils';
 export const ProjectForm = ({ project, isCreating }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const userId = useSelector(selectUserId);
 
-	const [newTracks, setNewTracks] = useState(project.tracks);
+	const [newTracks, setNewTracks] = useState([...project.tracks]);
 	const [deletedTracksId, setDeleteTracksId] = useState([]);
 	const [isLoading, setIsloading] = useState(false);
 
@@ -66,7 +64,6 @@ export const ProjectForm = ({ project, isCreating }) => {
 		dispatch(
 			saveProjectAsync({
 				id: project.id,
-				// userId,
 				name: formData.name,
 				tracks: {
 					create: createdTracks.map(formateTrack) || [],
@@ -109,9 +106,6 @@ export const ProjectForm = ({ project, isCreating }) => {
 			{
 				id: newId,
 				projectId: project.id,
-				startTime: Date.now(),
-				endTime: Date.now(),
-				description: '',
 			},
 			...prev,
 		]);
@@ -148,7 +142,7 @@ export const ProjectForm = ({ project, isCreating }) => {
 				</div>
 			</div>
 
-			{newTracks.map(({ id, description, startTime, endTime }) => (
+			{newTracks.map(({ id }) => (
 				<FormItemTrack
 					key={id}
 					id={id}

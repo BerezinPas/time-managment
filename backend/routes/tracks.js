@@ -9,10 +9,6 @@ router.get("/", auth, async (req, res) => {
   try {
     const { projectIds, startTime, endTime, limit, sortField, sortVal, page } =
       req.query;
-    console.log(sortVal);
-    // console.log(new Date(Number(startTime)));
-
-    // console.log("req.query.startTime,", req.query.startTime);
 
     const sort = sortField ? { field: sortField, val: Number(sortVal) } : null;
     const idsArray = Array.isArray(projectIds) ? projectIds : [projectIds];
@@ -20,7 +16,7 @@ router.get("/", auth, async (req, res) => {
       idsArray,
       {
         startTime: startTime ? new Date(Number(startTime)) : null,
-        endTime: endTime ? new Date(Number(endTime)) : null,
+        endTime: endTime ? new Date(Number(endTime)) : new Date(),
       },
       limit,
       page,

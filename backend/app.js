@@ -26,7 +26,7 @@ app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 app.get("/*splat", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
-console.log("__dirname", path.join(__dirname, "uploads"));
+// console.log("__dirname", path.join(__dirname, "uploads"));
 
 mongoose
   .connect(

@@ -47,6 +47,7 @@ export const BarChart = ({ tracks, dateGap }) => {
 					step={index}
 					dateStep={dateStep}
 					setShowColsDate={setShowColsDate}
+					isLast={durationCols.length - 1 === index}
 				/>
 			))}
 		</div>

@@ -2,6 +2,7 @@ export * from './attach-donut-tooltip-data';
 export * from './attach-duration-to-project';
 export * from './attach-percent-of-total';
 export * from './get-sort-func';
+export * from './init-options-filter';
 export * from './init-start-time-date-gap';
 export * from './sorted-by-data';
 export * from './sorted-by-duration';

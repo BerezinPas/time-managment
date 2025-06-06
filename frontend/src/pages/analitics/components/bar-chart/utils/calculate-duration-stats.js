@@ -15,12 +15,15 @@ export const calculateDurationStats = (dateGap, tracks) => {
 		dateStep = DATE_STEP.DAY;
 		durationCols = calculateDurationColsOnFlatGap(tracks, days, dateGap.start);
 	} else if (days < 150) {
+		const start =
+			dateGap.start - new Date(dateGap.start).getUTCDay() * ONE_DAY_IN_MSECS;
+
 		stepInDays = 7;
 		dateStep = DATE_STEP.WEEK;
 		durationCols = calculateDurationColsOnFlatGap(
 			tracks,
 			days,
-			dateGap.start,
+			start,
 			stepInDays,
 		);
 	} else {

@@ -20,7 +20,7 @@ router.post("/", auth, async (req, res) => {
     });
 
     form.parse(req, async (err, fields, files) => {
-      console.log("Результат парсинга:", { err, fields, files });
+      // console.log("Результат парсинга:", { err, fields, files });
       if (err) {
         return res.send({
           res: null,

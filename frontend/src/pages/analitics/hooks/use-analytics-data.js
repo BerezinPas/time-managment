@@ -5,16 +5,18 @@ import { request } from '../../../utils';
 import { useState } from 'react';
 import { useAlert } from '../../../context';
 
-export const useAnalyticsData = (dateGap, projectId) => {
+export const useAnalyticsData = (initialOptionsFilter, projectId) => {
 	const projects = useSelector(selectProjects);
 	const [selectedProjectsId, setSelectedProjectsId] = useState(
 		projectId ? [projectId] : [],
 	);
 	const { createAlert } = useAlert();
 	const [tracks, setTracks] = useState([]);
-	// useEffect(() => {
-	// 	setSelectedProjectsId(projectId ? [projectId] : []);
-	// }, [projects, projectId]);
+
+	const [dateGap, setDateGap] = useState({
+		start: initialOptionsFilter.dateGap.start,
+		end: initialOptionsFilter.dateGap.end,
+	});
 
 	useEffect(() => {
 		const query = selectedProjectsId.length
@@ -27,15 +29,21 @@ export const useAnalyticsData = (dateGap, projectId) => {
 		).then(({ res, error }) => {
 			if (error) {
 				createAlert(error, 'danger');
-				return;
+				return { tracks, selectedProjectsId, setSelectedProjectsId };
 			}
 
-			// console.log(res);
+			console.log('useEffect tracks', res);
 			if (res) {
 				setTracks(res);
 			}
 		});
-	}, [selectedProjectsId, dateGap]);
+	}, [selectedProjectsId, dateGap, projectId]);
 
-	return { tracks, selectedProjectsId, setSelectedProjectsId };
+	return {
+		tracks,
+		selectedProjectsId,
+		setSelectedProjectsId,
+		dateGap,
+		setDateGap,
+	};
 };

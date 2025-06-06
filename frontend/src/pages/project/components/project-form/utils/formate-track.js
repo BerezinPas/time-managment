@@ -1,8 +1,8 @@
 import { ONE_DAY_IN_MSECS } from '../../../../../constants';
 
 export const formateTrack = (track, fields) => {
-	console.log('track', track);
-	console.log('fields', fields);
+	// console.log('track', track);
+	// console.log('fields', fields);
 
 	if (
 		track.startTime === undefined &&
@@ -11,25 +11,24 @@ export const formateTrack = (track, fields) => {
 	) {
 		return track;
 	}
-	let startDay = track.startDay ? track.startDay : fields.startDay;
-	let newStartTime = new Date(
-		`${startDay}T${track.startTime || fields.startTime}`,
-	);
-	let newEndTime = new Date(`${startDay}T${track.endTime || fields.endTime}`);
+	const {
+		startDay = fields.startDay,
+		startTime = fields.startTime,
+		endTime = fields.endTime,
+	} = track;
 
-	if (newStartTime > newEndTime) {
-		newEndTime = Date.parse(newEndTime) + ONE_DAY_IN_MSECS;
+	// let startDay = track.startDay ? track.startDay : fields.startDay;
+	const startDate = new Date(`${startDay}T${startTime}`);
+	const endDate = new Date(`${startDay}T${endTime}`);
 
-		return {
-			...track,
-			endTime: new Date(newEndTime).toISOString(),
-			startTime: newStartTime.toISOString(),
-		};
-	}
+	const correctEndDate =
+		startDate > endDate
+			? new Date(endDate.getTime() + ONE_DAY_IN_MSECS)
+			: endDate;
 
 	return {
 		...track,
-		endTime: newEndTime.toISOString(),
-		startTime: newStartTime.toISOString(),
+		endTime: correctEndDate.toISOString(),
+		startTime: startDate.toISOString(),
 	};
 };

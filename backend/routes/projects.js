@@ -44,16 +44,12 @@ router.get("/", auth, async (req, res) => {
 
 router.get("/:id", auth, async (req, res) => {
   try {
-    // console.log("req.query.page", req.query.page);
-    // console.log("req.query.limit", req.query.limit);
-
     const { project, lastPage } = await getProject(
       req.user.id,
       req.params.id,
       req.query.limit,
       req.query.page
     );
-    // console.log("project", project);
 
     res.send({ res: { project: mapProject(project), lastPage }, error: null });
   } catch (error) {

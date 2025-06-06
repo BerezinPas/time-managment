@@ -1,5 +1,6 @@
 import { Button } from '../button/button';
 import styles from './pagination.module.scss';
+
 export const Pagination = ({ page, setPage, lastPage, ...props }) => {
 	return (
 		<div {...props} className={styles.pagination}>

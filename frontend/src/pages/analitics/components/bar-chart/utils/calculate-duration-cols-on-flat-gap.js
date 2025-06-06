@@ -1,11 +1,10 @@
-import { ONE_DAY_IN_MSECS, ONE_HOUR_IN_MSECS } from '../../../../../constants';
+import { ONE_DAY_IN_MSECS } from '../../../../../constants';
 import { updateDurationCols } from './update-duration-cols';
 
 export const calculateDurationColsOnFlatGap = (
 	tracks,
 	days,
 	startDate,
-
 	stepInDays = 1,
 ) => {
 	return tracks.reduce(
