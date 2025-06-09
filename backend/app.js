@@ -3,6 +3,9 @@ import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 import { router } from "./routes/index.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const PORT = 5001;
 const __dirname = path.resolve("");
@@ -30,7 +33,8 @@ app.get("/*splat", (req, res) => {
 
 mongoose
   .connect(
-    "mongodb://user:mongopass@localhost:27017/time-managment?authSource=admin"
+    // "mongodb://user:mongopass@localhost:27017/time-managment?authSource=admin"
+    process.env.MONGODB_URL
   )
   .then(() => {
     app.listen(PORT, () => {
