@@ -15,7 +15,7 @@ const UserSchema = mongoose.Schema(
     imageURL: {
       type: String,
       // required: true,
-      default: "",
+      default: "assets/image.png",
     },
     defaultStartTimeInAnalytics: {
       //  type: MAX || WEEK || MOUNTH || YEAR

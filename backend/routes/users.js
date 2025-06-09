@@ -6,6 +6,7 @@ import { IncomingForm } from "formidable";
 import { fileTypeFromFile } from "file-type";
 import path from "path";
 import { fileURLToPath } from "url";
+import { unlink } from "fs/promises";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,10 +46,21 @@ router.post("/", auth, async (req, res) => {
           error: "Загружаемый файл не изображение",
         });
       }
+      console.log("(req.user.imageURL", req.user.imageURL);
+
+      if (req.user.imageURL.startsWith("uploads/")) {
+        console.log(req.user.imageURL);
+        try {
+          await unlink(path.join(__dirname, "..", req.user.imageURL));
+          console.log("image deleted");
+        } catch (err) {
+          console.error("error on image delete:", err);
+        }
+      }
 
       const user = await updateUser(req.user.id, {
         defaultStartTimeInAnalytics: fields.defaultStartTimeInAnalytics[0],
-        imageURL: `/api/uploads/${fileName}`,
+        imageURL: `uploads/${fileName}`,
       });
 
       res.send({ res: mapUser(user), error: null });

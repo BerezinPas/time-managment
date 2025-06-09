@@ -3,5 +3,5 @@ export const mapUser = (user) => ({
   login: user.login,
   registredAt: user.createdAt,
   defaultStartTimeInAnalytics: user.defaultStartTimeInAnalytics,
-  imageURL: user.imageURL,
+  imageURL: `/api/${user.imageURL}`,
 });

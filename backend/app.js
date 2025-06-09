@@ -25,6 +25,7 @@ app.use(
 
 app.use("/api", router);
 app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/assets", express.static(path.join(__dirname, "assets")));
 
 app.get("/*splat", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
@@ -33,8 +34,8 @@ console.log("process.env.MONGODB_URL", process.env.MONGODB_URL);
 
 mongoose
   .connect(
-    // "mongodb://user:mongopass@localhost:27017/time-managment?authSource=admin"
-    process.env.MONGODB_URL
+    "mongodb://user:mongopass@localhost:27017/time-managment?authSource=admin"
+    // process.env.MONGODB_URL
   )
   .then(() => {
     app.listen(PORT, () => {
