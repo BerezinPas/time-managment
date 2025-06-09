@@ -3,7 +3,6 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
-	"homepage": "https://BerezinPas.github.io/time-managment",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",

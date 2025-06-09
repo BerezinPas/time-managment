@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LoadMore } from '../../../../components';
+import { Loader, LoadMore } from '../../../../components';
 import { PAGINATION_LIMIT } from '../../../../constants';
 import styles from './analytics-table.module.scss';
 import { AnalyticsTableRow, RowHeaderCol } from './components';
@@ -9,6 +9,7 @@ export const AnalyticsTable = ({
 	shouldGroup,
 	sortOption,
 	setSortOption,
+	isLoading,
 }) => {
 	const [page, setPage] = useState(1);
 
@@ -16,8 +17,23 @@ export const AnalyticsTable = ({
 		return 'В данном диапазоне нет ни одного трека.';
 	}
 
-	return (
+	const tableContent = (
 		<>
+			{data.slice(0, page * PAGINATION_LIMIT).map((rowData) => (
+				<AnalyticsTableRow
+					key={rowData.id}
+					shouldGroup={shouldGroup}
+					rowData={rowData}
+				/>
+			))}
+			{data.length > PAGINATION_LIMIT * page && (
+				<LoadMore onClick={() => setPage((prev) => prev + 1)} />
+			)}
+		</>
+	);
+
+	return (
+		<div className={styles.table}>
 			<div className={`${styles.analyticsRow} row rowHeader rowDark`}>
 				<RowHeaderCol
 					field="name"
@@ -42,17 +58,7 @@ export const AnalyticsTable = ({
 				/>
 				<div className={styles.colProcent}>процент</div>
 			</div>
-
-			{data.slice(0, page * PAGINATION_LIMIT).map((rowData) => (
-				<AnalyticsTableRow
-					key={rowData.id}
-					shouldGroup={shouldGroup}
-					rowData={rowData}
-				/>
-			))}
-			{data.length > PAGINATION_LIMIT * page && (
-				<LoadMore onClick={() => setPage((prev) => prev + 1)} />
-			)}
-		</>
+			{isLoading ? <Loader /> : tableContent}
+		</div>
 	);
 };

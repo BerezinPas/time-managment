@@ -17,8 +17,10 @@ export const useAnalyticsData = (initialOptionsFilter, projectId) => {
 		start: initialOptionsFilter.dateGap.start,
 		end: initialOptionsFilter.dateGap.end,
 	});
+	const [isLoading, setIsloading] = useState(false);
 
 	useEffect(() => {
+		setIsloading(true);
 		const query = selectedProjectsId.length
 			? selectedProjectsId.map((id) => `projectIds=${id}`).join('&')
 			: projects.map(({ id }) => `projectIds=${id}`).join('&');
@@ -26,17 +28,18 @@ export const useAnalyticsData = (initialOptionsFilter, projectId) => {
 		// DateGap type number
 		request(
 			`/tracks?${query}&startTime=${dateGap.start}&endTime=${dateGap.end}`,
-		).then(({ res, error }) => {
-			if (error) {
-				createAlert(error, 'danger');
-				return { tracks, selectedProjectsId, setSelectedProjectsId };
-			}
+		)
+			.then(({ res, error }) => {
+				if (error) {
+					createAlert(error, 'danger');
+					return { tracks, selectedProjectsId, setSelectedProjectsId };
+				}
 
-			console.log('useEffect tracks', res);
-			if (res) {
-				setTracks(res);
-			}
-		});
+				if (res) {
+					setTracks(res);
+				}
+			})
+			.finally(() => setIsloading(false));
 	}, [selectedProjectsId, dateGap, projectId]);
 
 	return {
@@ -45,5 +48,6 @@ export const useAnalyticsData = (initialOptionsFilter, projectId) => {
 		setSelectedProjectsId,
 		dateGap,
 		setDateGap,
+		isLoading,
 	};
 };

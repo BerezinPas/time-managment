@@ -8,10 +8,10 @@ const AlertContext = createContext({
 
 export const AlertProvider = ({ children }) => {
 	const [alerts, setAlerts] = useState([
-		{ text: 'success-test', id: 'sss', ms: 202000 },
-		{ text: 'error-test', type: 'danger', id: 'a1sd', ms: 302000 },
+		{ text: 'login: test', id: 'sss', ms: 30200 },
+		{ text: 'password: qwe123', id: 'a1sd', ms: 30200 },
 	]);
-	const createAlert = (text, type, ms = 50000) => {
+	const createAlert = (text, type, ms = 5000) => {
 		setAlerts((prev) => [...prev, { text, type, ms, id: Date.now() }]);
 	};
 	const removeAlert = (id) =>

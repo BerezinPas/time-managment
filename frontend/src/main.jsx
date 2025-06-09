@@ -9,7 +9,7 @@ import { AlertProvider } from './context/alert-context.jsx';
 createRoot(document.getElementById('root')).render(
 	<Provider store={store}>
 		<AlertProvider>
-			<BrowserRouter>
+			<BrowserRouter basename="/time-managment">
 				<App />
 			</BrowserRouter>
 		</AlertProvider>

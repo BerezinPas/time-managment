@@ -40,9 +40,10 @@ export const Analytics = () => {
 		setSelectedProjectsId,
 		dateGap,
 		setDateGap,
+		isLoading,
 	} = useAnalyticsData(initialOptionsFilter, projectId);
-	console.log('projectId', projectId);
-	console.log('selectedProjectsId', selectedProjectsId);
+	// console.log('projectId', projectId);
+	// console.log('selectedProjectsId', selectedProjectsId);
 
 	const { enhancedProjects, enhancedTracks, sortOption, setSortOption } =
 		useEnhancedData(projects, selectedProjectsId, tracks, shouldGroup);
@@ -81,6 +82,7 @@ export const Analytics = () => {
 								shouldGroup={shouldGroup}
 								sortOption={sortOption}
 								setSortOption={setSortOption}
+								isLoading={isLoading}
 							/>
 						</div>
 
