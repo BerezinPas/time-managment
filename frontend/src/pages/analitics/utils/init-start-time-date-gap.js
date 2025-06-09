@@ -20,8 +20,10 @@ export const initDateGapStartTime = (projects, id, option) => {
 			).setHours(0, 0, 0, 0);
 		}
 
-		case OPTIONS_START_TIME_DEFAULT_VALUE.WEEK:
-			return date.setDate(curDate.getDate() - curDate.getUTCDay() + 1);
+		case OPTIONS_START_TIME_DEFAULT_VALUE.WEEK: {
+			const weekDayNumber = curDate.getUTCDay() === 0 ? 7 : curDate.getUTCDay();
+			return date.setDate(curDate.getDate() - weekDayNumber);
+		}
 
 		case OPTIONS_START_TIME_DEFAULT_VALUE.MOUNTH:
 			return date.setDate(1);
