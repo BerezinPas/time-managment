@@ -4,6 +4,7 @@ export const initDateGapStartTime = (projects, id, option) => {
 	const curDate = new Date();
 	const date = new Date();
 	date.setHours(0, 0, 0, 0);
+
 	switch (option) {
 		case OPTIONS_START_TIME_DEFAULT_VALUE.MAX: {
 			const filtredProjects = projects.filter((project) =>
@@ -20,7 +21,7 @@ export const initDateGapStartTime = (projects, id, option) => {
 		}
 
 		case OPTIONS_START_TIME_DEFAULT_VALUE.WEEK:
-			return date.setDate(curDate.getDate() - curDate.getUTCDay());
+			return date.setDate(curDate.getDate() - curDate.getUTCDay() + 1);
 
 		case OPTIONS_START_TIME_DEFAULT_VALUE.MOUNTH:
 			return date.setDate(1);
