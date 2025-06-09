@@ -4,7 +4,7 @@ import { calculateDurationColsOnFlatGap } from './calculate-duration-cols-on-fla
 import { calculateDurationColsOnMouth } from './calculate-duration-cols-on-mouth';
 
 export const calculateDurationStats = (dateGap, tracks) => {
-	const days = Math.floor((dateGap.end - dateGap.start) / ONE_DAY_IN_MSECS);
+	const days = Math.ceil((dateGap.end - dateGap.start) / ONE_DAY_IN_MSECS);
 	console.log(days);
 
 	let stepInDays;
