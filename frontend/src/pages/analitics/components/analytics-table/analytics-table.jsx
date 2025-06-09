@@ -13,7 +13,7 @@ export const AnalyticsTable = ({
 }) => {
 	const [page, setPage] = useState(1);
 
-	if (data.length === 0) {
+	if (data.length === 0 && !isLoading) {
 		return 'В данном диапазоне нет ни одного трека.';
 	}
 

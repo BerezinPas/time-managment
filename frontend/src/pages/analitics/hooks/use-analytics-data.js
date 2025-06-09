@@ -5,7 +5,11 @@ import { request } from '../../../utils';
 import { useState } from 'react';
 import { useAlert } from '../../../context';
 
-export const useAnalyticsData = (initialOptionsFilter, projectId) => {
+export const useAnalyticsData = (
+	initialOptionsFilter,
+	projectId,
+	setIsloading,
+) => {
 	const projects = useSelector(selectProjects);
 	const [selectedProjectsId, setSelectedProjectsId] = useState(
 		projectId ? [projectId] : [],
@@ -17,7 +21,6 @@ export const useAnalyticsData = (initialOptionsFilter, projectId) => {
 		start: initialOptionsFilter.dateGap.start,
 		end: initialOptionsFilter.dateGap.end,
 	});
-	const [isLoading, setIsloading] = useState(false);
 
 	useEffect(() => {
 		setIsloading(true);
@@ -48,6 +51,5 @@ export const useAnalyticsData = (initialOptionsFilter, projectId) => {
 		setSelectedProjectsId,
 		dateGap,
 		setDateGap,
-		isLoading,
 	};
 };

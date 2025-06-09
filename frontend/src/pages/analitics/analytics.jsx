@@ -33,15 +33,14 @@ export const Analytics = () => {
 	const [shouldGroup, setShouldGroup] = useState(
 		initialOptionsFilter.shouldGroup,
 	);
-
+	const [isLoading, setIsloading] = useState(true);
 	const {
 		tracks,
 		selectedProjectsId,
 		setSelectedProjectsId,
 		dateGap,
 		setDateGap,
-		isLoading,
-	} = useAnalyticsData(initialOptionsFilter, projectId);
+	} = useAnalyticsData(initialOptionsFilter, projectId, setIsloading);
 	// console.log('projectId', projectId);
 	// console.log('selectedProjectsId', selectedProjectsId);
 
