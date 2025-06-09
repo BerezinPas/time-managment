@@ -34,8 +34,8 @@ console.log("process.env.MONGODB_URL", process.env.MONGODB_URL);
 
 mongoose
   .connect(
-    "mongodb://user:mongopass@localhost:27017/time-managment?authSource=admin"
-    // process.env.MONGODB_URL
+    // "mongodb://user:mongopass@localhost:27017/time-managment?authSource=admin"
+    process.env.MONGODB_URL
   )
   .then(() => {
     app.listen(PORT, () => {
