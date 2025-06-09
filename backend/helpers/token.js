@@ -7,5 +7,5 @@ export const generate = (data) => {
 };
 
 export const verify = (token) => {
-  return jwt.verify(token, process.env.JWT_SECRET);
+  return jwt.verify(token, process.env.JWT_SECRET || SECRET);
 };
